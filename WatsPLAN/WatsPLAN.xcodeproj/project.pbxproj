@@ -14,6 +14,7 @@
 		F596AE3F2495414B00B2D068 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F596AE3E2495414B00B2D068 /* Assets.xcassets */; };
 		F596AE422495414B00B2D068 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F596AE412495414B00B2D068 /* Preview Assets.xcassets */; };
 		F596AE452495414B00B2D068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F596AE432495414B00B2D068 /* LaunchScreen.storyboard */; };
+		F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DFB74624955DBC00A5C480 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F596AE412495414B00B2D068 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F596AE442495414B00B2D068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F596AE462495414B00B2D068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5DFB74624955DBC00A5C480 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				F596AE352495414500B2D068 /* AppDelegate.swift */,
 				F596AE372495414500B2D068 /* SceneDelegate.swift */,
+				F5DFB74624955DBC00A5C480 /* LoginView.swift */,
 				F596AE3C2495414500B2D068 /* ContentView.swift */,
 				F596AE3E2495414B00B2D068 /* Assets.xcassets */,
 				F596AE432495414B00B2D068 /* LaunchScreen.storyboard */,
@@ -152,6 +155,7 @@
 				F596AE362495414500B2D068 /* AppDelegate.swift in Sources */,
 				F596AE3B2495414500B2D068 /* WatsPLAN.xcdatamodeld in Sources */,
 				F596AE3D2495414500B2D068 /* ContentView.swift in Sources */,
+				F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */,
 				F596AE382495414500B2D068 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
