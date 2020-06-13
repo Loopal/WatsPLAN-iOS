@@ -11,6 +11,9 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack(alignment:.leading) {
+            
+            Spacer()
+
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                 Text("Button")
             }
@@ -20,6 +23,7 @@ struct ContentView: View {
                 .font(.title)
             Text("Let's begin your degree check")
                 .foregroundColor(Color.gray)
+            Spacer()
             
             LoadCard()
             
@@ -50,20 +54,21 @@ struct LoadCard: View {
                     .frame(width: 350, height: 100)
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("Load")
+                    Text("LOAD")
                         .foregroundColor(Color("uwyellow"))
-                        .frame(width: 200.0, height: 30.0)
+                        .font(.custom("Avenir Next Demi Bold", size:15))
+                        .frame(width: 200.0, height:40.0)
                         .background(Color.black)
                         .cornerRadius(10)
                 }
-                .offset(y:-20)
+                .offset(y:-30)
                 
             }
             .shadow(radius: 5)
             
             Text("CONTINUE")
-                .font(.title)
-                .offset(x:-85,y:-70)
+                .font(.custom("Avenir Next Demi Bold", size:30))
+                .offset(x:-75,y:-75)
         }
 
     }
@@ -78,18 +83,19 @@ struct CreateCard: View {
                     .frame(width: 350, height: 250)
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("Create")
+                    Text("CREATE")
+                        .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color("uwyellow"))
-                        .frame(width: 200.0, height: 30.0)
+                        .frame(width: 200.0, height: 40)
                         .background(Color.black)
                         .cornerRadius(10)
                 }
-                .offset(y:-20)
+                .offset(y:-30)
             }
             .shadow(radius: 5)
             Text("CREATE NEW")
-                .font(.title)
-                .offset(x:-75,y:-145)
+                .font(.custom("Avenir Next Demi Bold", size:30))
+                .offset(x:-60,y:-150)
         }
     }
 }
