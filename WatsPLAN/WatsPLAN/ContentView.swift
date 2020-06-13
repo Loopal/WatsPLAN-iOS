@@ -21,19 +21,9 @@ struct ContentView: View {
             Text("Let's begin your degree check")
                 .foregroundColor(Color.gray)
             
-            RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.yellow)
-                    .frame(width: 350, height: 150.0)
+            LoadCard()
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("Load")
-                    .foregroundColor(Color.yellow)
-                    .frame(width: 200.0, height: 30.0)
-                    .background(Color.black)
-                    .cornerRadius(10)
-            }
-            .padding(.leading, 75)
-            .offset(y:-20)
+            CreateCard()
 
 
                 
@@ -50,3 +40,57 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct LoadCard: View {
+    var body: some View {
+        ZStack {
+            VStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color("uwyellow"))
+                    .frame(width: 350, height: 100)
+                
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                    Text("Load")
+                        .foregroundColor(Color("uwyellow"))
+                        .frame(width: 200.0, height: 30.0)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                .offset(y:-20)
+                
+            }
+            .shadow(radius: 5)
+            
+            Text("CONTINUE")
+                .font(.title)
+                .offset(x:-85,y:-70)
+        }
+
+    }
+}
+
+struct CreateCard: View {
+    var body: some View {
+        ZStack {
+            VStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color("uwyellow"))
+                    .frame(width: 350, height: 250)
+                
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                    Text("Create")
+                        .foregroundColor(Color("uwyellow"))
+                        .frame(width: 200.0, height: 30.0)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                .offset(y:-20)
+            }
+            .shadow(radius: 5)
+            Text("CREATE NEW")
+                .font(.title)
+                .offset(x:-75,y:-145)
+        }
+    }
+}
+
