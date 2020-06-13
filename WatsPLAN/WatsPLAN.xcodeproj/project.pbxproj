@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */; };
 		F596AE362495414500B2D068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596AE352495414500B2D068 /* AppDelegate.swift */; };
 		F596AE382495414500B2D068 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596AE372495414500B2D068 /* SceneDelegate.swift */; };
 		F596AE3B2495414500B2D068 /* WatsPLAN.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F596AE392495414500B2D068 /* WatsPLAN.xcdatamodeld */; };
@@ -15,9 +16,13 @@
 		F596AE422495414B00B2D068 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F596AE412495414B00B2D068 /* Preview Assets.xcassets */; };
 		F596AE452495414B00B2D068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F596AE432495414B00B2D068 /* LaunchScreen.storyboard */; };
 		F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DFB74624955DBC00A5C480 /* LoginView.swift */; };
+		F5DFB7492495687F00A5C480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsPLAN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		281A4DABE026C93B5C881327 /* Pods-WatsPLAN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.release.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.release.xcconfig"; sourceTree = "<group>"; };
+		EF40EDB1B115BF7DB34CB1A8 /* Pods-WatsPLAN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.debug.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.debug.xcconfig"; sourceTree = "<group>"; };
 		F596AE322495414500B2D068 /* WatsPLAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsPLAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F596AE352495414500B2D068 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F596AE372495414500B2D068 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +33,7 @@
 		F596AE442495414B00B2D068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F596AE462495414B00B2D068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5DFB74624955DBC00A5C480 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +41,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0BEC5622EAF76CEBB8220912 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A4040451C7C70671E043F103 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF40EDB1B115BF7DB34CB1A8 /* Pods-WatsPLAN.debug.xcconfig */,
+				281A4DABE026C93B5C881327 /* Pods-WatsPLAN.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F596AE292495414500B2D068 = {
 			isa = PBXGroup;
 			children = (
 				F596AE342495414500B2D068 /* WatsPLAN */,
 				F596AE332495414500B2D068 /* Products */,
+				A4040451C7C70671E043F103 /* Pods */,
+				0BEC5622EAF76CEBB8220912 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +94,7 @@
 				F596AE3E2495414B00B2D068 /* Assets.xcassets */,
 				F596AE432495414B00B2D068 /* LaunchScreen.storyboard */,
 				F596AE462495414B00B2D068 /* Info.plist */,
+				F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */,
 				F596AE392495414500B2D068 /* WatsPLAN.xcdatamodeld */,
 				F596AE402495414B00B2D068 /* Preview Content */,
 			);
@@ -88,9 +116,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F596AE492495414B00B2D068 /* Build configuration list for PBXNativeTarget "WatsPLAN" */;
 			buildPhases = (
+				33A7970D8B0EE6D403BF8A94 /* [CP] Check Pods Manifest.lock */,
 				F596AE2E2495414500B2D068 /* Sources */,
 				F596AE2F2495414500B2D068 /* Frameworks */,
 				F596AE302495414500B2D068 /* Resources */,
+				759D6B4841185F66B8F07AFA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -140,12 +170,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				F596AE452495414B00B2D068 /* LaunchScreen.storyboard in Resources */,
+				F5DFB7492495687F00A5C480 /* GoogleService-Info.plist in Resources */,
 				F596AE422495414B00B2D068 /* Preview Assets.xcassets in Resources */,
 				F596AE3F2495414B00B2D068 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33A7970D8B0EE6D403BF8A94 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WatsPLAN-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		759D6B4841185F66B8F07AFA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F596AE2E2495414500B2D068 /* Sources */ = {
@@ -290,6 +363,7 @@
 		};
 		F596AE4A2495414B00B2D068 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF40EDB1B115BF7DB34CB1A8 /* Pods-WatsPLAN.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -310,6 +384,7 @@
 		};
 		F596AE4B2495414B00B2D068 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 281A4DABE026C93B5C881327 /* Pods-WatsPLAN.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

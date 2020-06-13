@@ -1,0 +1,6 @@
+framework module Pods_WatsPLAN {
+  umbrella header "Pods-WatsPLAN-umbrella.h"
+
+  export *
+  module * { export * }
+}
