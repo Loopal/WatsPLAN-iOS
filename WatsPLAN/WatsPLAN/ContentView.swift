@@ -15,15 +15,21 @@ struct ContentView: View {
             Spacer()
 
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("Button")
+                Image(systemName: "chevron.right")
+                    .foregroundColor(Color.black)
+                    .font(.system(size: 40, weight: .bold))
+                
             }
-                .background(Color.black)
+            Spacer()
+            
             
             Text("Welcome back, Warrior!")
-                .font(.title)
+                .font(.custom("Avenir Next Demi Bold", size:30))
             Text("Let's begin your degree check")
+                .font(.custom("Avenir Next Demi Bold", size:20))
                 .foregroundColor(Color.gray)
             Spacer()
+                .frame(height: 50)
             
             LoadCard()
             
@@ -75,6 +81,10 @@ struct LoadCard: View {
 }
 
 struct CreateCard: View {
+    @State private var faculty: String = ""
+    @State private var program: String = ""
+    @State private var option: String = ""
+
     var body: some View {
         ZStack {
             VStack {
@@ -93,6 +103,28 @@ struct CreateCard: View {
                 .offset(y:-30)
             }
             .shadow(radius: 5)
+            
+            VStack {
+                AutoCompleteTextField(frame: CGRect(x: 20, y: 64, width: 330, height: 40), dataSource: `YourDataSource`, delegate: `AppDelegate`)
+
+                TextField("Enter or select your faculty", text: $faculty)
+                    .frame(width: 330, height : 40)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                
+                TextField("Enter or select your program", text: $program)
+                    .frame(width: 330, height : 40)
+                    .border(Color.black)
+                    .cornerRadius(5)
+                
+                TextField("Enter or select your option(if applicable)", text: $option)
+                    .frame(width: 330, height : 40)
+                    .border(Color.black)
+                    .cornerRadius(5)
+            }
+            .offset(y:-50)
+
+            
             Text("CREATE NEW")
                 .font(.custom("Avenir Next Demi Bold", size:30))
                 .offset(x:-60,y:-150)
