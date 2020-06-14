@@ -22,19 +22,32 @@ struct LoginView: View {
 }
 
 struct LoginCard: View {
+    
+    @State var text = "ori"
+    @State var pass = ""
+    
+    
     var body: some View {
         ZStack {
             VStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color("uwyellow"))
-                    .frame(width: 350, height: 200)
+                /*FloatingTextField(x: 10, y: 10, width: 200, height: 45, placeholder: "Name", title: "Your Full Name", secure: false, text: $text)*/
+                
+                FloatingTextField(x: 10, y: 10, width: 200, height: 45, placeholder: "Name", title: "Your Full Name", secure: false, text: $text)
                 
                 
-                TextField("Email", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
-                    .offset(x: 50, y: -150)
+                Text(text)
+                    .font(.title)
                 
-                SecureField("Password", text: /*@START_MENU_TOKEN@*/ /*@PLACEHOLDER=Value@*/.constant(",Apple")/*@END_MENU_TOKEN@*/)
+                /*TextField("Email", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                    .offset(x: 50, y: -150)*/
+                
+                
+                SecureField("Password", text: $pass)
                     .offset(x: 50, y: -100)
+                
+                RoundedRectangle(cornerRadius: 10)
+                .fill(Color("uwyellow"))
+                .frame(width: 350, height: 200)
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                     Text("SIGN IN")

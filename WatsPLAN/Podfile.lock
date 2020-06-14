@@ -67,11 +67,11 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
-  - SwiftDrawer (5.0.2)
+  - SkyFloatingLabelTextField (3.8.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
-  - SwiftDrawer
+  - SkyFloatingLabelTextField
 
 SPEC REPOS:
   trunk:
@@ -87,7 +87,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
-    - SwiftDrawer
+    - SkyFloatingLabelTextField
 
 SPEC CHECKSUMS:
   Firebase: 7cf5f9c67f03cb3b606d1d6535286e1080e57eb6
@@ -102,8 +102,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  SwiftDrawer: 2ed1b1e13fa46323bb04b6cc417c05edf51b1b4a
+  SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
 
-PODFILE CHECKSUM: 84bfae52ebb63f1d3ecf6b4f63274310817bf98e
+PODFILE CHECKSUM: ed322cffe3760fb3a477735cdc93505a120449ce
 
 COCOAPODS: 1.9.3

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SwiftDrawerVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftDrawerVersionString[];
+FOUNDATION_EXPORT double SkyFloatingLabelTextFieldVersionNumber;
+FOUNDATION_EXPORT const unsigned char SkyFloatingLabelTextFieldVersionString[];
 
