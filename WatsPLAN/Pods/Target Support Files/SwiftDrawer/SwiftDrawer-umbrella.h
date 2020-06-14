@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double AutoCompleteTextFieldVersionNumber;
-FOUNDATION_EXPORT const unsigned char AutoCompleteTextFieldVersionString[];
+FOUNDATION_EXPORT double SwiftDrawerVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftDrawerVersionString[];
 

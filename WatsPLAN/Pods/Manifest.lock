@@ -1,5 +1,4 @@
 PODS:
-  - AutoCompleteTextField (0.5.0)
   - Firebase/Analytics (6.26.0):
     - Firebase/Core
   - Firebase/Core (6.26.0):
@@ -68,14 +67,14 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
+  - SwiftDrawer (5.0.2)
 
 DEPENDENCIES:
-  - AutoCompleteTextField
   - Firebase/Analytics
+  - SwiftDrawer
 
 SPEC REPOS:
   trunk:
-    - AutoCompleteTextField
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -88,9 +87,9 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - SwiftDrawer
 
 SPEC CHECKSUMS:
-  AutoCompleteTextField: 997d9c8ca5e8c8a092ac8e72ebbf3a127ebf3b14
   Firebase: 7cf5f9c67f03cb3b606d1d6535286e1080e57eb6
   FirebaseAnalytics: 96634d356482d4f3af8fe459a0ebf19a99c71b75
   FirebaseCore: f42e5e5f382cdcf6b617ed737bf6c871a6947b17
@@ -103,7 +102,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  SwiftDrawer: 2ed1b1e13fa46323bb04b6cc417c05edf51b1b4a
 
-PODFILE CHECKSUM: caec6380db61320d88f9fe208eec5d72bd9bae97
+PODFILE CHECKSUM: 84bfae52ebb63f1d3ecf6b4f63274310817bf98e
 
 COCOAPODS: 1.9.3

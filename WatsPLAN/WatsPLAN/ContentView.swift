@@ -9,17 +9,61 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var showMenu = false
+    
+    var body: some View {
+        
+        let dragMenu = DragGesture()
+            .onEnded {
+                if $0.translation.width > 100 {
+                    withAnimation {
+                        self.showMenu = true
+                    }
+                } else if $0.translation.width < -100 {
+                    withAnimation {
+                        self.showMenu = false
+                    }
+                }
+            }
+        
+        return NavigationView {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    MainView(showMenu: self.$showMenu)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .offset(x: self.showMenu ? geometry.size.width/1.3 : 0)
+                        .disabled(self.showMenu ? true : false)
+                    if self.showMenu {
+                        MenuView()
+                            .frame(width: geometry.size.width/1.3)
+                            .transition(.move(edge: .leading))
+                    }
+                }
+                    .gesture(dragMenu)
+            }
+                .navigationBarItems(leading: (
+                    Button(action: {
+                        withAnimation {
+                            self.showMenu.toggle()
+                        }
+                    }) {
+                        Image(systemName: "line.horizontal.3")
+                            .foregroundColor(Color.black)
+                            .imageScale(.large)
+                    }
+                ))
+        }
+    }
+}
+
+struct MainView: View {
+    
+    @Binding var showMenu: Bool
+    
     var body: some View {
         VStack(alignment:.leading) {
             
-            Spacer()
-
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Image(systemName: "chevron.right")
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 40, weight: .bold))
-                
-            }
             Spacer()
             
             
@@ -38,10 +82,6 @@ struct ContentView: View {
 
                 
         }
-        
-
-        
-
     }
 }
 
@@ -50,6 +90,7 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
 
 struct LoadCard: View {
     var body: some View {
@@ -68,7 +109,7 @@ struct LoadCard: View {
                         .cornerRadius(10)
                 }
                 .offset(y:-30)
-                
+
             }
             .shadow(radius: 5)
             
@@ -84,15 +125,17 @@ struct CreateCard: View {
     @State private var faculty: String = ""
     @State private var program: String = ""
     @State private var option: String = ""
-
+    
+    
     var body: some View {
         ZStack {
             VStack {
+        
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 250)
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {}) {
                     Text("CREATE")
                         .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color("uwyellow"))
@@ -105,13 +148,12 @@ struct CreateCard: View {
             .shadow(radius: 5)
             
             VStack {
-                AutoCompleteTextField(frame: CGRect(x: 20, y: 64, width: 330, height: 40), dataSource: `YourDataSource`, delegate: `AppDelegate`)
+
 
                 TextField("Enter or select your faculty", text: $faculty)
                     .frame(width: 330, height : 40)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                
                 TextField("Enter or select your program", text: $program)
                     .frame(width: 330, height : 40)
                     .border(Color.black)
@@ -121,6 +163,7 @@ struct CreateCard: View {
                     .frame(width: 330, height : 40)
                     .border(Color.black)
                     .cornerRadius(5)
+
             }
             .offset(y:-50)
 
