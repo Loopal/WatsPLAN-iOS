@@ -7,11 +7,14 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
 
 struct CheckListView: View {
     
     @State var selected = 0
-    
+    @EnvironmentObject var model : Model
+
     var cards : [Card]
     var storedCards : [Card]
     var body: some View {
@@ -22,7 +25,7 @@ struct CheckListView: View {
                 .padding(.horizontal, 40.0)
                 .padding(.top, 20)
                 
-            Text("Place holder")
+            Text(model.majorName)
                 .font(.custom("Avenir Next Medium", size:15))
                 .background(Color.black)
                 .foregroundColor(Color.white)
@@ -36,11 +39,13 @@ struct CheckListView: View {
             .cornerRadius(0)
                 .pickerStyle(SegmentedPickerStyle())
                 .onAppear{
-                    UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(named: "uwyellow")
+                    UISegmentedControl.appearance()
+                        .selectedSegmentTintColor = UIColor(named: "uwyellow")
                     UISegmentedControl.appearance()
                         .setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.black], for: .selected)
                     UISegmentedControl.appearance()
                         .setTitleTextAttributes([.foregroundColor: UIColor(named: "uwyellow")!], for: .normal)
+
                 }
             
             
@@ -63,5 +68,39 @@ struct CheckListView: View {
 struct CheckListView_Previews: PreviewProvider {
     static var previews: some View {
         CheckListView(cards : [Card(id : 0, text: "Some Text",items : ["CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])], storedCards: [Card(id : 0, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])])
+    }
+}
+
+private func getCollection(model:Model) {
+    if model.fileName != "" {
+        //load from db
+        // [START get_collection]
+        var docRef = db.collection("/Majors/").document(model.majorName)
+        docRef.getDocument { (document, error) in
+            if let major = document.flatMap({
+              $0.data().flatMap({ (data) in
+                return City(dictionary: data)
+              })
+            }) {
+                print("City: \(city)")
+            } else {
+                print("Document does not exist")
+            }
+        }
+        // [END get_collection]
+        
+        
+    } else {
+        //load from storage
+    }
+
+}
+
+
+
+fileprivate struct Major {
+    let Requirements : [String]
+    init(s: String) {
+        Requirements = s
     }
 }
