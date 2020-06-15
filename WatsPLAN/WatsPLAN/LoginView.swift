@@ -43,7 +43,7 @@ struct LoginCard: View {
                 
                 
                 SecureField("Password", text: $pass)
-                    .offset(x: 50, y: -100)
+                    .offset(x: 50, y: -110)
                 
                 RoundedRectangle(cornerRadius: 10)
                 .fill(Color("uwyellow"))
