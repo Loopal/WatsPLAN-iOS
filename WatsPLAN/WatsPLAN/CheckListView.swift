@@ -7,16 +7,18 @@
 //
 
 import SwiftUI
-import FirebaseCore
-import FirebaseFirestore
 
 struct CheckListView: View {
-    
-    @State var selected = 0
     @EnvironmentObject var model : Model
-
-    var cards : [Card]
-    var storedCards : [Card]
+    @State var selected = 0
+    
+    init() {
+        model.facultyName = "asd"
+        model.majorName = "asd"
+        model.majorName = "Applied Mathematics"
+        model.getCollection()
+    }
+    
     var body: some View {
         return VStack(spacing : 0) {
             Image("math_logo")
@@ -49,7 +51,7 @@ struct CheckListView: View {
                 }
             
             
-            List(cards) { card in
+            List(model.cards) { card in
                 ListItemView(card: card)
             }
             .onAppear {
@@ -59,52 +61,15 @@ struct CheckListView: View {
 
         }
         .background(Color.black)
-
-
-        
+        .onAppear {
+        }
     }
 }
 
-/*
 struct CheckListView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckListView(cards : [Card(id : 0, text: "Some Text",items : ["CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])], storedCards: [Card(id : 0, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])])
+        CheckListView()
     }
 }
- */
-
-private func getCollection(model:Model) {
-    if model.fileName != "" {
-        //load from db
-        let db = Firestore.firestore()
-        var docRef = db.collection("/Majors/").document(model.majorName)
-        docRef.getDocument { (document, error) in
-                if let major = document.flatMap({
-                  $0.data().flatMap({ (data) in
-                    return Major(dictionary: data)
-                  })
-                }) {
-                    var count = 0
-                    for item in major.Requirements {
-                        var temp = item.components(separatedBy: ";")
-                        model.cards.append(Card(id : count, text: temp[0], num: Int(temp[1]) ?? 0, items: [String](temp[2...temp.count])))
-                        count += 1
-                    }
-                } else {
-                    print("Document does not exist")
-                }
-            }
-    } else {
-        //load from storage
-    }
-
-}
 
 
-
-fileprivate struct Major {
-    let Requirements : [String]
-    init?(dictionary: [String: Any]) {
-        Requirements = dictionary["Requirements"] as! [String]
-    }
-}

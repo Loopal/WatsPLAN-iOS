@@ -97,15 +97,16 @@ struct LoadCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 100)
                 
-                Button(action: {CheckListView(cards : [Card(id : 0, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])], storedCards: [Card(id : 0, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])])}) {
-                    Text("LOAD")
-                        .foregroundColor(Color("uwyellow"))
-                        .font(.custom("Avenir Next Demi Bold", size:15))
-                        .frame(width: 200.0, height:40.0)
-                        .background(Color.black)
-                        .cornerRadius(10)
-                }
-                .offset(y:-30)
+                   NavigationLink(destination: CheckListView()) {
+                      Text("LOAD")
+                          .foregroundColor(Color("uwyellow"))
+                          .font(.custom("Avenir Next Demi Bold", size:15))
+                          .frame(width: 200.0, height:40.0)
+                          .background(Color.black)
+                          .cornerRadius(10)
+                   }
+                   .buttonStyle(PlainButtonStyle())
+                   .offset(y:-30)
 
             }
             .shadow(radius: 5)
