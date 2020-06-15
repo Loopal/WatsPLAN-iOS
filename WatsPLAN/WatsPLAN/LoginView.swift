@@ -17,14 +17,18 @@ struct LoginView: View {
                 .frame(width: 200.0, height: 200.0)
             
             Spacer()
-            .frame(height: 100)
+                .frame(height: 20)
             
             LoginCard()
             
-            Text("New Here? Create an Account")
-                .offset(y: -200)
+            Spacer()
+                .frame(height: 50)
             
+            NavigationLink(destination: RegisterView()) {
+                Text("New Here? Create an Account")
+            }
             
+            Spacer()
             
         }
     }
@@ -40,63 +44,64 @@ struct LoginCard: View {
     var body: some View {
         ZStack {
             
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color("uwyellow"))
+                .frame(width: 350, height: 250)
+            //.offset(y: -40)
+            
             VStack {
-                VStack {
-                    
-                    RoundedRectangle(cornerRadius: 10)
-                    .fill(Color("uwyellow"))
-                    .frame(width: 350, height: 250)
-                        .offset(y: -40)
-                    
-                    Button(action: {
-                        self.endEditing(true)
-                    }) {
-                        Text("SIGN IN")
-                            .foregroundColor(Color("uwyellow"))
-                            .frame(width: 200.0, height: 30.0)
-                            .background(Color.black)
-                            .cornerRadius(10)
-                    }
-                    .offset(y: -60)
-                    
-                }
-                .shadow(radius: 5)
                 
-                VStack(alignment: .leading) {
-                    FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
-                        
-                    }
-                    .floatingStyle(ThemeTextFieldStyle())
-                    .modifier(ThemeTextField())
-                    
-                    
-                    FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
-                        
-                    }
-                    .rightView({
-                        Button(action: {
-                            withAnimation {
-                                self.isPasswordShow.toggle()
-                            }
-                            
-                        }) {
-                            Image(self.isPasswordShow ? "eye_close" : "eye_show")
-                            .foregroundColor(Color.black)
-                        }
-                    })
-                        .isSecureTextEntry(!self.isPasswordShow)
-                    .floatingStyle(ThemeTextFieldStyle())
-                    .modifier(ThemeTextField())
+                FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
                     
                 }
-                .offset(y: -320)
+                .floatingStyle(ThemeTextFieldStyle())
+                .modifier(ThemeTextField())
+                
+                
+                FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
+                    
+                }
+                .rightView({
+                    Button(action: {
+                        withAnimation {
+                            self.isPasswordShow.toggle()
+                        }
+                        
+                    }) {
+                        Image(self.isPasswordShow ? "eye_close" : "eye_show")
+                            .foregroundColor(Color.black)
+                    }
+                })
+                    .isSecureTextEntry(!self.isPasswordShow)
+                    .floatingStyle(ThemeTextFieldStyle())
+                    .modifier(ThemeTextField())
+                
+                
+                Button(action: {
+                    self.endEditing(true)
+                }) {
+                    Text("SIGN IN")
+                        .foregroundColor(Color("uwyellow"))
+                        .frame(width: 200.0, height: 30.0)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                .offset(y: 55)
+                
+                
+                Text("LOGIN")
+                    .font(.custom("Avenir Next Demi Bold", size:30))
+                    .offset(x:-110,y:-225)
             }
+                
+            .shadow(radius: 5)
+            
+            /*VStack(alignment: .leading) {
+             
+             //.offset(y: -320)
+             }*/
             
             
-            
-            Text("LOGIN")
-                .font(.custom("Avenir Next Demi Bold", size:30))
-                .offset(x:-110,y:-275)
         }
     }
 }
