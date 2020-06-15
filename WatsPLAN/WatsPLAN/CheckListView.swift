@@ -65,31 +65,35 @@ struct CheckListView: View {
     }
 }
 
+/*
 struct CheckListView_Previews: PreviewProvider {
     static var previews: some View {
         CheckListView(cards : [Card(id : 0, text: "Some Text",items : ["CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])], storedCards: [Card(id : 0, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])])
     }
 }
+ */
 
 private func getCollection(model:Model) {
     if model.fileName != "" {
         //load from db
-        // [START get_collection]
+        let db = Firestore.firestore()
         var docRef = db.collection("/Majors/").document(model.majorName)
         docRef.getDocument { (document, error) in
-            if let major = document.flatMap({
-              $0.data().flatMap({ (data) in
-                return City(dictionary: data)
-              })
-            }) {
-                print("City: \(city)")
-            } else {
-                print("Document does not exist")
+                if let major = document.flatMap({
+                  $0.data().flatMap({ (data) in
+                    return Major(dictionary: data)
+                  })
+                }) {
+                    var count = 0
+                    for item in major.Requirements {
+                        var temp = item.components(separatedBy: ";")
+                        model.cards.append(Card(id : count, text: temp[0], num: Int(temp[1]) ?? 0, items: [String](temp[2...temp.count])))
+                        count += 1
+                    }
+                } else {
+                    print("Document does not exist")
+                }
             }
-        }
-        // [END get_collection]
-        
-        
     } else {
         //load from storage
     }
@@ -100,7 +104,7 @@ private func getCollection(model:Model) {
 
 fileprivate struct Major {
     let Requirements : [String]
-    init(s: String) {
-        Requirements = s
+    init?(dictionary: [String: Any]) {
+        Requirements = dictionary["Requirements"] as! [String]
     }
 }
