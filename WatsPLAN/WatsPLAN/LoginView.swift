@@ -64,7 +64,7 @@ struct LoginCard: View {
                 /*FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
                 }*/
                 
-                FloatingLabelTextField($viewModel.username, placeholder: "Email", editingChanged: { (isChanged) in}){
+                FloatingLabelTextField($viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
                 }
                 .leftView( {
                     Button(action: {

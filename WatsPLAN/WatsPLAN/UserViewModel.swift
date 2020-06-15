@@ -15,21 +15,24 @@ class UserViewModel: ObservableObject {
     
     @Published var username: String = ""
     @Published var password: String = ""
+    @Published var email: String = ""
     @Published var confirmPassword: String = ""
     @Published var userNameValidator = UsernameValidation.emptyUsername
+    @Published var emailValidator = EmailValidation.emptyEmail
     @Published var passwordValidator = PasswordValidation.empty
     @Published var isValid: Bool = false
     @Published var userNameError: String?
+    @Published var emailError: String?
     @Published var passwordError: String?
     @Published var confirmPasswordError: String?
     
     private var cancellableSet: Set<AnyCancellable> = []
     init() {
-        Publishers.CombineLatest3(self.validUserNamePublisher, self.passwordValidatorPublisher, self.confirmPasswordValidatorPublisher)
+        Publishers.CombineLatest4(self.validUserNamePublisher, self.emailValidatorPublisher, self.passwordValidatorPublisher, self.confirmPasswordValidatorPublisher)
             .dropFirst()
-            .sink { _usernameError, _passwordValidator , _confirmPasswordValidator in
+            .sink { _usernameError, _emailError, _passwordValidator , _confirmPasswordValidator in
                 
-                self.isValid = _usernameError == nil &&
+                self.isValid = _usernameError == nil && _emailError == nil &&
                     _passwordValidator.errorMessage == nil &&
                     _confirmPasswordValidator.confirmPasswordErrorMessage == nil
         }
@@ -41,6 +44,13 @@ class UserViewModel: ObservableObject {
             self.userNameError = _usernameError
             }
         .store(in: &cancellableSet)
+        
+        emailValidatorPublisher
+            .dropFirst()
+            .sink { (_emailError) in
+                self.emailError = _emailError
+                }
+            .store(in: &cancellableSet)
         
         passwordValidatorPublisher
             .dropFirst()
@@ -66,6 +76,23 @@ class UserViewModel: ObservableObject {
                 if _username.isEmpty {
                     return "Please enter username"
                 } else if !_username.isValidEmail {
+                    return "Please enter valid email"
+                } else {
+                    return nil
+                }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    private var emailValidatorPublisher: AnyPublisher<String?, Never> {
+        
+        $email
+            .debounce(for: 0.5, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map { _email in
+                if _email.isEmpty {
+                    return "Please enter email"
+                } else if !_email.isValidEmail {
                     return "Please enter valid email"
                 } else {
                     return nil

@@ -73,3 +73,19 @@ public enum UsernameValidation {
         }
     }
 }
+
+public enum EmailValidation {
+    case emptyEmail
+    case inValidEmail
+    case validEmail
+    var errorMessage: String? {
+        switch self {
+        case .emptyEmail:
+            return "Please enter email"
+        case .inValidEmail:
+            return "Invalid email"
+        case .validEmail:
+            return nil
+        }
+    }
+}
