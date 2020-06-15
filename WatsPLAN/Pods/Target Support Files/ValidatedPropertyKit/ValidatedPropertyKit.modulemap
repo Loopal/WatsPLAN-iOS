@@ -1,0 +1,6 @@
+framework module ValidatedPropertyKit {
+  umbrella header "ValidatedPropertyKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

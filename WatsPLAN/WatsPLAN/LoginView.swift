@@ -8,6 +8,7 @@
 
 import SwiftUI
 import FloatingLabelTextFieldSwiftUI
+import ValidatedPropertyKit
 
 struct LoginView: View {
     var body: some View {
@@ -41,6 +42,8 @@ struct LoginCard: View {
     
     @State private var isPasswordShow: Bool = false
     
+    @State private var isemailFormat: Bool = false
+    
     var body: some View {
         ZStack {
             
@@ -54,8 +57,18 @@ struct LoginCard: View {
                 FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
                     
                 }
-                .floatingStyle(ThemeTextFieldStyle())
-                .modifier(ThemeTextField())
+                .leftView( {
+                    Button(action: {
+                        withAnimation {
+                            self.isemailFormat.toggle()
+                        }
+                    }) {
+                        Image(self.isemailFormat ? "envelope" : "warning")
+                            .foregroundColor(.black)
+                    }
+                })
+                    .floatingStyle(ThemeTextFieldStyle())
+                    .modifier(ThemeTextField())
                 
                 
                 FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
@@ -86,6 +99,7 @@ struct LoginCard: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
+                .disabled(email.isEmpty)
                 .offset(y: 55)
                 
                 
