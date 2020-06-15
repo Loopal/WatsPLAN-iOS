@@ -64,9 +64,6 @@ struct MainView: View {
     var body: some View {
         VStack(alignment:.leading) {
             
-            Spacer()
-            
-            
             Text("Welcome back, Warrior!")
                 .font(.custom("Avenir Next Demi Bold", size:30))
             Text("Let's begin your degree check")
@@ -100,7 +97,7 @@ struct LoadCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 100)
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {CheckListView(cards : [Card(id : 0, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])], storedCards: [Card(id : 0, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",]), Card(id : 1, text: "Some Text",items : ["CS136", "CS136","CS136","CS136",])])}) {
                     Text("LOAD")
                         .foregroundColor(Color("uwyellow"))
                         .font(.custom("Avenir Next Demi Bold", size:15))

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67490C3A249701AE0051BCA1 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C39249701AE0051BCA1 /* Card.swift */; };
+		67490C3C249701CA0051BCA1 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C3B249701CA0051BCA1 /* CheckBoxView.swift */; };
+		67490C3E249701ED0051BCA1 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C3D249701ED0051BCA1 /* CheckListView.swift */; };
+		67490C40249702110051BCA1 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C3F249702110051BCA1 /* ListItemView.swift */; };
 		674CC3A72496A76300A75723 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674CC3A62496A76300A75723 /* MenuView.swift */; };
 		9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */; };
 		F58F84892496B89700E8B15E /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58F84882496B89700E8B15E /* FloatingTextField.swift */; };
@@ -24,6 +28,10 @@
 /* Begin PBXFileReference section */
 		0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsPLAN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281A4DABE026C93B5C881327 /* Pods-WatsPLAN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.release.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.release.xcconfig"; sourceTree = "<group>"; };
+		67490C39249701AE0051BCA1 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		67490C3B249701CA0051BCA1 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		67490C3D249701ED0051BCA1 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
+		67490C3F249702110051BCA1 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		674CC3A42495A9C800A75723 /* iOSDropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = iOSDropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		674CC3A62496A76300A75723 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EF40EDB1B115BF7DB34CB1A8 /* Pods-WatsPLAN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.debug.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +112,10 @@
 				F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */,
 				F596AE392495414500B2D068 /* WatsPLAN.xcdatamodeld */,
 				F596AE402495414B00B2D068 /* Preview Content */,
+				67490C39249701AE0051BCA1 /* Card.swift */,
+				67490C3B249701CA0051BCA1 /* CheckBoxView.swift */,
+				67490C3D249701ED0051BCA1 /* CheckListView.swift */,
+				67490C3F249702110051BCA1 /* ListItemView.swift */,
 			);
 			path = WatsPLAN;
 			sourceTree = "<group>";
@@ -235,10 +247,14 @@
 				F596AE362495414500B2D068 /* AppDelegate.swift in Sources */,
 				674CC3A72496A76300A75723 /* MenuView.swift in Sources */,
 				F596AE3B2495414500B2D068 /* WatsPLAN.xcdatamodeld in Sources */,
+				67490C40249702110051BCA1 /* ListItemView.swift in Sources */,
+				67490C3E249701ED0051BCA1 /* CheckListView.swift in Sources */,
 				F596AE3D2495414500B2D068 /* ContentView.swift in Sources */,
+				67490C3C249701CA0051BCA1 /* CheckBoxView.swift in Sources */,
 				F58F84892496B89700E8B15E /* FloatingTextField.swift in Sources */,
 				F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */,
 				F596AE382495414500B2D068 /* SceneDelegate.swift in Sources */,
+				67490C3A249701AE0051BCA1 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
