@@ -97,14 +97,13 @@ struct LoadCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 100)
                 
-                   NavigationLink(destination: CheckListView()) {
+                   
                       Text("LOAD")
                           .foregroundColor(Color("uwyellow"))
                           .font(.custom("Avenir Next Demi Bold", size:15))
                           .frame(width: 200.0, height:40.0)
                           .background(Color.black)
                           .cornerRadius(10)
-                   }
                    .buttonStyle(PlainButtonStyle())
                    .offset(y:-30)
 

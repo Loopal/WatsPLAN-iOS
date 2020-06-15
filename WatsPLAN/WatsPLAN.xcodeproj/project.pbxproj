@@ -23,6 +23,9 @@
 		F596AE3F2495414B00B2D068 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F596AE3E2495414B00B2D068 /* Assets.xcassets */; };
 		F596AE422495414B00B2D068 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F596AE412495414B00B2D068 /* Preview Assets.xcassets */; };
 		F596AE452495414B00B2D068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F596AE432495414B00B2D068 /* LaunchScreen.storyboard */; };
+		F59A645D24981DD60047FD3C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A645C24981DD60047FD3C /* LoginModel.swift */; };
+		F59A645F24982F3C0047FD3C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A645E24982F3C0047FD3C /* UserViewModel.swift */; };
+		F59A646124982F6D0047FD3C /* PasswordStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A646024982F6D0047FD3C /* PasswordStrength.swift */; };
 		F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DFB74624955DBC00A5C480 /* LoginView.swift */; };
 		F5DFB7492495687F00A5C480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -48,6 +51,9 @@
 		F596AE412495414B00B2D068 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F596AE442495414B00B2D068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F596AE462495414B00B2D068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F59A645C24981DD60047FD3C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		F59A645E24982F3C0047FD3C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		F59A646024982F6D0047FD3C /* PasswordStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrength.swift; sourceTree = "<group>"; };
 		F5DFB74624955DBC00A5C480 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +127,9 @@
 				67490C3D249701ED0051BCA1 /* CheckListView.swift */,
 				67490C3F249702110051BCA1 /* ListItemView.swift */,
 				674508432497337C005B2FF0 /* Model.swift */,
+				F59A645C24981DD60047FD3C /* LoginModel.swift */,
+				F59A645E24982F3C0047FD3C /* UserViewModel.swift */,
+				F59A646024982F6D0047FD3C /* PasswordStrength.swift */,
 			);
 			path = WatsPLAN;
 			sourceTree = "<group>";
@@ -260,12 +269,15 @@
 				674CC3A72496A76300A75723 /* MenuView.swift in Sources */,
 				F596AE3B2495414500B2D068 /* WatsPLAN.xcdatamodeld in Sources */,
 				67490C40249702110051BCA1 /* ListItemView.swift in Sources */,
+				F59A645F24982F3C0047FD3C /* UserViewModel.swift in Sources */,
 				67490C3E249701ED0051BCA1 /* CheckListView.swift in Sources */,
 				F596AE3D2495414500B2D068 /* ContentView.swift in Sources */,
 				67490C3C249701CA0051BCA1 /* CheckBoxView.swift in Sources */,
+				F59A645D24981DD60047FD3C /* LoginModel.swift in Sources */,
 				F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */,
 				674508442497337C005B2FF0 /* Model.swift in Sources */,
 				F596AE382495414500B2D068 /* SceneDelegate.swift in Sources */,
+				F59A646124982F6D0047FD3C /* PasswordStrength.swift in Sources */,
 				67490C3A249701AE0051BCA1 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

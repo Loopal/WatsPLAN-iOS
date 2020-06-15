@@ -37,14 +37,19 @@ struct LoginView: View {
 
 struct LoginCard: View {
     
-    @State private var email: String = ""
-    @State private var password: String = ""
+    //@State private var email: String = ""
+    //@State private var password: String = ""
+    
+    @ObservedObject var viewModel = UserViewModel()
     
     @State private var isPasswordShow: Bool = false
     
     @State private var isemailFormat: Bool = false
     
+    @State private var emailErrorMessage: String?
+    
     var body: some View {
+        
         ZStack {
             
             RoundedRectangle(cornerRadius: 10)
@@ -53,9 +58,13 @@ struct LoginCard: View {
             //.offset(y: -40)
             
             VStack {
+                /*FloatingLabelTextField($loginModel.email.bound, placeholder: "Email", editingChanged: { (isChanged) in}){
+                }*/
                 
-                FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
-                    
+                /*FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
+                }*/
+                
+                FloatingLabelTextField($viewModel.username, placeholder: "Email", editingChanged: { (isChanged) in}){
                 }
                 .leftView( {
                     Button(action: {
@@ -69,11 +78,14 @@ struct LoginCard: View {
                 })
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
+                    .autocapitalization(UITextAutocapitalizationType.none)
                 
-                
-                FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
+                /*FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
                     
-                }
+                }*/
+                    FloatingLabelTextField($viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
+                        
+                    }
                 .rightView({
                     Button(action: {
                         withAnimation {
@@ -99,7 +111,7 @@ struct LoginCard: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
-                .disabled(email.isEmpty)
+                //.disabled(email.isEmpty || password.isEmpty)
                 .offset(y: 55)
                 
                 
@@ -109,6 +121,15 @@ struct LoginCard: View {
             }
                 
             .shadow(radius: 5)
+            
+            VStack(alignment: .leading){
+                Text(viewModel.userNameError ?? "")
+                .frame(width: 300, height: 20)
+                .foregroundColor(.red)
+                .font(.caption)
+                
+                
+            }
             
             /*VStack(alignment: .leading) {
              
@@ -156,5 +177,24 @@ struct CreateButtonStyle: ButtonStyle {
             .padding()
             .background(Color.orange)
             .cornerRadius(10.0)
+    }
+}
+
+extension Optional where Wrapped == String {
+    var _bound: String? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var bound: String {
+        get {
+            return _bound ?? ""
+        }
+        set {
+            _bound = newValue.isEmpty ? nil : newValue
+        }
     }
 }
