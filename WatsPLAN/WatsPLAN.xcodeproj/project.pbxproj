@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6745083F249715AD005B2FF0 /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 6745083E249715AD005B2FF0 /* QGrid */; };
+		674508442497337C005B2FF0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674508432497337C005B2FF0 /* Model.swift */; };
 		67490C3A249701AE0051BCA1 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C39249701AE0051BCA1 /* Card.swift */; };
 		67490C3C249701CA0051BCA1 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C3B249701CA0051BCA1 /* CheckBoxView.swift */; };
 		67490C3E249701ED0051BCA1 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C3D249701ED0051BCA1 /* CheckListView.swift */; };
@@ -28,6 +30,7 @@
 /* Begin PBXFileReference section */
 		0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsPLAN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281A4DABE026C93B5C881327 /* Pods-WatsPLAN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.release.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.release.xcconfig"; sourceTree = "<group>"; };
+		674508432497337C005B2FF0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		67490C39249701AE0051BCA1 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		67490C3B249701CA0051BCA1 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		67490C3D249701ED0051BCA1 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6745083F249715AD005B2FF0 /* QGrid in Frameworks */,
 				9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +120,7 @@
 				67490C3B249701CA0051BCA1 /* CheckBoxView.swift */,
 				67490C3D249701ED0051BCA1 /* CheckListView.swift */,
 				67490C3F249702110051BCA1 /* ListItemView.swift */,
+				674508432497337C005B2FF0 /* Model.swift */,
 			);
 			path = WatsPLAN;
 			sourceTree = "<group>";
@@ -146,6 +151,9 @@
 			dependencies = (
 			);
 			name = WatsPLAN;
+			packageProductDependencies = (
+				6745083E249715AD005B2FF0 /* QGrid */,
+			);
 			productName = WatsPLAN;
 			productReference = F596AE322495414500B2D068 /* WatsPLAN.app */;
 			productType = "com.apple.product-type.application";
@@ -174,6 +182,9 @@
 				Base,
 			);
 			mainGroup = F596AE292495414500B2D068;
+			packageReferences = (
+				6745083D249715AD005B2FF0 /* XCRemoteSwiftPackageReference "QGrid" */,
+			);
 			productRefGroup = F596AE332495414500B2D068 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -253,6 +264,7 @@
 				F596AE3D2495414500B2D068 /* ContentView.swift in Sources */,
 				67490C3C249701CA0051BCA1 /* CheckBoxView.swift in Sources */,
 				F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */,
+				674508442497337C005B2FF0 /* Model.swift in Sources */,
 				F596AE382495414500B2D068 /* SceneDelegate.swift in Sources */,
 				67490C3A249701AE0051BCA1 /* Card.swift in Sources */,
 			);
@@ -450,6 +462,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6745083D249715AD005B2FF0 /* XCRemoteSwiftPackageReference "QGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Q-Mobile/QGrid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6745083E249715AD005B2FF0 /* QGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6745083D249715AD005B2FF0 /* XCRemoteSwiftPackageReference "QGrid" */;
+			productName = QGrid;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		F596AE392495414500B2D068 /* WatsPLAN.xcdatamodeld */ = {
