@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FloatingLabelTextFieldSwiftUI
 
 struct LoginView: View {
     var body: some View {
@@ -23,27 +24,14 @@ struct LoginView: View {
 
 struct LoginCard: View {
     
-    @State var text = "ori"
-    @State var pass = ""
+    @State private var email: String = ""
+    @State private var password: String = ""
     
+    @State private var isPasswordShow: Bool = false
     
     var body: some View {
         ZStack {
             VStack {
-                /*FloatingTextField(x: 10, y: 10, width: 200, height: 45, placeholder: "Name", title: "Your Full Name", secure: false, text: $text)*/
-                
-                FloatingTextField(x: 10, y: 10, width: 200, height: 45, placeholder: "Name", title: "Your Full Name", secure: false, text: $text)
-                
-                
-                Text(text)
-                    .font(.title)
-                
-                /*TextField("Email", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
-                    .offset(x: 50, y: -150)*/
-                
-                
-                SecureField("Password", text: $pass)
-                    .offset(x: 50, y: -110)
                 
                 RoundedRectangle(cornerRadius: 10)
                 .fill(Color("uwyellow"))
@@ -57,16 +45,29 @@ struct LoginCard: View {
                         .cornerRadius(10)
                 }
                 .offset(y: -80)
-                
-                Spacer()
-                    .frame(height: 200)
             }
             .shadow(radius: 5)
+            
+            VStack(alignment: .leading) {
+                FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
+                    
+                }
+                
+                
+                FloatingLabelTextField($password, placeholder: "Password")
+            }
             
             Text("LOGIN")
                 .font(.title)
                 .offset(x:-110,y:-250)
         }
+    }
+}
+
+//MARK: Create floating style
+struct ThemeTextFieldStyle: FloatingLabelTextFieldStyle {
+    func body(content: FloatingLabelTextField) -> FloatingLabelTextField {
+        content.titleColor(Color("uwyellow"))
     }
 }
 
