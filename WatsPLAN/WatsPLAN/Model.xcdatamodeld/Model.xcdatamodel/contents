@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F96" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Model" representedClassName="Model" syncable="YES" codeGenerationType="class">
+        <attribute name="cards" optional="YES" attributeType="Transformable" customClassName="[Card]"/>
+        <attribute name="changed" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="facultyName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="fileName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="majorName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="storedCards" optional="YES" attributeType="Transformable" customClassName="[Card]"/>
+    </entity>
+    <elements>
+        <element name="Model" positionX="-12031.97265625" positionY="-2628.02734375" width="128" height="43"/>
+    </elements>
+</model>
