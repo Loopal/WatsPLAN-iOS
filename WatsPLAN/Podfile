@@ -20,5 +20,7 @@ target 'WatsPLAN' do
 
   pod "ValidatedPropertyKit"
 
-  pod "FloatingButton"    
+  pod "FloatingButton"
+
+  pod 'MaterialComponents/Snackbar'    
 end

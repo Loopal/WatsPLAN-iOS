@@ -8,8 +8,10 @@
 
 import SwiftUI
 import FloatingLabelTextFieldSwiftUI
+import FirebaseAuth
 
 struct LoginView: View {
+    
     var body: some View {
         VStack(alignment: .center) {
             Image("logo")
@@ -38,7 +40,23 @@ struct LoginView: View {
 
 struct LoginCard: View {
     
+    @EnvironmentObject var session: SessionStore
+    
     @ObservedObject var viewModel = LoginUserViewModel()
+    
+    @State var loading = false
+    @State var error = false
+    
+    func signIn () {
+        loading = true
+        error = false
+        session.signIn(email: viewModel.email, password: viewModel.password) { (result, error) in
+            self.loading = false
+            if error != nil {
+                self.error = true
+            }
+        }
+    }
     
     @State private var isPasswordShow: Bool = false
     
@@ -95,9 +113,10 @@ struct LoginCard: View {
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
                 
-                
                 Button(action: {
                     self.endEditing(true)
+                    // SignIn with firebase
+                    self.signIn()
                 }) {
                     Text("SIGN IN")
                         .foregroundColor(Color("uwyellow"))
@@ -107,6 +126,7 @@ struct LoginCard: View {
                 }
                 .disabled(!viewModel.isValid)
                 .offset(y: 55)
+                
                 
                 
                 Text("LOGIN")
