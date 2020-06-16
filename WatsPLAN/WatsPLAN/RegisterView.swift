@@ -36,16 +36,13 @@ struct RegisterView: View {
 
 struct RegisterCard: View {
     
-    @State private var name: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
+    @State private var viewModel = RegisterUserViewModel()
     
     @State private var isPasswordShow: Bool = false
     @State private var isConfirmedPasswordShow: Bool = false
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color("uwyellow"))
@@ -54,20 +51,20 @@ struct RegisterCard: View {
             
             VStack {
                 
-                FloatingLabelTextField($name, placeholder: "Full Name", editingChanged: { (isChanged) in}){
+                FloatingLabelTextField($viewModel.username, placeholder: "User Name", editingChanged: { (isChanged) in}){
                     
                 }
                 .floatingStyle(ThemeTextFieldStyle())
                 .modifier(ThemeTextField())
                 
-                FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
+                FloatingLabelTextField($viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
                     
                 }
                 .floatingStyle(ThemeTextFieldStyle())
                 .modifier(ThemeTextField())
                 
                 
-                FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
+                FloatingLabelTextField($viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
                     
                 }
                 .rightView({
@@ -85,7 +82,7 @@ struct RegisterCard: View {
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
                 
-                FloatingLabelTextField($confirmPassword, placeholder: "Confirm Password", editingChanged: { (isChanged) in}){
+                FloatingLabelTextField($viewModel.confirmPassword, placeholder: "Confirm Password", editingChanged: { (isChanged) in}){
                     
                 }
                 .rightView({
@@ -104,7 +101,7 @@ struct RegisterCard: View {
                     .modifier(ThemeTextField())
                 
             }
-            .offset(y: -20)
+            //.offset(y: 10)
             
             
             Button(action: {
@@ -116,21 +113,55 @@ struct RegisterCard: View {
                     .background(Color.black)
                     .cornerRadius(10)
             }
-            .offset(y: 200)
+            .offset(y: 385)
             
             
             Text("Register")
                 .font(.custom("Avenir Next Demi Bold", size:30))
-                .offset(x:-110,y:-200)
+                .offset(x: -100,y: -20)
+            
+            VStack(alignment: .leading){
+                
+                Spacer()
+                    .frame(height: 80)
+                
+                Text(viewModel.userNameError ?? "")
+                    .frame(width: 300, height: 20)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                
+                Spacer()
+                    .frame(height: 65)
+                
+                Text(viewModel.emailError ?? "")
+                    .frame(width: 300, height: 20)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                
+                Spacer()
+                    .frame(height: 70)
+                
+                Text(viewModel.passwordError ?? "")
+                    .frame(width: 300, height: 20)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                
+                Spacer()
+                    .frame(height: 68)
+                
+                Text(viewModel.confirmPasswordError ?? "")
+                    .frame(width: 300, height: 20)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                
+                
+                Spacer()
+                    .frame(width:300, height: 10)
+                
+            }
         }
             
-        .shadow(radius: 5)
-        
-        /*VStack(alignment: .leading) {
-         
-         //.offset(y: -320)
-         }*/
-        
+        //.shadow(radius: 5)
         
     }
 }

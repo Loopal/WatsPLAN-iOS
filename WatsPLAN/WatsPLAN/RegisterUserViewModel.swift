@@ -1,21 +1,21 @@
 //
-//  UserViewModel.swift
-//  CoolLoginScreens
+//  registerUserViewModel.swift
+//  WatsPLAN
 //
-//  Created by Hitesh Agarwal on 09/02/20.
-//  Copyright © 2020 Hitesh Agarwal. All rights reserved.
+//  Created by Jack Zhang on 2020-06-15.
+//  Copyright © 2020 Jiawen Zhang. All rights reserved.
 //
 
 import Foundation
 import SwiftUI
 import Combine
 
-class UserViewModel: ObservableObject {
+class RegisterUserViewModel: ObservableObject {
     
     
     @Published var username: String = ""
-    @Published var password: String = ""
     @Published var email: String = ""
+    @Published var password: String = ""
     @Published var confirmPassword: String = ""
     @Published var userNameValidator = UsernameValidation.emptyUsername
     @Published var emailValidator = EmailValidation.emptyEmail
@@ -70,14 +70,15 @@ class UserViewModel: ObservableObject {
     private var validUserNamePublisher: AnyPublisher<String?, Never> {
         
         $username
+        
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
             .map { _username in
                 if _username.isEmpty {
                     return "Please enter username"
-                } else if !_username.isValidEmail {
+                } /*else if !_username.isValidEmail {
                     return "Please enter valid email"
-                } else {
+                }*/ else {
                     return nil
                 }
         }
@@ -131,11 +132,3 @@ class UserViewModel: ObservableObject {
     }
 }
 
-extension String {
-    var isValidEmail: Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: self)
-    }
-}

@@ -37,20 +37,13 @@ struct LoginView: View {
 
 struct LoginCard: View {
     
-    //@State private var email: String = ""
-    //@State private var password: String = ""
-    
-    @ObservedObject var viewModel = UserViewModel()
+    @ObservedObject var viewModel = LoginUserViewModel()
     
     @State private var isPasswordShow: Bool = false
     
-    @State private var isemailFormat: Bool = false
-    
-    @State private var emailErrorMessage: String?
-    
     var body: some View {
         
-        ZStack {
+        ZStack(alignment: .top) {
             
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color("uwyellow"))
@@ -66,7 +59,7 @@ struct LoginCard: View {
                 
                 FloatingLabelTextField($viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
                 }
-                .leftView( {
+                /*.leftView( {
                     Button(action: {
                         withAnimation {
                             self.isemailFormat.toggle()
@@ -75,7 +68,7 @@ struct LoginCard: View {
                         Image(self.isemailFormat ? "envelope" : "warning")
                             .foregroundColor(.black)
                     }
-                })
+                })*/
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
                     .autocapitalization(UITextAutocapitalizationType.none)
@@ -111,7 +104,7 @@ struct LoginCard: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
-                //.disabled(email.isEmpty || password.isEmpty)
+                .disabled(!viewModel.isValid)
                 .offset(y: 55)
                 
                 
@@ -123,20 +116,22 @@ struct LoginCard: View {
             .shadow(radius: 5)
             
             VStack(alignment: .leading){
-                Text(viewModel.userNameError ?? "")
-                .frame(width: 300, height: 20)
+                Spacer()
+                    .frame(height: 80)
+                
+                Text(viewModel.emailError ?? "")
+                    .frame(height: 20)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                
+                Spacer()
+                    .frame(width:300, height: 65)
+                
+                Text(viewModel.passwordError ?? "")
+                    .frame(height: 20)
                 .foregroundColor(.red)
                 .font(.caption)
-                
-                
             }
-            
-            /*VStack(alignment: .leading) {
-             
-             //.offset(y: -320)
-             }*/
-            
-            
         }
     }
 }
@@ -180,7 +175,7 @@ struct CreateButtonStyle: ButtonStyle {
     }
 }
 
-extension Optional where Wrapped == String {
+/*extension Optional where Wrapped == String {
     var _bound: String? {
         get {
             return self
@@ -197,4 +192,4 @@ extension Optional where Wrapped == String {
             _bound = newValue.isEmpty ? nil : newValue
         }
     }
-}
+}*/
