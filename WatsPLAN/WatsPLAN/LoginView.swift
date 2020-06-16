@@ -8,14 +8,13 @@
 
 import SwiftUI
 import FloatingLabelTextFieldSwiftUI
-import ValidatedPropertyKit
 
 struct LoginView: View {
     var body: some View {
         VStack(alignment: .center) {
             Image("logo")
                 .resizable()
-                .frame(width: 200.0, height: 200.0)
+                .frame(width: 200.0, height: 200)
             
             Spacer()
                 .frame(height: 20)
@@ -28,6 +27,8 @@ struct LoginView: View {
             NavigationLink(destination: RegisterView()) {
                 Text("New Here? Create an Account")
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
             
             Spacer()
             

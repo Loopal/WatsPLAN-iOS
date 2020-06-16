@@ -36,7 +36,7 @@ struct RegisterView: View {
 
 struct RegisterCard: View {
     
-    @State private var viewModel = RegisterUserViewModel()
+    @ObservedObject private var viewModel = RegisterUserViewModel()
     
     @State private var isPasswordShow: Bool = false
     @State private var isConfirmedPasswordShow: Bool = false
@@ -56,12 +56,14 @@ struct RegisterCard: View {
                 }
                 .floatingStyle(ThemeTextFieldStyle())
                 .modifier(ThemeTextField())
+                .autocapitalization(UITextAutocapitalizationType.none)
                 
                 FloatingLabelTextField($viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
                     
                 }
                 .floatingStyle(ThemeTextFieldStyle())
                 .modifier(ThemeTextField())
+                .autocapitalization(UITextAutocapitalizationType.none)
                 
                 
                 FloatingLabelTextField($viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
@@ -113,6 +115,7 @@ struct RegisterCard: View {
                     .background(Color.black)
                     .cornerRadius(10)
             }
+            .disabled(!viewModel.isValid)
             .offset(y: 385)
             
             
@@ -126,7 +129,7 @@ struct RegisterCard: View {
                     .frame(height: 80)
                 
                 Text(viewModel.userNameError ?? "")
-                    .frame(width: 300, height: 20)
+                    .frame(height: 20)
                     .foregroundColor(.red)
                     .font(.caption)
                 
@@ -134,7 +137,7 @@ struct RegisterCard: View {
                     .frame(height: 65)
                 
                 Text(viewModel.emailError ?? "")
-                    .frame(width: 300, height: 20)
+                    .frame(height: 20)
                     .foregroundColor(.red)
                     .font(.caption)
                 
@@ -142,15 +145,15 @@ struct RegisterCard: View {
                     .frame(height: 70)
                 
                 Text(viewModel.passwordError ?? "")
-                    .frame(width: 300, height: 20)
+                    .frame(width: 300, height: 60)
                     .foregroundColor(.red)
                     .font(.caption)
                 
                 Spacer()
-                    .frame(height: 68)
+                    .frame(height: 30)
                 
                 Text(viewModel.confirmPasswordError ?? "")
-                    .frame(width: 300, height: 20)
+                    .frame(height: 20)
                     .foregroundColor(.red)
                     .font(.caption)
                 

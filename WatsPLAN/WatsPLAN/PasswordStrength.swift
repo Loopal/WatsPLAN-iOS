@@ -9,10 +9,21 @@
 import Foundation
 
 func passwordStrengthChecker(forPassword text: String) -> PasswordValidation {
-    let entropy = text.count
+    
+    let range = NSRange(location: 0, length: text.utf16.count)
+    let regex = try! NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$")
+    
+    if(regex.firstMatch(in: text, options: [], range: range) != nil) {
+        return .veryStrong
+    }
+    else{
+        return .veryWeak
+    }
+    
+    /*let entropy = text.count
     if entropy < 4 {
         return .veryWeak
-    } else if entropy < 6 {
+    } else if entropy <= 6 {
         return .weak
     } else if entropy < 8 {
         return .reasonable
@@ -20,7 +31,7 @@ func passwordStrengthChecker(forPassword text: String) -> PasswordValidation {
         return .strong
     } else {
         return .veryStrong
-    }
+    }*/
 }
 
 public enum PasswordValidation {
@@ -36,9 +47,7 @@ public enum PasswordValidation {
     var errorMessage: String? {
         switch self {
         case .veryWeak:
-            return "Vary weak password"
-        case .weak:
-            return "Weak password"
+            return "Password should be Minimum Eight Characters, at Least One Letter, One Number and One Special Character"
         case .empty:
             return "Please enter password"
          default:

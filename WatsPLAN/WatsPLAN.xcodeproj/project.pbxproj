@@ -28,6 +28,7 @@
 		F59A646524986B1B0047FD3C /* LoginUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A646424986B1B0047FD3C /* LoginUserViewModel.swift */; };
 		F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DFB74624955DBC00A5C480 /* LoginView.swift */; };
 		F5DFB7492495687F00A5C480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */; };
+		F5FFDF5D249942E9006FC669 /* MyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FFDF5C249942E9006FC669 /* MyNavigationLink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		F59A646424986B1B0047FD3C /* LoginUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserViewModel.swift; sourceTree = "<group>"; };
 		F5DFB74624955DBC00A5C480 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F5DFB7482495687F00A5C480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F5FFDF5C249942E9006FC669 /* MyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationLink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,9 @@
 				F596AE372495414500B2D068 /* SceneDelegate.swift */,
 				F5DFB74624955DBC00A5C480 /* LoginView.swift */,
 				F51577B32497228900110CB1 /* RegisterView.swift */,
+				F59A646024982F6D0047FD3C /* PasswordStrength.swift */,
+				F59A646424986B1B0047FD3C /* LoginUserViewModel.swift */,
+				F59A646224986AB70047FD3C /* RegisterUserViewModel.swift */,
 				F596AE3C2495414500B2D068 /* ContentView.swift */,
 				674CC3A62496A76300A75723 /* MenuView.swift */,
 				F596AE3E2495414B00B2D068 /* Assets.xcassets */,
@@ -127,9 +132,7 @@
 				67490C3D249701ED0051BCA1 /* CheckListView.swift */,
 				67490C3F249702110051BCA1 /* ListItemView.swift */,
 				674508432497337C005B2FF0 /* Model.swift */,
-				F59A646024982F6D0047FD3C /* PasswordStrength.swift */,
-				F59A646224986AB70047FD3C /* RegisterUserViewModel.swift */,
-				F59A646424986B1B0047FD3C /* LoginUserViewModel.swift */,
+				F5FFDF5C249942E9006FC669 /* MyNavigationLink.swift */,
 			);
 			path = WatsPLAN;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				F596AE362495414500B2D068 /* AppDelegate.swift in Sources */,
 				674CC3A72496A76300A75723 /* MenuView.swift in Sources */,
 				F596AE3B2495414500B2D068 /* WatsPLAN.xcdatamodeld in Sources */,
+				F5FFDF5D249942E9006FC669 /* MyNavigationLink.swift in Sources */,
 				67490C40249702110051BCA1 /* ListItemView.swift in Sources */,
 				67490C3E249701ED0051BCA1 /* CheckListView.swift in Sources */,
 				F596AE3D2495414500B2D068 /* ContentView.swift in Sources */,
