@@ -32,7 +32,7 @@ struct LoginView: View {
             Spacer()
                 .frame(height: 50)
             
-            NavigationLink(destination: RegisterView()) {
+            NavigationLink(destination: RegisterView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
                 Text("New Here? Create an Account")
             }
             .navigationBarTitle("")
