@@ -12,6 +12,11 @@ import FirebaseAuth
 
 struct LoginView: View {
     
+    @Binding var shouldPopToRootView: Bool
+    
+    @Binding var isMenuActive: Bool
+    
+    
     var body: some View {
         VStack(alignment: .center) {
             Image("logo")
@@ -21,7 +26,7 @@ struct LoginView: View {
             Spacer()
                 .frame(height: 20)
             
-            LoginCard()
+            LoginCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
             
             Spacer()
                 .frame(height: 50)
@@ -39,6 +44,12 @@ struct LoginView: View {
 }
 
 struct LoginCard: View {
+    
+    @Binding var shouldPopToRootView: Bool
+    
+    @Binding var isMenuActive: Bool
+    
+    @Environment(\.presentationMode) var presentation
     
     @EnvironmentObject var session: SessionStore
     
@@ -113,10 +124,32 @@ struct LoginCard: View {
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
                 
+                /*NavigationLink(destination: ContentView(), tag: true, selection: session.$verified) {
+                    Button(action: {
+                        self.endEditing(true)
+                        // SignIn with firebase
+                        self.signIn()
+                    }) {
+                        Text("SIGN IN")
+                            .foregroundColor(Color("uwyellow"))
+                            .frame(width: 200.0, height: 30.0)
+                            .background(Color.black)
+                            .cornerRadius(10)
+                    }
+                    .disabled(!viewModel.isValid)
+                    .offset(y: 55)
+                }*/
+                
                 Button(action: {
                     self.endEditing(true)
                     // SignIn with firebase
                     self.signIn()
+                    /*if(self.session.session != nil){
+                        self.presentation.wrappedValue.dismiss()
+                    }*/
+                    self.shouldPopToRootView = false
+                    self.isMenuActive = false
+                    
                 }) {
                     Text("SIGN IN")
                         .foregroundColor(Color("uwyellow"))
@@ -179,11 +212,11 @@ struct ThemeTextField: ViewModifier {
 }
 
 //MARK: ViewModifier
-struct LoginView_Previews: PreviewProvider {
+/*struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
-}
+}*/
 
 //MARK: Button style
 struct CreateButtonStyle: ButtonStyle {

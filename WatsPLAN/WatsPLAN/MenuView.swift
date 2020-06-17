@@ -10,7 +10,11 @@ import SwiftUI
 
 struct MenuView: View {
     
+    @State var isActive: Bool = false
+    
     @EnvironmentObject var session: SessionStore
+    
+    @Binding var isMenuActive: Bool
     
     func getUser() {
         session.listen()
@@ -22,7 +26,7 @@ struct MenuView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
 
-            NavigationLink(destination: LoginView()) {
+            NavigationLink(destination: LoginView(shouldPopToRootView: self.$isActive, isMenuActive: self.$isMenuActive), isActive: self.$isActive) {
                     HStack {
                         Image("login")
                             .imageScale(.large)
@@ -33,6 +37,7 @@ struct MenuView: View {
                             .padding(.leading, 30)
                     }
             }
+            .isDetailLink(false)
             .padding(.top, 10)
             HStack {
                 Image("home")
@@ -95,9 +100,9 @@ struct MenuView: View {
     }
 }
 
-struct MenuView_Previews: PreviewProvider {
+/*struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         MenuView()
         .environmentObject(SessionStore())
     }
-}
+}*/

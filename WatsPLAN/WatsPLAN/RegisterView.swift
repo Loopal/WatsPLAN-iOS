@@ -24,9 +24,9 @@ struct RegisterView: View {
             Spacer()
                 .frame(height: 50)
             
-            NavigationLink(destination: LoginView()) {
+            /*NavigationLink(destination: LoginView()) {
                 Text("Already Registered? Login Here")
-            }
+            }*/
             
             Spacer()
             

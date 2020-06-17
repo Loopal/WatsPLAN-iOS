@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User {
+class User{
     var uid: String
     var email: String?
     var displayName: String?

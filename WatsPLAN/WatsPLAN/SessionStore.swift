@@ -14,6 +14,8 @@ class SessionStore : ObservableObject {
     var didChange = PassthroughSubject<SessionStore, Never>()
     var session: User? { didSet { self.didChange.send(self) }}
     var handle: AuthStateDidChangeListenerHandle?
+    @State var verified: Bool? = false
+    
 
     func listen () {
         // monitor authentication changes using firebase
@@ -26,6 +28,7 @@ class SessionStore : ObservableObject {
                     displayName: user.displayName,
                     email: user.email
                 )
+                self.verified = true
             } else {
                 // if we don't have a user, set our session to nil
                 self.session = nil
