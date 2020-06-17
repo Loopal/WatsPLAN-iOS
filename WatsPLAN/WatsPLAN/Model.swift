@@ -50,19 +50,6 @@ class Model: ObservableObject {
 
     }
     
-    func filter(_ selection: Int) {
-        var temp = 0
-        for c in cards {
-           if selection == 0 ||
-                (selection == 1 && c.progress == 100) ||
-                (selection == 2 && c.progress != 100)
-            {
-               temp += 1
-            }
-        }
-        self.filterlen = temp
-        print(self.filterlen)
-    }
 }
 
 

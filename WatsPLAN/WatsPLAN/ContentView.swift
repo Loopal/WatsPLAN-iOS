@@ -149,17 +149,16 @@ struct CreateCard: View {
             
             VStack {
 
-
-                TextField("Enter or select your faculty", text: $faculty)
+                TextField("Select your faculty", text: $faculty)
                     .frame(width: 330, height : 40)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                TextField("Enter or select your program", text: $program)
+                TextField("Select your program", text: $program)
                     .frame(width: 330, height : 40)
                     .border(Color.black)
                     .cornerRadius(5)
                 
-                TextField("Enter or select your option(if applicable)", text: $option)
+                TextField("Select your option(if applicable)", text: $option)
                     .frame(width: 330, height : 40)
                     .border(Color.black)
                     .cornerRadius(5)

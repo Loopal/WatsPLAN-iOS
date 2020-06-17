@@ -31,7 +31,7 @@ struct CheckListView: View {
                 .foregroundColor(Color.white)
                 .offset(y:-5)
             
-            Picker(selection: $selected.onChange(model.filter), label: Text("adasdas"), content: {
+            Picker(selection: $selected, label: Text("adasdas"), content: {
                 Text("ALL").tag(SELECT_ALL)
                 Text("CHECKED").tag(SELECT_CHECK)
                 Text("UNCHECKED").tag(SELECT_UNCHECK)
@@ -48,10 +48,15 @@ struct CheckListView: View {
                 }
             
             List([Int](0..<model.cards.count)) { curId in
-                ListItemView(id: curId)
+                if self.selected == SELECT_ALL ||
+                    (self.selected == SELECT_CHECK && self.model.cards[curId].progress == 100) ||
+                (self.selected == SELECT_UNCHECK && self.model.cards[curId].progress != 100)
+                {
+                    ListItemView(id: curId)
+                }
             }
             .onAppear {
-                //UITableView.appearance().separatorStyle = .none
+                UITableView.appearance().separatorStyle = .none
                 UITableView.appearance().backgroundColor = .clear
             }
             
@@ -71,13 +76,3 @@ struct CheckListView_Previews: PreviewProvider {
     }
 }
 
-extension Binding {
-    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
-        return Binding(
-            get: { self.wrappedValue },
-            set: { selection in
-                self.wrappedValue = selection
-                handler(selection)
-        })
-    }
-}
