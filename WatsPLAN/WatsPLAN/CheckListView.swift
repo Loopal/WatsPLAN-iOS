@@ -8,17 +8,15 @@
 
 import SwiftUI
 
+let SELECT_ALL = 0
+let SELECT_CHECK = 1
+let SELECT_UNCHECK = 2
+
 struct CheckListView: View {
+
     @EnvironmentObject var model : Model
-    @State var selected = 0
-    
-    init() {
-        model.facultyName = "asd"
-        model.majorName = "asd"
-        model.majorName = "Applied Mathematics"
-        model.getCollection()
-    }
-    
+    @State var selected = SELECT_ALL
+        
     var body: some View {
         return VStack(spacing : 0) {
             Image("math_logo")
@@ -33,12 +31,12 @@ struct CheckListView: View {
                 .foregroundColor(Color.white)
                 .offset(y:-5)
             
-            Picker(selection: $selected, label: Text("adasdas"), content: {
-                Text("ALL").tag(0)
-                Text("UNCHECKED").tag(1)
-                Text("CHECKED").tag(2)
+            Picker(selection: $selected.onChange(model.filter), label: Text("adasdas"), content: {
+                Text("ALL").tag(SELECT_ALL)
+                Text("CHECKED").tag(SELECT_CHECK)
+                Text("UNCHECKED").tag(SELECT_UNCHECK)
             })
-            .cornerRadius(0)
+                .cornerRadius(0)
                 .pickerStyle(SegmentedPickerStyle())
                 .onAppear{
                     UISegmentedControl.appearance()
@@ -47,21 +45,22 @@ struct CheckListView: View {
                         .setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.black], for: .selected)
                     UISegmentedControl.appearance()
                         .setTitleTextAttributes([.foregroundColor: UIColor(named: "uwyellow")!], for: .normal)
-
                 }
             
-            
-            List(model.cards) { card in
-                ListItemView(card: card)
+            List([Int](0..<model.cards.count)) { curId in
+                ListItemView(id: curId)
             }
             .onAppear {
-                UITableView.appearance().separatorStyle = .none
+                //UITableView.appearance().separatorStyle = .none
                 UITableView.appearance().backgroundColor = .clear
             }
+            
 
         }
         .background(Color.black)
         .onAppear {
+            self.model.majorName = "Applied Mathematics"
+            self.model.getCollection()
         }
     }
 }
@@ -72,4 +71,13 @@ struct CheckListView_Previews: PreviewProvider {
     }
 }
 
-
+extension Binding {
+    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
+        return Binding(
+            get: { self.wrappedValue },
+            set: { selection in
+                self.wrappedValue = selection
+                handler(selection)
+        })
+    }
+}

@@ -12,53 +12,55 @@ import SwiftUI
 
 //MARK:- Checkbox Field
 struct CheckBoxView: View {
-    let id: String
-    let label: String
-    let size: CGFloat
-    let textSize: Int
-    let callback: (String, Bool)->()
+    let cardid : Int
+    let id: Int
+    let size: CGFloat = 20
+    let textSize: CGFloat = 15
+    var pad:Bool
     
-    init(
-        id: String,
-        label:String,
-        size: CGFloat = 15,
-        color: Color = Color.black,
-        textSize: Int = 15,
-        callback: @escaping (String, Bool)->()
-        ) {
-        self.id = id
-        self.label = label
-        self.size = size
-        self.textSize = textSize
-        self.callback = callback
-    }
-    
-    @State var isMarked:Bool = false
-    
+    @EnvironmentObject var model : Model
+
     var body: some View {
         Button(action:{
-            self.isMarked.toggle()
-            self.callback(self.id, self.isMarked)
+            self.checkboxSelected()
         }) {
             HStack(alignment: .center, spacing: 10) {
-                Image(systemName: self.isMarked ? "checkmark.square.fill" : "square")
+                Image(systemName: self.model.cards[self.cardid].checkedBoxes.contains(self.id) ? "checkmark.square.fill" : "square")
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: self.size, height: self.size)
-                Text(label)
-                    .font(Font.system(size: size))
+                Text(model.cards[self.cardid].items[self.id])
+                    .font(Font.system(size: self.textSize))
                     .foregroundColor(Color.black)
+                    .minimumScaleFactor(0.01)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                if pad {
+                    Spacer()
+                }
             }
         }
     }
-}
-struct CheckBoxView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckBoxView(id: "a",
-        label: "Test Course",
-        size: 20,
-        textSize: 20,
-        callback: checkboxSelected)
+    
+    func checkboxSelected() {
+        if self.model.cards[self.cardid].checkedBoxes.contains(self.id) {
+            model.cards[cardid].checkedBoxes.remove(at: model.cards[cardid].checkedBoxes.firstIndex(of: self.id)!)
+        } else {
+            self.model.cards[cardid].checkedBoxes.append(self.id)
+            if (model.cards[cardid].checkedBoxes.count > model.cards[cardid].num) {
+                model.cards[cardid].checkedBoxes.remove(at: 0)
+            }
+        }
+        model.cards[cardid].progress = model.cards[cardid].checkedBoxes.count * 100 / model.cards[cardid].num
     }
 }
+
+struct CheckBoxView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        CheckBoxView(cardid: 0, id: 0, pad : true)
+        .environmentObject(Model())
+    }
+}
+

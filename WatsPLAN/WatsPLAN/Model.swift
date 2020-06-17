@@ -17,11 +17,13 @@ class Model: ObservableObject {
     @Published var storedCards: [Card] = []
     @Published var cards: [Card] = []
     
+    @Published var filterlen = 0
     private var db = Firestore.firestore()
     
     func getCollection() {
-        if self.fileName != "" {
+        if self.fileName == "" {
             //load from db
+
             let db = Firestore.firestore()
             var docRef = db.collection("/Majors/").document(self.majorName)
             docRef.getDocument { (document, error) in
@@ -32,11 +34,12 @@ class Model: ObservableObject {
                     }) {
                         var count = 0
                         for item in major.Requirements {
-                            var temp = item.components(separatedBy: ";")
-                            self.storedCards.append(Card(id : count, text: temp[0], num: Int(temp[1]) ?? 0, items: [String](temp[2...temp.count])))
+                            let temp = item.components(separatedBy: ";")
+                            self.storedCards.append(Card(id : count, text: temp[0], num: Int(temp[1]) ?? 0, items: [String](temp[2...temp.count-1])))
                             count += 1
                         }
                         self.cards.append(contentsOf: self.storedCards)
+                        self.filterlen = self.cards.count
                     } else {
                         print("Document does not exist")
                     }
@@ -45,6 +48,20 @@ class Model: ObservableObject {
             //load from storage
         }
 
+    }
+    
+    func filter(_ selection: Int) {
+        var temp = 0
+        for c in cards {
+           if selection == 0 ||
+                (selection == 1 && c.progress == 100) ||
+                (selection == 2 && c.progress != 100)
+            {
+               temp += 1
+            }
+        }
+        self.filterlen = temp
+        print(self.filterlen)
     }
 }
 
