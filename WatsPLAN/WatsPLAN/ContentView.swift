@@ -106,8 +106,8 @@ struct LoadCard: View {
                           .cornerRadius(10)
                    }
                    .buttonStyle(PlainButtonStyle())
-                   .navigationBarTitle("")
-                   .navigationBarHidden(true)
+                   //.navigationBarTitle("")
+                   //.navigationBarHidden(true)
                    .offset(y:-30)
 
             }

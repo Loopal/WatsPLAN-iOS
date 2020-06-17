@@ -9,6 +9,7 @@
 import SwiftUI
 import FloatingLabelTextFieldSwiftUI
 import FirebaseAuth
+import MaterialComponents.MaterialSnackbar
 
 struct LoginView: View {
     
@@ -144,12 +145,14 @@ struct LoginCard: View {
                     self.endEditing(true)
                     // SignIn with firebase
                     self.signIn()
-                    /*if(self.session.session != nil){
-                        self.presentation.wrappedValue.dismiss()
-                    }*/
-                    self.shouldPopToRootView = false
-                    self.isMenuActive = false
-                    
+                    if(self.session.session != nil){
+                        let message = MDCSnackbarMessage()
+                        message.text = "Login Successfully"
+                        message.duration = 2
+                        MDCSnackbarManager.show(message)
+                        self.shouldPopToRootView = false
+                        self.isMenuActive = false
+                    }
                 }) {
                     Text("SIGN IN")
                         .foregroundColor(Color("uwyellow"))
