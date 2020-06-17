@@ -27,18 +27,19 @@ struct MenuView: View {
                 .aspectRatio(contentMode: .fit)
 
             NavigationLink(destination: LoginView(shouldPopToRootView: self.$isActive, isMenuActive: self.$isMenuActive), isActive: self.$isActive) {
-                    HStack {
-                        Image("login")
-                            .imageScale(.large)
-                            .foregroundColor(Color("uwyellow"))
-                        Text("Login")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .padding(.leading, 30)
-                    }
+                HStack {
+                    Image("login")
+                        .imageScale(.large)
+                        .foregroundColor(Color("uwyellow"))
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding(.leading, 30)
+                }
             }
             .isDetailLink(false)
             .padding(.top, 10)
+            .disabled(self.session.session == nil)
             HStack {
                 Image("home")
                     .imageScale(.large)

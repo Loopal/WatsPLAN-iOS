@@ -8,8 +8,15 @@
 
 import SwiftUI
 import FloatingLabelTextFieldSwiftUI
+import FirebaseAuth
+import MaterialComponents.MaterialSnackbar
 
 struct RegisterView: View {
+    
+    @Binding var shouldPopToRootView: Bool
+    
+    @Binding var isMenuActive: Bool
+    
     var body: some View {
         VStack(alignment: .center) {
             Image("logo")
@@ -19,14 +26,14 @@ struct RegisterView: View {
             Spacer()
                 .frame(height: 20)
             
-            RegisterCard()
+            RegisterCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
             
             Spacer()
                 .frame(height: 50)
             
-            /*NavigationLink(destination: LoginView()) {
+            NavigationLink(destination: LoginView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
                 Text("Already Registered? Login Here")
-            }*/
+            }
             
             Spacer()
             
@@ -36,10 +43,30 @@ struct RegisterView: View {
 
 struct RegisterCard: View {
     
+    @Binding var shouldPopToRootView: Bool
+    
+    @Binding var isMenuActive: Bool
+    
+    @EnvironmentObject var session: SessionStore
+    
     @ObservedObject private var viewModel = RegisterUserViewModel()
     
     @State private var isPasswordShow: Bool = false
     @State private var isConfirmedPasswordShow: Bool = false
+    
+    @State var loading = false
+    @State var error = false
+    
+    func signUp () {
+        loading = true
+        error = false
+        session.signUp(email: viewModel.email, password: viewModel.password) { (result, error) in
+            self.loading = false
+            if error != nil {
+                self.error = true
+            }
+        }
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -108,6 +135,16 @@ struct RegisterCard: View {
             
             Button(action: {
                 self.endEditing(true)
+                // SignUp with firebase
+                
+                if(self.session.session != nil){
+                    let message = MDCSnackbarMessage()
+                    message.text = "Register Successfully"
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
+                    self.shouldPopToRootView = false
+                    self.isMenuActive = false
+                }
             }) {
                 Text("SIGN UP")
                     .foregroundColor(Color("uwyellow"))
@@ -170,8 +207,8 @@ struct RegisterCard: View {
 }
 
 
-struct RegisterView_Previews: PreviewProvider {
+/*struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView()
     }
-}
+}*/
