@@ -14,6 +14,7 @@
 		67490C3E249701ED0051BCA1 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C3D249701ED0051BCA1 /* CheckListView.swift */; };
 		67490C40249702110051BCA1 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67490C3F249702110051BCA1 /* ListItemView.swift */; };
 		674CC3A72496A76300A75723 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674CC3A62496A76300A75723 /* MenuView.swift */; };
+		67BE2916249ACFC6009CFC69 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE2915249ACFC6009CFC69 /* PickerView.swift */; };
 		9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */; };
 		F51577B42497228900110CB1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51577B32497228900110CB1 /* RegisterView.swift */; };
 		F596AE362495414500B2D068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596AE352495414500B2D068 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		67490C3F249702110051BCA1 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		674CC3A42495A9C800A75723 /* iOSDropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = iOSDropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		674CC3A62496A76300A75723 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		67BE2915249ACFC6009CFC69 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		EF40EDB1B115BF7DB34CB1A8 /* Pods-WatsPLAN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.debug.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.debug.xcconfig"; sourceTree = "<group>"; };
 		F51577B32497228900110CB1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		F596AE322495414500B2D068 /* WatsPLAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsPLAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 				F5FFDF5C249942E9006FC669 /* MyNavigationLink.swift */,
 				F5FFDF5E24995421006FC669 /* SessionStore.swift */,
 				F5FFDF60249954F5006FC669 /* User.swift */,
+				67BE2915249ACFC6009CFC69 /* PickerView.swift */,
 			);
 			path = WatsPLAN;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				F596AE3D2495414500B2D068 /* ContentView.swift in Sources */,
 				67490C3C249701CA0051BCA1 /* CheckBoxView.swift in Sources */,
 				F5DFB74724955DBC00A5C480 /* LoginView.swift in Sources */,
+				67BE2916249ACFC6009CFC69 /* PickerView.swift in Sources */,
 				674508442497337C005B2FF0 /* Model.swift in Sources */,
 				F5FFDF5F24995421006FC669 /* SessionStore.swift in Sources */,
 				F59A646324986AB70047FD3C /* RegisterUserViewModel.swift in Sources */,

@@ -11,6 +11,9 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showMenu = false
+    @State var showPicker = false
+    @State var pickerType = 0
+    @EnvironmentObject var model: Model
     
     var body: some View {
         
@@ -25,24 +28,73 @@ struct ContentView: View {
                         self.showMenu = false
                     }
                 }
+                if $0.translation.height > 50 {
+                    withAnimation {
+                        self.showPicker = false
+                    }
+                }
             }
         
         return NavigationView {
             GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    MainView(showMenu: self.$showMenu)
+                ZStack(alignment: .center) {
+                    MainView(showMenu: self.$showMenu, showPicker: self.$showPicker, pickerType: self.$pickerType)
                         .frame(width: geometry.size.width, height: geometry.size.height)
-                        .offset(x: self.showMenu ? geometry.size.width/1.3 : 0)
-                        .disabled(self.showMenu ? true : false)
+                        .offset(x: self.showMenu ? geometry.size.width/1.3 : 0,
+                                y: self.showPicker ? -300 : 0)
+                        .disabled(self.showMenu || self.showPicker ? true : false)
                     if self.showMenu {
                         MenuView(isMenuActive: self.$showMenu)
                             .frame(width: geometry.size.width/1.3)
+                            .padding(.leading, -(geometry.size.width - geometry.size.width/1.3))
                             .transition(.move(edge: .leading))
                     }
+                    if self.showPicker {
+                        /*PickerView(isPickerActive: self.$showPicker, type: self.$pickerType)
+                            .frame(height: geometry.size.height/3)
+                            .transition(.move(edge: .bottom))*/
+                        VStack(alignment: .center){
+                            Button(action: {
+                                withAnimation{
+                                    self.showPicker = false
+                                }
+                                
+                            }) {
+                                Text("CONFIRM")
+                                    .font(.custom("Avenir Next Demi Bold", size:15))
+                                    .foregroundColor(Color("uwyellow"))
+                                    .frame(width: 700, height: 40)
+                                    .background(Color.black)
+                            }
+                            
+                            Picker(selection: self.$model.majorName, label: Text("")) {
+                                ForEach(0..<self.model.fContent.count) { index in
+                                    Text("\(self.model.fContent[index])").tag(index)
+                                    .font(.custom("Avenir Next Demi Bold", size:20))
+                                }
+                                
+                            }
+                            .frame(width: 700)
+                            .pickerStyle(WheelPickerStyle())
+
+                            
+                            }
+                            .background(Color("uwyellow"))
+                            .labelsHidden()
+                            .pickerStyle(WheelPickerStyle())
+                            .padding(.top, geometry.size.height-200)
+                        .onAppear{
+                                self.model.fetchContent(s: "/Faculties/")
+                            }
+                            .transition(.move(edge: .bottom))
+                        }
+
+                    
+                    
                 }
-                    .gesture(dragMenu)
+                .gesture(dragMenu)
             }
-                .navigationBarItems(leading: (
+            .navigationBarItems(leading: (
                     Button(action: {
                         withAnimation {
                             self.showMenu.toggle()
@@ -60,9 +112,11 @@ struct ContentView: View {
 struct MainView: View {
     
     @Binding var showMenu: Bool
+    @Binding var showPicker: Bool
+    @Binding var pickerType: Int
     
     var body: some View {
-        VStack(alignment:.leading) {
+        VStack(alignment:.leading, spacing: 0) {
             
             Text("Welcome back, Warrior!")
                 .font(.custom("Avenir Next Demi Bold", size:30))
@@ -74,10 +128,9 @@ struct MainView: View {
             
             LoadCard()
             
-            CreateCard()
+            CreateCard(showPicker: self.$showPicker, pickerType: self.$pickerType)
 
 
-                
         }
     }
 }
@@ -85,6 +138,7 @@ struct MainView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        .environmentObject(Model())
     }
 }
 
@@ -122,15 +176,12 @@ struct LoadCard: View {
 }
 
 struct CreateCard: View {
-    @State private var faculty: String = ""
-    @State private var program: String = ""
-    @State private var option: String = ""
-    
-    
+    @Binding var showPicker: Bool
+    @Binding var pickerType: Int
+    @EnvironmentObject var model: Model
     var body: some View {
         ZStack {
             VStack {
-        
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 250)
@@ -148,20 +199,35 @@ struct CreateCard: View {
             .shadow(radius: 5)
             
             VStack {
-
-                TextField("Select your faculty", text: $faculty)
-                    .frame(width: 330, height : 40)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                TextField("Select your program", text: $program)
-                    .frame(width: 330, height : 40)
-                    .border(Color.black)
-                    .cornerRadius(5)
-                
-                TextField("Select your option(if applicable)", text: $option)
-                    .frame(width: 330, height : 40)
-                    .border(Color.black)
-                    .cornerRadius(5)
+                Button(action: {
+                    self.pickerType = 0
+                    withAnimation{
+                        self.showPicker.toggle()
+                    }
+                    
+                }) {
+                    Text(model.facultyName == "" ? "Select your faculty" : model.facultyName)
+                        .font(.custom("Avenir Next Demi Bold", size:15))
+                        .foregroundColor(Color.black)
+                        .frame(width: 330, height: 40)
+                        .border(Color.black, width: 5)
+                }
+                Button(action: {
+                }) {
+                    Text(model.facultyName == "" ? "Select your program" : model.majorName)
+                        .font(.custom("Avenir Next Demi Bold", size:15))
+                        .foregroundColor(Color.black)
+                        .frame(width: 330, height: 40)
+                        .border(Color.black, width: 5)
+                }
+                Button(action: {
+                }) {
+                    Text(model.facultyName == "" ? "Select your option (if applicable)" : model.optionName)
+                        .font(.custom("Avenir Next Demi Bold", size:15))
+                        .foregroundColor(Color.black)
+                        .frame(width: 330, height: 40)
+                        .border(Color.black, width: 5)
+                }
 
             }
             .offset(y:-50)
@@ -173,4 +239,3 @@ struct CreateCard: View {
         }
     }
 }
-

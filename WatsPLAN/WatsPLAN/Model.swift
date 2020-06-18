@@ -10,22 +10,26 @@ import Foundation
 import FirebaseFirestore
 
 class Model: ObservableObject {
+    @Published var fileName = ""
     @Published var facultyName = ""
     @Published var majorName = ""
-    @Published var fileName = ""
+    @Published var optionName = ""
     @Published var changed = false
     @Published var storedCards: [Card] = []
     @Published var cards: [Card] = []
-    
     @Published var filterlen = 0
+    
+    @Published var fContent: [String] = []
+    @Published var mContent: [String] = []
+    @Published var oContent: [String] = []
+
+    
     private var db = Firestore.firestore()
     
     func getCollection() {
         if self.fileName == "" {
             //load from db
-
-            let db = Firestore.firestore()
-            var docRef = db.collection("/Majors/").document(self.majorName)
+            var docRef = db.collection("/Majors/").document(optionName == "" ? self.majorName : self.majorName + " | " + self.optionName)
             docRef.getDocument { (document, error) in
                     if let major = document.flatMap({
                       $0.data().flatMap({ (data) in
@@ -50,6 +54,21 @@ class Model: ObservableObject {
 
     }
     
+    func fetchContent(s: String) {
+        
+        db.collection(s).addSnapshotListener { (querySnapshot, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                    return
+                } else {
+                    self.fContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
+                        return queryDocumentSnapshot.documentID }
+                    print(self.fContent)
+                }
+            }
+        }
+    }
 }
 
 
@@ -58,4 +77,8 @@ fileprivate struct Major {
     init?(dictionary: [String: Any]) {
         Requirements = dictionary["Requirements"] as! [String]
     }
+}
+
+extension String: Identifiable {
+    public var id: String { self }
 }
