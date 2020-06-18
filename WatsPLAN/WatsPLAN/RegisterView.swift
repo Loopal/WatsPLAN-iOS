@@ -23,8 +23,8 @@ struct RegisterView: View {
                 .resizable()
                 .frame(width: 200.0, height: 200.0)
             
-            Spacer()
-                .frame(height: 20)
+            /*Spacer()
+                .frame(height: 20)*/
             
             RegisterCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
             
@@ -36,8 +36,11 @@ struct RegisterView: View {
             }
             
             Spacer()
+                .frame(height: 120)
             
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
 }
 
@@ -71,159 +74,161 @@ struct RegisterCard: View {
     }
     
     var body: some View {
-        ZStack(alignment: .top) {
-            
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color("uwyellow"))
-                .frame(width: 350, height: 400)
-            //.offset(y: -40)
-            
-            VStack {
+        GeometryReader { geo in
+            ZStack(alignment: .top) {
                 
-                FloatingLabelTextField($viewModel.username, placeholder: "User Name", editingChanged: { (isChanged) in}){
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color("uwyellow"))
+                    .frame(width: 350, height: 400)
+                //.offset(y: -40)
+                
+                VStack {
                     
-                }
-                .floatingStyle(ThemeTextFieldStyle())
-                .modifier(ThemeTextField())
-                .autocapitalization(UITextAutocapitalizationType.none)
-                
-                FloatingLabelTextField($viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
-                    
-                }
-                .floatingStyle(ThemeTextFieldStyle())
-                .modifier(ThemeTextField())
-                .autocapitalization(UITextAutocapitalizationType.none)
-                
-                
-                FloatingLabelTextField($viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
-                    
-                }
-                .rightView({
-                    Button(action: {
-                        withAnimation {
-                            self.isPasswordShow.toggle()
-                        }
+                    FloatingLabelTextField(self.$viewModel.username, placeholder: "User Name", editingChanged: { (isChanged) in}){
                         
-                    }) {
-                        Image(self.isPasswordShow ? "eye_close" : "eye_show")
-                            .foregroundColor(Color.black)
                     }
-                })
-                    .isSecureTextEntry(!self.isPasswordShow)
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
-                
-                FloatingLabelTextField($viewModel.confirmPassword, placeholder: "Confirm Password", editingChanged: { (isChanged) in}){
+                    .autocapitalization(UITextAutocapitalizationType.none)
                     
-                }
-                .rightView({
-                    Button(action: {
-                        withAnimation {
-                            self.isConfirmedPasswordShow.toggle()
-                        }
+                    FloatingLabelTextField(self.$viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
                         
-                    }) {
-                        Image(self.isConfirmedPasswordShow ? "eye_close" : "eye_show")
-                            .foregroundColor(Color.black)
                     }
-                })
-                    .isSecureTextEntry(!self.isConfirmedPasswordShow)
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
-                
-            }
-            //.offset(y: 10)
-            
-            
-            Button(action: {
-                self.endEditing(true)
-                // SignUp with firebase
-                
-                if(self.session.session != nil){
-                    let message = MDCSnackbarMessage()
-                    message.text = "Register Successfully"
-                    message.duration = 2
-                    MDCSnackbarManager.show(message)
-                    self.shouldPopToRootView = false
-                    self.isMenuActive = false
+                    .autocapitalization(UITextAutocapitalizationType.none)
+                    
+                    
+                    FloatingLabelTextField(self.$viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
+                        
+                    }
+                    .rightView({
+                        Button(action: {
+                            withAnimation {
+                                self.isPasswordShow.toggle()
+                            }
+                            
+                        }) {
+                            Image(self.isPasswordShow ? "eye_close" : "eye_show")
+                                .foregroundColor(Color.black)
+                        }
+                    })
+                        .isSecureTextEntry(!self.isPasswordShow)
+                        .floatingStyle(ThemeTextFieldStyle())
+                        .modifier(ThemeTextField())
+                    
+                    FloatingLabelTextField(self.$viewModel.confirmPassword, placeholder: "Confirm Password", editingChanged: { (isChanged) in}){
+                        
+                    }
+                    .rightView({
+                        Button(action: {
+                            withAnimation {
+                                self.isConfirmedPasswordShow.toggle()
+                            }
+                            
+                        }) {
+                            Image(self.isConfirmedPasswordShow ? "eye_close" : "eye_show")
+                                .foregroundColor(Color.black)
+                        }
+                    })
+                        .isSecureTextEntry(!self.isConfirmedPasswordShow)
+                        .floatingStyle(ThemeTextFieldStyle())
+                        .modifier(ThemeTextField())
+                    
                 }
-            }) {
-                Text("SIGN UP")
-                    .foregroundColor(Color("uwyellow"))
-                    .frame(width: 200.0, height: 30.0)
-                    .background(Color.black)
-                    .cornerRadius(10)
+                //.offset(y: 10)
+                
+                
+                Button(action: {
+                    self.endEditing(true)
+                    // SignUp with firebase
+                    
+                    if(self.session.session != nil){
+                        let message = MDCSnackbarMessage()
+                        message.text = "Register Successfully"
+                        message.duration = 2
+                        MDCSnackbarManager.show(message)
+                        self.shouldPopToRootView = false
+                        self.isMenuActive = false
+                    }
+                }) {
+                    Text("SIGN UP")
+                        .foregroundColor(Color("uwyellow"))
+                        .frame(width: 200.0, height: 30.0)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                .disabled(!self.viewModel.isValid)
+                .offset(y: 385)
+                
+                
+                Text("Register")
+                    .font(.custom("Avenir Next Demi Bold", size:30))
+                    .offset(x: -100,y: -20)
+                
+                VStack(alignment: .leading){
+                    
+                    Spacer()
+                        .frame(height: 80)
+                    
+                    Text(self.viewModel.userNameError ?? "")
+                        .frame(height: 20)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                    
+                    Spacer()
+                        .frame(height: 65)
+                    
+                    Text(self.viewModel.emailError ?? "")
+                        .frame(height: 20)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                    
+                    Spacer()
+                        .frame(height: 70)
+                    
+                    Text(self.viewModel.passwordError ?? "")
+                        .frame(width: 300, height: 60)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                    
+                    Spacer()
+                        .frame(height: 30)
+                    
+                    Text(self.viewModel.confirmPasswordError ?? "")
+                        .frame(height: 20)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                    
+                    
+                    Spacer()
+                        .frame(width:300, height: 10)
+                    
+                }
             }
-            .disabled(!viewModel.isValid)
-            .offset(y: 385)
-            
-            
-            Text("Register")
-                .font(.custom("Avenir Next Demi Bold", size:30))
-                .offset(x: -100,y: -20)
-            
-            VStack(alignment: .leading){
-                
-                Spacer()
-                    .frame(height: 80)
-                
-                Text(viewModel.userNameError ?? "")
-                    .frame(height: 20)
-                    .foregroundColor(.red)
-                    .font(.caption)
-                
-                Spacer()
-                    .frame(height: 65)
-                
-                Text(viewModel.emailError ?? "")
-                    .frame(height: 20)
-                    .foregroundColor(.red)
-                    .font(.caption)
-                
-                Spacer()
-                    .frame(height: 70)
-                
-                Text(viewModel.passwordError ?? "")
-                    .frame(width: 300, height: 60)
-                    .foregroundColor(.red)
-                    .font(.caption)
-                
-                Spacer()
-                    .frame(height: 30)
-                
-                Text(viewModel.confirmPasswordError ?? "")
-                    .frame(height: 20)
-                    .foregroundColor(.red)
-                    .font(.caption)
-                
-                
-                Spacer()
-                    .frame(width:300, height: 10)
-                
-            }
-        }
-        .offset(y: -self.keyboardHeight)
-        .animation(.spring())
-        .onAppear {
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
-                (notification) in
-                guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
-                    CGRect else {
-                        return
+            .offset(y: -self.keyboardHeight)
+            .animation(.spring())
+            .onAppear {
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
+                    (notification) in
+                    guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
+                        CGRect else {
+                            return
+                    }
+                    
+                    self.keyboardHeight = keyboardFrame.height - geo.size.height / 2
                 }
                 
-                self.keyboardHeight = keyboardFrame.height
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
+                    (notification) in
+                    
+                    self.keyboardHeight = 0
+                }
             }
-            
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
-                (notification) in
                 
-                self.keyboardHeight = 0
-            }
+            //.shadow(radius: 5)
         }
-            
-        //.shadow(radius: 5)
-        
+
     }
 }
 
