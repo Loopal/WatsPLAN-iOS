@@ -191,7 +191,7 @@ struct LoginCard: View {
                 .font(.caption)
             }
         }
-        .offset(y: -self.keyboardHeight)
+        .offset(y: -self.keyboardHeight + 50)
         .animation(.spring())
         .onAppear {
             NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {

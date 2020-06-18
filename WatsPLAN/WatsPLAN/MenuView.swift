@@ -74,16 +74,20 @@ struct MenuView: View {
             
             Button(action: {
                 let result = self.session.signOut()
+                let message = MDCSnackbarMessage()
+                message.duration = 2
                 if(result){
-                    print("Log out successfully")
+                    message.text = "Log out Successfully"
                 }
                 else{
-                    print("Log out fail")
+                    message.text = "Unable to Log out"
                 }
+                MDCSnackbarManager.show(message)
             }) {
                 HStack {
                     Image("logout")
                         .imageScale(.large)
+                        .foregroundColor(Color("uwyellow"))
                     Text("Log out")
                         .foregroundColor(.white)
                         .font(.headline)
