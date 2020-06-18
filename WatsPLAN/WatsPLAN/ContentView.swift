@@ -49,6 +49,23 @@ struct ContentView: View {
                             .padding(.leading, -(geometry.size.width - geometry.size.width/1.3))
                             .transition(.move(edge: .leading))
                     }
+                    
+                    VStack(alignment: .leading) {
+                        Button(action: {
+                            withAnimation {
+                                self.showMenu.toggle()
+                            }
+                        }) {
+                            Image(systemName: "line.horizontal.3")
+                                .foregroundColor(Color.black)
+                                .imageScale(.large)
+                        }
+                        .padding(.leading, -175)
+                        
+                        Spacer()
+                            .frame(height: 600)
+                    }
+                    
                     if self.showPicker {
                         /*PickerView(isPickerActive: self.$showPicker, type: self.$pickerType)
                             .frame(height: geometry.size.height/3)
@@ -94,7 +111,9 @@ struct ContentView: View {
                 }
                 .gesture(dragMenu)
             }
-            .navigationBarItems(leading: (
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            /*.navigationBarItems(leading: (
                     Button(action: {
                         withAnimation {
                             self.showMenu.toggle()
@@ -104,7 +123,7 @@ struct ContentView: View {
                             .foregroundColor(Color.black)
                             .imageScale(.large)
                     }
-                ))
+                ))*/
         }
     }
 }
