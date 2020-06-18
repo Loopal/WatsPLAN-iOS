@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MaterialComponents.MaterialSnackbar
 
 struct MenuView: View {
     
@@ -41,7 +42,14 @@ struct MenuView: View {
             //.isDetailLink(false)
             .padding(.top, 10)
             .disabled(self.session.session != nil)
-            
+            .simultaneousGesture(TapGesture().onEnded{_ in
+                if(self.session.session != nil){
+                    let message = MDCSnackbarMessage()
+                    message.text = "Currently Login with " + (self.session.session?.displayName)!
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
+                }
+            })
             
             HStack {
                 Image("home")
