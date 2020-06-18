@@ -436,7 +436,7 @@
 				DEVELOPMENT_TEAM = F3X9577JCZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WatsPLAN/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -458,7 +458,7 @@
 				DEVELOPMENT_TEAM = F3X9577JCZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WatsPLAN/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

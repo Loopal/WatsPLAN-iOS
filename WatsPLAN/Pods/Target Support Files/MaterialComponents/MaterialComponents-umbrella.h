@@ -68,6 +68,8 @@
 #import "MDCSnackbarManagerDelegate.h"
 #import "MDCSnackbarMessage.h"
 #import "MDCSnackbarMessageView.h"
+#import "MaterialSnackbar+TypographyThemer.h"
+#import "MDCSnackbarTypographyThemer.h"
 #import "MaterialTypography.h"
 #import "MDCFontScaler.h"
 #import "MDCFontTextStyle.h"
@@ -89,6 +91,13 @@
 #import "MDCOverlayImplementor.h"
 #import "MDCOverlayObserver.h"
 #import "MDCOverlayTransitioning.h"
+#import "MaterialTypographyScheme.h"
+#import "MDCLegacyFontScheme.h"
+#import "MDCTypographyScheme.h"
+#import "MaterialTypographyScheme+BasicFontScheme.h"
+#import "MDCBasicFontScheme.h"
+#import "MaterialTypographyScheme+Scheming.h"
+#import "MDCTypographyScheming.h"
 
 FOUNDATION_EXPORT double MaterialComponentsVersionNumber;
 FOUNDATION_EXPORT const unsigned char MaterialComponentsVersionString[];

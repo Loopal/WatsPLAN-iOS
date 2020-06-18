@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MaterialComponents.MaterialSnackbar
 
 struct MenuView: View {
     
@@ -19,6 +20,7 @@ struct MenuView: View {
     func getUser() {
         session.listen()
     }
+    
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,9 +39,18 @@ struct MenuView: View {
                         .padding(.leading, 30)
                 }
             }
-            .isDetailLink(false)
+            //.isDetailLink(false)
             .padding(.top, 10)
-            .disabled(self.session.session == nil)
+            .disabled(self.session.session != nil)
+            .simultaneousGesture(TapGesture().onEnded{_ in
+                if(self.session.session != nil){
+                    let message = MDCSnackbarMessage()
+                    message.text = "Currently Login with " + (self.session.session?.displayName)!
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
+                }
+            })
+            
             HStack {
                 Image("home")
                     .imageScale(.large)
@@ -63,16 +74,20 @@ struct MenuView: View {
             
             Button(action: {
                 let result = self.session.signOut()
+                let message = MDCSnackbarMessage()
+                message.duration = 2
                 if(result){
-                    print("Log out successfully")
+                    message.text = "Log out Successfully"
                 }
                 else{
-                    print("Log out fail")
+                    message.text = "Unable to Log out"
                 }
+                MDCSnackbarManager.show(message)
             }) {
                 HStack {
                     Image("logout")
                         .imageScale(.large)
+                        .foregroundColor(Color("uwyellow"))
                     Text("Log out")
                         .foregroundColor(.white)
                         .font(.headline)

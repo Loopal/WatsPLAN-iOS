@@ -373,6 +373,12 @@ PODS:
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
+  - MaterialComponents/schemes/Typography (109.8.0):
+    - "MaterialComponents/schemes/Typography+BasicFontScheme"
+    - "MaterialComponents/schemes/Typography+Scheming"
+    - MaterialComponents/Typography
+  - "MaterialComponents/schemes/Typography+BasicFontScheme (109.8.0)"
+  - "MaterialComponents/schemes/Typography+Scheming (109.8.0)"
   - MaterialComponents/ShadowElevations (109.8.0)
   - MaterialComponents/ShadowLayer (109.8.0):
     - MaterialComponents/ShadowElevations
@@ -396,6 +402,9 @@ PODS:
     - MaterialComponents/ShadowElevations
     - MaterialComponents/ShadowLayer
     - MaterialComponents/Typography
+  - "MaterialComponents/Snackbar+TypographyThemer (109.8.0)":
+    - MaterialComponents/schemes/Typography
+    - MaterialComponents/Snackbar
   - MaterialComponents/Typography (109.8.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
@@ -418,6 +427,7 @@ DEPENDENCIES:
   - FloatingButton
   - FloatingLabelTextFieldSwiftUI
   - MaterialComponents/Snackbar
+  - "MaterialComponents/Snackbar+TypographyThemer"
   - ValidatedPropertyKit
 
 SPEC REPOS:
@@ -481,6 +491,6 @@ SPEC CHECKSUMS:
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 8a4f09dc4ebf95222931153503a0f539ca8dd183
+PODFILE CHECKSUM: 9ee28ccf918458c201526c38c81c22813c47f027
 
 COCOAPODS: 1.9.3

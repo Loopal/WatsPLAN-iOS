@@ -22,5 +22,6 @@ target 'WatsPLAN' do
 
   pod "FloatingButton"
 
-  pod 'MaterialComponents/Snackbar'    
+  pod 'MaterialComponents/Snackbar'
+  pod 'MaterialComponents/Snackbar+TypographyThemer'    
 end
