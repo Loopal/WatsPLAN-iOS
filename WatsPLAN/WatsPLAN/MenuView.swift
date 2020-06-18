@@ -20,6 +20,7 @@ struct MenuView: View {
         session.listen()
     }
     
+    
     var body: some View {
         VStack(alignment: .leading) {
             Image("uwlogo")
@@ -37,9 +38,11 @@ struct MenuView: View {
                         .padding(.leading, 30)
                 }
             }
-            .isDetailLink(false)
+            //.isDetailLink(false)
             .padding(.top, 10)
-            .disabled(self.session.session == nil)
+            .disabled(self.session.session != nil)
+            
+            
             HStack {
                 Image("home")
                     .imageScale(.large)

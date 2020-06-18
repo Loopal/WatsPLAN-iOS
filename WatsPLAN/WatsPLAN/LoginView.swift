@@ -17,7 +17,6 @@ struct LoginView: View {
     
     @Binding var isMenuActive: Bool
     
-    
     var body: some View {
         VStack(alignment: .center) {
             Image("logo")
@@ -35,8 +34,8 @@ struct LoginView: View {
             NavigationLink(destination: RegisterView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
                 Text("New Here? Create an Account")
             }
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
+            //.navigationBarTitle("")
+            //.navigationBarHidden(true)
             
             Spacer()
             
@@ -58,6 +57,8 @@ struct LoginCard: View {
     
     @State var loading = false
     @State var error = false
+    
+    @State private var keyboardHeight: CGFloat = 0.0
     
     func signIn () {
         loading = true
@@ -188,6 +189,25 @@ struct LoginCard: View {
                     .frame(height: 20)
                 .foregroundColor(.red)
                 .font(.caption)
+            }
+        }
+        .offset(y: -self.keyboardHeight)
+        .animation(.spring())
+        .onAppear {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
+                (notification) in
+                guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
+                    CGRect else {
+                        return
+                }
+                
+                self.keyboardHeight = keyboardFrame.height
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
+                (notification) in
+                
+                self.keyboardHeight = 0
             }
         }
     }

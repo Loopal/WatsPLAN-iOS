@@ -57,6 +57,8 @@ struct RegisterCard: View {
     @State var loading = false
     @State var error = false
     
+    @State private var keyboardHeight: CGFloat = 0.0
+    
     func signUp () {
         loading = true
         error = false
@@ -198,6 +200,25 @@ struct RegisterCard: View {
                 Spacer()
                     .frame(width:300, height: 10)
                 
+            }
+        }
+        .offset(y: -self.keyboardHeight)
+        .animation(.spring())
+        .onAppear {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
+                (notification) in
+                guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
+                    CGRect else {
+                        return
+                }
+                
+                self.keyboardHeight = keyboardFrame.height
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
+                (notification) in
+                
+                self.keyboardHeight = 0
             }
         }
             
