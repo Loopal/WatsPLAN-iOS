@@ -23,8 +23,8 @@ struct LoginView: View {
                 .resizable()
                 .frame(width: 200.0, height: 200)
             
-            Spacer()
-                .frame(height: 20)
+            /*Spacer()
+                .frame(height: 20)*/
             
             LoginCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
             
@@ -38,8 +38,11 @@ struct LoginView: View {
             //.navigationBarHidden(true)
             
             Spacer()
+                .frame(height: 200)
             
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
 }
 
@@ -74,63 +77,86 @@ struct LoginCard: View {
     @State private var isPasswordShow: Bool = false
     
     var body: some View {
-        
-        ZStack(alignment: .top) {
-            
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color("uwyellow"))
-                .frame(width: 350, height: 250)
-            //.offset(y: -40)
-            
-            VStack {
-                /*FloatingLabelTextField($loginModel.email.bound, placeholder: "Email", editingChanged: { (isChanged) in}){
-                }*/
+        GeometryReader { geo in
+            ZStack(alignment: .top) {
                 
-                /*FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
-                }*/
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color("uwyellow"))
+                    .frame(width: 350, height: 250)
+                //.offset(y: -40)
                 
-                FloatingLabelTextField($viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
-                }
-                /*.leftView( {
-                    Button(action: {
-                        withAnimation {
-                            self.isemailFormat.toggle()
-                        }
-                    }) {
-                        Image(self.isemailFormat ? "envelope" : "warning")
-                            .foregroundColor(.black)
-                    }
-                })*/
-                    .floatingStyle(ThemeTextFieldStyle())
-                    .modifier(ThemeTextField())
-                    .autocapitalization(UITextAutocapitalizationType.none)
-                
-                /*FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
+                VStack {
+                    /*FloatingLabelTextField($loginModel.email.bound, placeholder: "Email", editingChanged: { (isChanged) in}){
+                    }*/
                     
-                }*/
-                    FloatingLabelTextField($viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
-                        
+                    /*FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in}){
+                    }*/
+                    
+                    FloatingLabelTextField(self.$viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
                     }
-                .rightView({
-                    Button(action: {
-                        withAnimation {
-                            self.isPasswordShow.toggle()
+                    /*.leftView( {
+                        Button(action: {
+                            withAnimation {
+                                self.isemailFormat.toggle()
+                            }
+                        }) {
+                            Image(self.isemailFormat ? "envelope" : "warning")
+                                .foregroundColor(.black)
                         }
+                    })*/
+                        .floatingStyle(ThemeTextFieldStyle())
+                        .modifier(ThemeTextField())
+                        .autocapitalization(UITextAutocapitalizationType.none)
+                    
+                    /*FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
                         
-                    }) {
-                        Image(self.isPasswordShow ? "eye_close" : "eye_show")
-                            .foregroundColor(Color.black)
-                    }
-                })
-                    .isSecureTextEntry(!self.isPasswordShow)
-                    .floatingStyle(ThemeTextFieldStyle())
-                    .modifier(ThemeTextField())
-                
-                /*NavigationLink(destination: ContentView(), tag: true, selection: session.$verified) {
+                    }*/
+                    FloatingLabelTextField(self.$viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
+                            
+                        }
+                    .rightView({
+                        Button(action: {
+                            withAnimation {
+                                self.isPasswordShow.toggle()
+                            }
+                            
+                        }) {
+                            Image(self.isPasswordShow ? "eye_close" : "eye_show")
+                                .foregroundColor(Color.black)
+                        }
+                    })
+                        .isSecureTextEntry(!self.isPasswordShow)
+                        .floatingStyle(ThemeTextFieldStyle())
+                        .modifier(ThemeTextField())
+                    
+                    /*NavigationLink(destination: ContentView(), tag: true, selection: session.$verified) {
+                        Button(action: {
+                            self.endEditing(true)
+                            // SignIn with firebase
+                            self.signIn()
+                        }) {
+                            Text("SIGN IN")
+                                .foregroundColor(Color("uwyellow"))
+                                .frame(width: 200.0, height: 30.0)
+                                .background(Color.black)
+                                .cornerRadius(10)
+                        }
+                        .disabled(!viewModel.isValid)
+                        .offset(y: 55)
+                    }*/
+                    
                     Button(action: {
                         self.endEditing(true)
                         // SignIn with firebase
                         self.signIn()
+                        if(self.session.session != nil){
+                            let message = MDCSnackbarMessage()
+                            message.text = "Login Successfully"
+                            message.duration = 2
+                            MDCSnackbarManager.show(message)
+                            self.shouldPopToRootView = false
+                            self.isMenuActive = false
+                        }
                     }) {
                         Text("SIGN IN")
                             .foregroundColor(Color("uwyellow"))
@@ -138,78 +164,57 @@ struct LoginCard: View {
                             .background(Color.black)
                             .cornerRadius(10)
                     }
-                    .disabled(!viewModel.isValid)
+                    .disabled(!self.viewModel.isValid)
                     .offset(y: 55)
-                }*/
-                
-                Button(action: {
-                    self.endEditing(true)
-                    // SignIn with firebase
-                    self.signIn()
-                    if(self.session.session != nil){
-                        let message = MDCSnackbarMessage()
-                        message.text = "Login Successfully"
-                        message.duration = 2
-                        MDCSnackbarManager.show(message)
-                        self.shouldPopToRootView = false
-                        self.isMenuActive = false
-                    }
-                }) {
-                    Text("SIGN IN")
-                        .foregroundColor(Color("uwyellow"))
-                        .frame(width: 200.0, height: 30.0)
-                        .background(Color.black)
-                        .cornerRadius(10)
+                    
+                    
+                    
+                    Text("LOGIN")
+                        .font(.custom("Avenir Next Demi Bold", size:30))
+                        .offset(x:-110,y:-225)
                 }
-                .disabled(!viewModel.isValid)
-                .offset(y: 55)
+                    
+                .shadow(radius: 5)
                 
-                
-                
-                Text("LOGIN")
-                    .font(.custom("Avenir Next Demi Bold", size:30))
-                    .offset(x:-110,y:-225)
-            }
-                
-            .shadow(radius: 5)
-            
-            VStack(alignment: .leading){
-                Spacer()
-                    .frame(height: 80)
-                
-                Text(viewModel.emailError ?? "")
-                    .frame(height: 20)
+                VStack(alignment: .leading){
+                    Spacer()
+                        .frame(height: 80)
+                    
+                    Text(self.viewModel.emailError ?? "")
+                        .frame(height: 20)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                    
+                    Spacer()
+                        .frame(width:300, height: 65)
+                    
+                    Text(self.viewModel.passwordError ?? "")
+                        .frame(height: 20)
                     .foregroundColor(.red)
                     .font(.caption)
-                
-                Spacer()
-                    .frame(width:300, height: 65)
-                
-                Text(viewModel.passwordError ?? "")
-                    .frame(height: 20)
-                .foregroundColor(.red)
-                .font(.caption)
+                }
             }
-        }
-        .offset(y: -self.keyboardHeight + 50)
-        .animation(.spring())
-        .onAppear {
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
-                (notification) in
-                guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
-                    CGRect else {
-                        return
+            .offset(y: -self.keyboardHeight)
+            .animation(.spring())
+            .onAppear {
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
+                    (notification) in
+                    guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
+                        CGRect else {
+                            return
+                    }
+                    
+                    self.keyboardHeight = keyboardFrame.height - geo.size.height / 2
                 }
                 
-                self.keyboardHeight = keyboardFrame.height
-            }
-            
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
-                (notification) in
-                
-                self.keyboardHeight = 0
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
+                    (notification) in
+                    
+                    self.keyboardHeight = 0
+                }
             }
         }
+        
     }
 }
 
