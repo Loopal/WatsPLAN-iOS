@@ -29,7 +29,10 @@ class Model: ObservableObject {
     func getCollection() {
         if self.fileName == "" {
             //load from db
-            var docRef = db.collection("/Majors/").document(optionName == "" ? self.majorName : self.majorName + " | " + self.optionName)
+            if self.optionName == "!Just click CREATE button if no option" {
+                self.optionName = ""
+            }
+            var docRef = db.collection("/Majors/").document(self.optionName == "" ? self.majorName : self.majorName + " | " + self.optionName)
             docRef.getDocument { (document, error) in
                     if let major = document.flatMap({
                       $0.data().flatMap({ (data) in
@@ -54,7 +57,13 @@ class Model: ObservableObject {
 
     }
     
-    func fetchContent(s: String) {
+    func fetchContent(s: String, type: Int) {
+        if (type == 0) {
+            self.majorName = ""
+            self.optionName = ""
+        } else if (type == 1) {
+            self.optionName = ""
+        }
         
         db.collection(s).addSnapshotListener { (querySnapshot, error) in
             DispatchQueue.main.async {
@@ -62,12 +71,20 @@ class Model: ObservableObject {
                     print((error?.localizedDescription)!)
                     return
                 } else {
-                    self.fContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
-                        return queryDocumentSnapshot.documentID }
-                    print(self.fContent)
+                    if type == 0 {
+                        self.fContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
+                            return queryDocumentSnapshot.documentID }
+                    } else if type == 1 {
+                        self.mContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
+                            return queryDocumentSnapshot.documentID }
+                    } else {
+                        self.oContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
+                            return queryDocumentSnapshot.documentID }
+                    }
                 }
             }
         }
+        
     }
 }
 
@@ -81,4 +98,7 @@ fileprivate struct Major {
 
 extension String: Identifiable {
     public var id: String { self }
+    func stringAt(_ i: Int) -> String {
+      return String(Array(self)[i])
+    }
 }

@@ -15,6 +15,19 @@ struct ContentView: View {
     @State var pickerType = 0
     @EnvironmentObject var model: Model
     
+    @State var oldF = ""
+    @State var oldM = ""
+    @State var oldO = ""
+    
+    func refresh() {
+        if self.model.facultyName != self.oldF {
+            self.model.fetchContent(s: "/\(self.model.facultyName)/", type : 1)
+        }
+        if self.model.majorName != self.oldM {
+            self.model.fetchContent(s: "/\(self.model.majorName)/", type : 2)
+        }
+    }
+    
     var body: some View {
         
         let dragMenu = DragGesture()
@@ -30,6 +43,7 @@ struct ContentView: View {
                     self.showMenu = false
                 }
                 if $0.translation.height > 50 {
+                    self.refresh()
                     withAnimation {
                         self.showPicker = false
                     }
@@ -67,12 +81,13 @@ struct ContentView: View {
                             .frame(height: 600)
                     }
                     
-                    if self.showPicker {
-                        /*PickerView(isPickerActive: self.$showPicker, type: self.$pickerType)
-                            .frame(height: geometry.size.height/3)
-                            .transition(.move(edge: .bottom))*/
+                    if self.showPicker && (self.pickerType == 0 || (self.pickerType == 1 && self.model.facultyName != "") ||
+                        (self.pickerType == 2 && self.model.facultyName != "" && self.model.majorName != ""))
+                        {
+
                         VStack(alignment: .center){
                             Button(action: {
+                                self.refresh()
                                 withAnimation{
                                     self.showPicker = false
                                 }
@@ -85,25 +100,28 @@ struct ContentView: View {
                                     .background(Color.black)
                             }
                             
-                            Picker(selection: self.$model.majorName, label: Text("")) {
-                                ForEach(0..<self.model.fContent.count) { index in
-                                    Text("\(self.model.fContent[index])").tag(index)
-                                    .font(.custom("Avenir Next Demi Bold", size:20))
+                                Picker(selection: self.pickerType == 0 ? self.$model.facultyName :
+                                    (self.pickerType == 1 ? self.$model.majorName : self.$model.optionName)
+                                , label: Text("")) {
+                                    ForEach(self.pickerType == 0 ? self.model.fContent :
+                                    (self.pickerType == 1 ? self.model.mContent : self.model.oContent)) { f in
+                                        Text(f)
+                                        .font(.custom("Avenir Next Demi Bold", size:20))
+                                    }
                                 }
-                                
-                            }
-                            .frame(width: 700)
-                            .pickerStyle(WheelPickerStyle())
+                                .frame(width: 700, height: 200)
+                                .pickerStyle(WheelPickerStyle())
+                                .onAppear{
+                                    self.oldF = self.model.facultyName
+                                    self.oldM = self.model.majorName
+                                    self.oldO = self.model.optionName
+                                }
 
-                            
-                            }
+                        }
                             .background(Color("uwyellow"))
                             .labelsHidden()
                             .pickerStyle(WheelPickerStyle())
                             .padding(.top, geometry.size.height-200)
-                        .onAppear{
-                                self.model.fetchContent(s: "/Faculties/")
-                            }
                             .transition(.move(edge: .bottom))
                         }
 
@@ -125,6 +143,9 @@ struct ContentView: View {
                             .imageScale(.large)
                     }
                 ))*/
+            .onAppear{
+                self.model.fetchContent(s: "/Faculties/", type: 0)
+            }
         }
     }
 }
@@ -206,14 +227,17 @@ struct CreateCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 250)
                 
-                Button(action: {}) {
-                    Text("CREATE")
-                        .font(.custom("Avenir Next Demi Bold", size:15))
-                        .foregroundColor(Color("uwyellow"))
-                        .frame(width: 200.0, height: 40)
-                        .background(Color.black)
-                        .cornerRadius(10)
+                NavigationLink(destination: CheckListView()) {
+                   Text("CREATE")
+                       .foregroundColor(Color("uwyellow"))
+                       .font(.custom("Avenir Next Demi Bold", size:15))
+                       .frame(width: 200.0, height:40.0)
+                       .background(Color.black)
+                       .cornerRadius(10)
                 }
+                .buttonStyle(PlainButtonStyle())
+                //.navigationBarTitle("")
+                //.navigationBarHidden(true)
                 .offset(y:-30)
             }
             .shadow(radius: 5)
@@ -226,23 +250,31 @@ struct CreateCard: View {
                     }
                     
                 }) {
-                    Text(model.facultyName == "" ? "Select your faculty" : model.facultyName)
+                    Text(model.facultyName == "" ? "Select your faculty" : "Selected: " + model.facultyName)
                         .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color.black)
                         .frame(width: 330, height: 40)
                         .border(Color.black, width: 5)
                 }
                 Button(action: {
+                    self.pickerType = 1
+                    withAnimation{
+                        self.showPicker.toggle()
+                    }
                 }) {
-                    Text(model.facultyName == "" ? "Select your program" : model.majorName)
+                    Text(model.majorName == "" ? "Select your program" : "Selected: " + model.majorName)
                         .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color.black)
                         .frame(width: 330, height: 40)
                         .border(Color.black, width: 5)
                 }
                 Button(action: {
+                    self.pickerType = 2
+                    withAnimation{
+                        self.showPicker.toggle()
+                    }
                 }) {
-                    Text(model.facultyName == "" ? "Select your option (if applicable)" : model.optionName)
+                    Text(model.optionName == "" ? "Select your option (if applicable)" : "Selected: " +  model.optionName)
                         .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color.black)
                         .frame(width: 330, height: 40)

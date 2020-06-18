@@ -25,7 +25,7 @@ struct CheckListView: View {
                 .padding(.horizontal, 40.0)
                 .padding(.top, 20)
                 
-            Text(model.majorName)
+            Text(model.majorName + " | " + model.optionName)
                 .font(.custom("Avenir Next Medium", size:15))
                 .background(Color.black)
                 .foregroundColor(Color.white)
@@ -64,7 +64,6 @@ struct CheckListView: View {
         }
         .background(Color.black)
         .onAppear {
-            self.model.majorName = "Applied Mathematics"
             self.model.getCollection()
         }
     }
