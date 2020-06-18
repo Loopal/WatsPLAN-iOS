@@ -24,9 +24,10 @@ struct ContentView: View {
                         self.showMenu = true
                     }
                 } else if $0.translation.width < -100 {
-                    withAnimation {
+                    /*withAnimation {
                         self.showMenu = false
-                    }
+                    }*/
+                    self.showMenu = false
                 }
                 if $0.translation.height > 50 {
                     withAnimation {
