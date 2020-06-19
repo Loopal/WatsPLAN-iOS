@@ -231,6 +231,9 @@ PODS:
   - Firebase/Firestore (6.26.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.15.0)
+  - Firebase/Storage (6.26.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.6.1)
   - FirebaseAnalytics (6.6.0):
     - FirebaseCore (~> 6.7)
     - FirebaseInstallations (~> 1.3)
@@ -279,6 +282,10 @@ PODS:
     - GoogleUtilities/Environment (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.6)
     - PromisesObjC (~> 1.2)
+  - FirebaseStorage (3.6.1):
+    - FirebaseAuthInterop (~> 1.1)
+    - FirebaseCore (~> 6.6)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FloatingButton (0.0.1)
   - FloatingLabelTextFieldSwiftUI (3.2.0)
   - GoogleAppMeasurement (6.6.0):
@@ -423,6 +430,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
   - FirebaseFirestoreSwift
   - FloatingButton
   - FloatingLabelTextFieldSwiftUI
@@ -444,6 +452,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseFirestoreSwift
     - FirebaseInstallations
+    - FirebaseStorage
     - FloatingButton
     - FloatingLabelTextFieldSwiftUI
     - GoogleAppMeasurement
@@ -474,6 +483,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 8c158bdde010fa397386333a74570eaef033e62d
   FirebaseFirestoreSwift: 0cda93628782ca5a817cfecd2a8c0187436c0ae5
   FirebaseInstallations: 6f5f680e65dc374397a483c32d1799ba822a395b
+  FirebaseStorage: f4f39ae834a7145963b913f54e2f24a9db1d8fac
   FloatingButton: 8ef7f8c8b5fa12b4664ed78d53b1d24cbc83a727
   FloatingLabelTextFieldSwiftUI: 2ad673f26db92fdee03fb29b84e7d9b282ec5ea8
   GoogleAppMeasurement: 67458367830514fb20fd9e233496f1eef9d90185
@@ -491,6 +501,6 @@ SPEC CHECKSUMS:
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 9ee28ccf918458c201526c38c81c22813c47f027
+PODFILE CHECKSUM: bc22aed0df15ef6216d9fda54edc39b3da64d513
 
 COCOAPODS: 1.9.3

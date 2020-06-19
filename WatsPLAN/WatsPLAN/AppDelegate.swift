@@ -15,8 +15,6 @@ import FirebaseFirestore
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -25,6 +23,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
         // [END default_firestore]
         print(db) // silence warning
+        
+        // Retrive the data from cloud
+        // Reference to the storage service
+        let storage = Storage.storage()
+        let storageRef = storage.reference(withPath: "userData/${currentUser.uid}")
+        storageRef.listAll { (result, error) in
+            if let error = error {
+                print("Retrived Failed")
+                print(error)
+            }
+            else{
+                for item in result.items {
+                    let localURL = URL(string: "${item.name}.saves")!
+                    
+                    let downloadTask = storageRef.write(toFile: localURL) {url, error in
+                        if let error = error{
+                            print("Download Failed")
+                            print(error)
+                        }
+                        
+                    }
+                }
+            }
+
+        }
+        
+        /*storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                
+            }
+            
+        }*/
+        
         
         return true
     }
