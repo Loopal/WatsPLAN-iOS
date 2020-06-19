@@ -15,9 +15,9 @@ class Model: ObservableObject {
     @Published var majorName = ""
     @Published var optionName = ""
     @Published var changed = false
+    @Published var done = false
     @Published var storedCards: [Card] = []
     @Published var cards: [Card] = []
-    @Published var filterlen = 0
     
     @Published var fContent: [String] = []
     @Published var mContent: [String] = []
@@ -46,7 +46,6 @@ class Model: ObservableObject {
                             count += 1
                         }
                         self.cards.append(contentsOf: self.storedCards)
-                        self.filterlen = self.cards.count
                     } else {
                         print("Document does not exist")
                     }
@@ -65,27 +64,71 @@ class Model: ObservableObject {
             self.optionName = ""
         }
         
-        db.collection(s).addSnapshotListener { (querySnapshot, error) in
-            DispatchQueue.main.async {
-                if error != nil {
-                    print((error?.localizedDescription)!)
-                    return
-                } else {
-                    if type == 0 {
-                        self.fContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
-                            return queryDocumentSnapshot.documentID }
-                    } else if type == 1 {
-                        self.mContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
-                            return queryDocumentSnapshot.documentID }
+        if (type != 3){
+            //fetch from sever
+            db.collection(s).addSnapshotListener { (querySnapshot, error) in
+                DispatchQueue.main.async {
+                    if error != nil {
+                        print((error?.localizedDescription)!)
+                        return
                     } else {
-                        self.oContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
-                            return queryDocumentSnapshot.documentID }
+                        if type == 0 {
+                            self.fContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
+                                return queryDocumentSnapshot.documentID }
+                        } else if type == 1 {
+                            self.mContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
+                                return queryDocumentSnapshot.documentID }
+                        } else {
+                            self.oContent = querySnapshot!.documents.map{queryDocumentSnapshot -> String in
+                                return queryDocumentSnapshot.documentID }
+                        }
                     }
                 }
             }
+        } else {
+            //fetch from local dir
+            self.storedCards.removeAll()
+            self.cards.removeAll()
+
+        }
+    }
+    
+    func saveModel(name: String) {
+        let fName = name + ".save"
+        let fileManager = FileManager.default
+        let path = fileManager.urls(for: FileManager.SearchPathDirectory.documentDirectory, in:     FileManager.SearchPathDomainMask.userDomainMask).last?.appendingPathComponent(fName)
+
+        if !fileManager.fileExists(atPath: (path?.absoluteString)!) {
+            fileManager.createFile(atPath: String(fName),  contents:Data(" ".utf8), attributes: nil)
         }
         
+        let fileHandle = FileHandle(forWritingAtPath: fName)
+
+        if(fileHandle == nil)
+        {
+            print("Open of outFilename forWritingAtPath: failed.  \nCheck whether the file already exists.  \nIt should already exist.\n");
+            return
+        }
+        fileHandle?.write((self.facultyName + "\n").data(using: .utf8)!)
+        fileHandle?.write((self.majorName + " | " + self.optionName + "\n").data(using: .utf8)!)
+        for c in self.cards {
+            var temp = ""
+            temp += c.text + "?"
+            temp += c.done.description + "?"
+            temp += c.checkedBoxes.map(String.init).joined(separator: ";") + "?"
+            temp += String(c.num) + "?"
+            temp += String(c.progress) + "?"
+            temp += c.items.joined(separator: ";") + "?"
+            temp += c.comment + "\n"
+            fileHandle?.write(temp.data(using: .utf8)!)
+        }
+        
+        fileHandle!.closeFile()
+        self.changed = false
+        self.fileName = name
     }
+    
+
 }
 
 
