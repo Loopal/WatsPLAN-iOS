@@ -22,12 +22,13 @@ class Model: ObservableObject {
     @Published var fContent: [String] = []
     @Published var mContent: [String] = []
     @Published var oContent: [String] = []
+    @Published var fileContent: [String] = []
 
     
     private var db = Firestore.firestore()
     
-    func getCollection() {
-        if self.fileName == "" {
+    func getCollection(type: Int) {
+        if type == 0 {
             //load from db
             if self.optionName == "!Just click CREATE button if no option" {
                 self.optionName = ""
@@ -52,6 +53,44 @@ class Model: ObservableObject {
                 }
         } else {
             //load from storage
+            self.storedCards.removeAll()
+            self.cards.removeAll()
+            
+            let fileManager = FileManager.default
+            let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(self.fileName + ".save")
+            do {
+                let data: [String] = try String(contentsOf: url).split(whereSeparator: \.isNewline).map(String.init)
+                self.facultyName = data[0]
+                
+                let m_o = data[1].split(separator: "|").map(String.init)
+                self.majorName = String(m_o[0][..<m_o[0].endIndex])
+                self.optionName = (String(m_o[1][m_o[1].startIndex...]) == " " ? "" : String(m_o[1][m_o[1].startIndex...]))
+
+                var lineNum = 2
+                while lineNum < data.count {
+                    let lineData = data[lineNum].split(separator: "?", omittingEmptySubsequences: false).map(String.init)
+
+                    var curCard = Card(id: lineNum - 2, text: lineData[0], done: false, num: Int(lineData[3])!, items:  lineData[5].split(separator: ";").map(String.init))
+                    
+                    curCard.progress = Int(lineData[4])!
+                    curCard.checkedBoxes = []
+
+                    if lineData[2] != "" {
+                        curCard.checkedBoxes = []
+                        let sl = lineData[2].split(separator: ";").map(String.init)
+                        for s in sl {
+                            curCard.checkedBoxes.append(Int(s)!)
+                        }
+                    }
+                    curCard.comment = lineData[6]
+                    self.storedCards.append(curCard)
+                    lineNum += 1
+                }
+                self.cards.append(contentsOf: self.storedCards)
+
+            } catch {
+                print(error.localizedDescription)
+            }
         }
 
     }
@@ -86,10 +125,19 @@ class Model: ObservableObject {
                 }
             }
         } else {
-            //fetch from local dir
-            self.storedCards.removeAll()
-            self.cards.removeAll()
-
+            //fetch.save files from local dir
+            self.fileContent.removeAll()
+            
+            let fileManager = FileManager.default
+            let documentsUrl = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            do {
+                let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil)
+                for save in (directoryContents.filter{ $0.pathExtension == "save" }) {
+                    self.fileContent.append(save.lastPathComponent.components(separatedBy: ".")[0])
+                }
+            } catch {
+                print("error load from document")
+            }
         }
     }
     
@@ -100,7 +148,7 @@ class Model: ObservableObject {
         data += self.majorName + " | " + self.optionName + "\n"
         for c in self.cards {
             data += c.text + "?"
-            data += c.done.description + "?"
+            data += "false" + "?"
             data += c.checkedBoxes.map(String.init).joined(separator: ";") + "?"
             data += String(c.num) + "?"
             data += String(c.progress) + "?"
@@ -113,13 +161,7 @@ class Model: ObservableObject {
         let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fName)
         
         do {
-            var input2 = try String(contentsOf: url)
-            print(input2)
-
             try data.write(to: url, atomically: true, encoding: .utf8)
-            
-            input2 = try String(contentsOf: url)
-            print(input2)
         } catch {
             print(error.localizedDescription)
         }

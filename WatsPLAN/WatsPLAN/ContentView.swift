@@ -65,7 +65,7 @@ struct ContentView: View {
                                 .transition(.move(edge: .leading))
                         }
                         
-                        if self.showPicker && (self.pickerType == 0 || (self.pickerType == 1 && self.model.facultyName != "") ||
+                        if self.showPicker && (self.pickerType == 0 || self.pickerType == 3 || (self.pickerType == 1 && self.model.facultyName != "") ||
                             (self.pickerType == 2 && self.model.facultyName != "" && self.model.majorName != ""))
                             {
 
@@ -85,10 +85,12 @@ struct ContentView: View {
                                 }
                                 
                                     Picker(selection: self.pickerType == 0 ? self.$model.facultyName :
-                                        (self.pickerType == 1 ? self.$model.majorName : self.$model.optionName)
+                                        (self.pickerType == 1 ? self.$model.majorName :
+                                            (self.pickerType == 2 ? self.$model.optionName : self.$model.fileName))
                                     , label: Text("")) {
                                         ForEach(self.pickerType == 0 ? self.model.fContent :
-                                        (self.pickerType == 1 ? self.model.mContent : self.model.oContent)) { f in
+                                        (self.pickerType == 1 ? self.model.mContent :
+                                            (self.pickerType == 2 ? self.model.oContent : self.model.fileContent))) { f in
                                             Text(f)
                                             .font(.custom("Avenir Next Demi Bold", size:20))
                                         }
@@ -129,6 +131,7 @@ struct ContentView: View {
                 ))*/
             .onAppear{
                 self.model.fetchContent(s: "/Faculties/", type: 0)
+                self.model.fetchContent(s: "", type: 3)
             }
         }
     }
@@ -195,7 +198,7 @@ struct LoadCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 120)
                 
-                   NavigationLink(destination: CheckListView()) {
+                NavigationLink(destination: CheckListView(sourceType: 1)) {
                       Text("LOAD")
                           .foregroundColor(Color("uwyellow"))
                           .font(.custom("Avenir Next Demi Bold", size:20))
@@ -245,7 +248,7 @@ struct CreateCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: 350, height: 250)
                 
-                NavigationLink(destination: CheckListView()) {
+                NavigationLink(destination: CheckListView(sourceType : 0)) {
                    Text("CREATE")
                        .foregroundColor(Color("uwyellow"))
                        .font(.custom("Avenir Next Demi Bold", size:20))

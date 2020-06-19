@@ -18,6 +18,12 @@ struct CheckListView: View {
     @State var selected = SELECT_ALL
     @State var showDialog = true
     @State var tempName = ""
+    
+    var sourceType: Int
+    
+    init(sourceType: Int) {
+        self.sourceType = sourceType
+    }
         
     var body: some View {
         return ZStack {
@@ -66,7 +72,7 @@ struct CheckListView: View {
             .disabled(self.showDialog)
             .background(Color.black)
             .onAppear {
-                self.model.getCollection()
+                self.model.getCollection(type: self.sourceType)
             }
             
             if self.showDialog {
@@ -161,7 +167,7 @@ struct CheckListView: View {
 
 struct CheckListView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckListView()
+        CheckListView(sourceType: 1)
         .environmentObject(Model())
     }
 }
