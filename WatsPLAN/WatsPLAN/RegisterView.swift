@@ -65,12 +65,22 @@ struct RegisterCard: View {
     func signUp () {
         loading = true
         error = false
-        session.signUp(email: viewModel.email, password: viewModel.password) { (result, error) in
+        /*session.signUp(email: viewModel.email, password: viewModel.password, username: viewModel.username) { (result, error) in
             self.loading = false
             if error != nil {
                 self.error = true
             }
-        }
+        }*/
+        session.signUp(email: viewModel.email, password: viewModel.password, username: viewModel.username)/* {
+            (result, error) in
+            self.loading = false
+            if error != nil {
+                self.error = true
+            }
+        }*/
+        /*let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = viewModel.username
+        session.session?.displayName = viewModel.username*/
     }
     
     var body: some View {
@@ -142,7 +152,7 @@ struct RegisterCard: View {
                 Button(action: {
                     self.endEditing(true)
                     // SignUp with firebase
-                    
+                    self.signUp()
                     if(self.session.session != nil){
                         let message = MDCSnackbarMessage()
                         message.text = "Register Successfully"

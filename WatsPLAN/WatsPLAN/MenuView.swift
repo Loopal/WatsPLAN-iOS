@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MaterialComponents.MaterialSnackbar
+import FirebaseAuth
 
 struct MenuView: View {
     
@@ -39,13 +40,13 @@ struct MenuView: View {
                         .padding(.leading, 30)
                 }
             }
-            //.isDetailLink(false)
+            .isDetailLink(false)
             .padding(.top, 10)
             .disabled(self.session.session != nil)
             .simultaneousGesture(TapGesture().onEnded{_ in
                 if(self.session.session != nil){
                     let message = MDCSnackbarMessage()
-                    message.text = "Currently Login with " + (self.session.session?.displayName)!
+                    message.text = "Currently Login with " + (Auth.auth().currentUser?.displayName)!
                     message.duration = 2
                     MDCSnackbarManager.show(message)
                 }
