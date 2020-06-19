@@ -107,6 +107,8 @@ struct LoginCard: View {
                         .floatingStyle(ThemeTextFieldStyle())
                         .modifier(ThemeTextField())
                         .autocapitalization(UITextAutocapitalizationType.none)
+                        .keyboardType(.emailAddress)
+                        .textContentType(.emailAddress)
                     
                     /*FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in}){
                         
@@ -128,6 +130,8 @@ struct LoginCard: View {
                         .isSecureTextEntry(!self.isPasswordShow)
                         .floatingStyle(ThemeTextFieldStyle())
                         .modifier(ThemeTextField())
+                        .keyboardType(.asciiCapable)
+                        .textContentType(.password)
                     
                     /*NavigationLink(destination: ContentView(), tag: true, selection: session.$verified) {
                         Button(action: {

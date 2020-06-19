@@ -12,8 +12,8 @@ import Combine
 
 class LoginUserViewModel: ObservableObject {
     
-    @Published var email: String = ""
-    @Published var password: String = ""
+    @Published var email: String = "".trimmingCharacters(in: .whitespacesAndNewlines)
+    @Published var password: String = "".trimmingCharacters(in: .whitespacesAndNewlines)
     @Published var emailValidator = EmailValidation.emptyEmail
     @Published var passwordValidator = PasswordValidation.empty
     @Published var isValid: Bool = false

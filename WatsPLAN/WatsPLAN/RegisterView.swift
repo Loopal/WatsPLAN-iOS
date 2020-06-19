@@ -94,12 +94,13 @@ struct RegisterCard: View {
                 
                 VStack {
                     
-                    FloatingLabelTextField(self.$viewModel.username, placeholder: "User Name", editingChanged: { (isChanged) in}){
+                    FloatingLabelTextField(self.$viewModel.username, placeholder: "Full Name", editingChanged: { (isChanged) in}){
                         
                     }
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
                     .autocapitalization(UITextAutocapitalizationType.none)
+                    .textContentType(.name)
                     
                     FloatingLabelTextField(self.$viewModel.email, placeholder: "Email", editingChanged: { (isChanged) in}){
                         
@@ -107,6 +108,8 @@ struct RegisterCard: View {
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
                     .autocapitalization(UITextAutocapitalizationType.none)
+                    .keyboardType(.emailAddress)
+                    .textContentType(.emailAddress)
                     
                     
                     FloatingLabelTextField(self.$viewModel.password, placeholder: "Password", editingChanged: { (isChanged) in}){
@@ -126,6 +129,9 @@ struct RegisterCard: View {
                         .isSecureTextEntry(!self.isPasswordShow)
                         .floatingStyle(ThemeTextFieldStyle())
                         .modifier(ThemeTextField())
+                        .autocapitalization(UITextAutocapitalizationType.none)
+                        .keyboardType(.asciiCapable)
+                        .textContentType(.newPassword)
                     
                     FloatingLabelTextField(self.$viewModel.confirmPassword, placeholder: "Confirm Password", editingChanged: { (isChanged) in}){
                         
@@ -144,6 +150,9 @@ struct RegisterCard: View {
                         .isSecureTextEntry(!self.isConfirmedPasswordShow)
                         .floatingStyle(ThemeTextFieldStyle())
                         .modifier(ThemeTextField())
+                        .autocapitalization(UITextAutocapitalizationType.none)
+                        .keyboardType(.asciiCapable)
+                        .textContentType(.newPassword)
                     
                 }
                 //.offset(y: 10)
