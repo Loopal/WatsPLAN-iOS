@@ -34,15 +34,15 @@ struct LoginView: View {
             NavigationLink(destination: RegisterView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
                 Text("New Here? Create an Account")
             }
-            //.navigationBarTitle("")
-            //.navigationBarHidden(true)
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
             
             Spacer()
                 .frame(height: 200)
             
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
+        //.navigationBarTitle("")
+        //.navigationBarHidden(true)
     }
 }
 

@@ -37,9 +37,38 @@ class SessionStore : ObservableObject {
     func signUp(
         email: String,
         password: String,
-        handler: @escaping AuthDataResultCallback
+        username: String
         ) {
-        Auth.auth().createUser(withEmail: email, password: password, completion: handler)
+        //Auth.auth().createUser(withEmail: email, password: password, completion: handler)
+        Auth.auth().createUser(withEmail: email, password: password) {result, error in
+            
+            if error == nil && result != nil {
+                let credential: AuthCredential = EmailAuthProvider.credential(withEmail: email, password: password)
+                let currentUser = Auth.auth().currentUser
+                
+                // Have to re-Auth before change the user info
+                currentUser?.reauthenticate(with: credential, completion: {(authResult, error) in
+                    if error == nil {
+                    }
+                    else{
+                        
+                    }
+                })
+
+                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = username
+                
+                changeRequest?.commitChanges { error in
+                    if error == nil {
+                    }
+                    else {
+                        guard let message = error?.localizedDescription else { return }
+                        print("Error" + message)
+                    }
+                }
+            }
+            
+        }
     }
 
     func signIn(
