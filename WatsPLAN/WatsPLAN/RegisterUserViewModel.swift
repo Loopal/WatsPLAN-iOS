@@ -13,10 +13,10 @@ import Combine
 class RegisterUserViewModel: ObservableObject {
     
     
-    @Published var username: String = ""
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var confirmPassword: String = ""
+    @Published var username: String = "".trimmingCharacters(in: .whitespacesAndNewlines)
+    @Published var email: String = "".trimmingCharacters(in: .whitespacesAndNewlines)
+    @Published var password: String = "".trimmingCharacters(in: .whitespacesAndNewlines)
+    @Published var confirmPassword: String = "".trimmingCharacters(in: .whitespacesAndNewlines)
     @Published var userNameValidator = UsernameValidation.emptyUsername
     @Published var emailValidator = EmailValidation.emptyEmail
     @Published var passwordValidator = PasswordValidation.empty
