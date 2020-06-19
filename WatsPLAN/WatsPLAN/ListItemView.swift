@@ -39,9 +39,7 @@ struct ListItemView: View {
                 GridView(id: self.id, colNum: model.cards[id].items.count)
             }
             
-            
-            //GridView(id: self.id, colNum: 1)
-            
+                        
             if(self.model.cards[id].num == 1) {
                 TextField("My selection is ...", text: $comment)
                     .padding(.bottom, 10)

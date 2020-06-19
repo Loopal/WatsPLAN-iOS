@@ -94,36 +94,36 @@ class Model: ObservableObject {
     }
     
     func saveModel(name: String) {
+        
+        var data = ""
+        data += self.facultyName + "\n"
+        data += self.majorName + " | " + self.optionName + "\n"
+        for c in self.cards {
+            data += c.text + "?"
+            data += c.done.description + "?"
+            data += c.checkedBoxes.map(String.init).joined(separator: ";") + "?"
+            data += String(c.num) + "?"
+            data += String(c.progress) + "?"
+            data += c.items.joined(separator: ";") + "?"
+            data += c.comment + "\n"
+        }
+        
         let fName = name + ".save"
         let fileManager = FileManager.default
-        let path = fileManager.urls(for: FileManager.SearchPathDirectory.documentDirectory, in:     FileManager.SearchPathDomainMask.userDomainMask).last?.appendingPathComponent(fName)
-
-        if !fileManager.fileExists(atPath: (path?.absoluteString)!) {
-            fileManager.createFile(atPath: String(fName),  contents:Data(" ".utf8), attributes: nil)
-        }
+        let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fName)
         
-        let fileHandle = FileHandle(forWritingAtPath: fName)
+        do {
+            var input2 = try String(contentsOf: url)
+            print(input2)
 
-        if(fileHandle == nil)
-        {
-            print("Open of outFilename forWritingAtPath: failed.  \nCheck whether the file already exists.  \nIt should already exist.\n");
-            return
+            try data.write(to: url, atomically: true, encoding: .utf8)
+            
+            input2 = try String(contentsOf: url)
+            print(input2)
+        } catch {
+            print(error.localizedDescription)
         }
-        fileHandle?.write((self.facultyName + "\n").data(using: .utf8)!)
-        fileHandle?.write((self.majorName + " | " + self.optionName + "\n").data(using: .utf8)!)
-        for c in self.cards {
-            var temp = ""
-            temp += c.text + "?"
-            temp += c.done.description + "?"
-            temp += c.checkedBoxes.map(String.init).joined(separator: ";") + "?"
-            temp += String(c.num) + "?"
-            temp += String(c.progress) + "?"
-            temp += c.items.joined(separator: ";") + "?"
-            temp += c.comment + "\n"
-            fileHandle?.write(temp.data(using: .utf8)!)
-        }
-        
-        fileHandle!.closeFile()
+
         self.changed = false
         self.fileName = name
     }

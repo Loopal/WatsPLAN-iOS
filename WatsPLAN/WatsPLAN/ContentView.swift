@@ -275,9 +275,11 @@ struct CreateCard: View {
                         .border(Color.black, width: 3)
                 }
                 Button(action: {
-                    self.pickerType = 1
-                    withAnimation{
-                        self.showPicker.toggle()
+                    if (self.model.facultyName != ""){
+                        self.pickerType = 1
+                        withAnimation{
+                            self.showPicker.toggle()
+                        }
                     }
                 }) {
                     Text(model.majorName == "" ? "Select your program" : "Selected: " + model.majorName)
@@ -287,9 +289,11 @@ struct CreateCard: View {
                         .border(Color.black, width: 3)
                 }
                 Button(action: {
-                    self.pickerType = 2
-                    withAnimation{
-                        self.showPicker.toggle()
+                    if (self.model.majorName != ""){
+                        self.pickerType = 2
+                        withAnimation{
+                            self.showPicker.toggle()
+                        }
                     }
                 }) {
                     Text(model.optionName == "" ? "Select your option (if applicable)" : "Selected: " +  model.optionName)
