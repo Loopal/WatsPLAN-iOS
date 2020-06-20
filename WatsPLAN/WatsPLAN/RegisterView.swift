@@ -18,26 +18,24 @@ struct RegisterView: View {
     @Binding var isMenuActive: Bool
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .center, spacing: 0) {
             Image("logo")
                 .resizable()
-                .frame(width: 200.0, height: 200.0)
-            
-            /*Spacer()
-                .frame(height: 20)*/
+                .frame(width: 150, height: 150)
             
             RegisterCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
             
             Spacer()
-                .frame(height: 50)
+                .frame(height: 40)
             
             NavigationLink(destination: LoginView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
                 Text("Already Registered? Login Here")
             }
             
             Spacer()
-                .frame(height: 120)
-            
+                .frame(height: 40)
+
+
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
@@ -89,7 +87,9 @@ struct RegisterCard: View {
                 
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: 350, height: 400)
+                    .frame(width: UIScreen.main.bounds.width - 20, height: 400)
+                    .shadow(radius: 5)
+
                 //.offset(y: -40)
                 
                 VStack {
@@ -173,7 +173,7 @@ struct RegisterCard: View {
                 }) {
                     Text("SIGN UP")
                         .foregroundColor(Color("uwyellow"))
-                        .frame(width: 200.0, height: 30.0)
+                        .frame(width: UIScreen.main.bounds.width - 150, height: 40.0)
                         .background(Color.black)
                         .cornerRadius(10)
                 }
@@ -245,7 +245,6 @@ struct RegisterCard: View {
                 }
             }
                 
-            //.shadow(radius: 5)
         }
 
     }
