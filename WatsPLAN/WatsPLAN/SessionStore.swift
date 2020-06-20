@@ -9,8 +9,13 @@
 import SwiftUI
 import FirebaseAuth
 import Combine
+import FirebaseFirestore
+import Firebase
 
 class SessionStore : ObservableObject {
+    
+    let storage = Storage.storage()
+    
     @Published var didChange = PassthroughSubject<SessionStore, Never>()
     @Published var session: User? { didSet { self.didChange.send(self) }}
     @Published var handle: AuthStateDidChangeListenerHandle?
@@ -60,6 +65,31 @@ class SessionStore : ObservableObject {
                 
                 changeRequest?.commitChanges { error in
                     if error == nil {
+                        
+                        let currentUser = Auth.auth().currentUser
+                        let currentUID = currentUser?.uid
+                        
+                        if(currentUID != nil){
+                            let fileManager = FileManager.default
+                            let documentsUrl = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                            let storageRef = self.storage.reference(withPath: "userData/" + currentUID!)
+                            
+                            do {
+                                let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil)
+                                for save in (directoryContents.filter{ $0.pathExtension == "save" }) {
+                                    let fileRef = storageRef.child(save.lastPathComponent)
+                                    let uploadTask = fileRef.putFile(from: save, metadata: nil) { metadata, error in
+                                        guard let metadata = metadata else {
+                                            print(error)
+                                            return
+                                        }
+                                    }
+                                }
+                            } catch {
+                                print("error load from document")
+                            }
+                        }
+                        
                     }
                     else {
                         guard let message = error?.localizedDescription else { return }

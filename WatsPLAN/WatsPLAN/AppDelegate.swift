@@ -11,6 +11,7 @@ import CoreData
 import Firebase
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,25 +28,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Retrive the data from cloud
         // Reference to the storage service
         let storage = Storage.storage()
-        let storageRef = storage.reference(withPath: "userData/${currentUser.uid}")
-        storageRef.listAll { (result, error) in
-            if let error = error {
-                print("Retrived Failed")
-                print(error)
-            }
-            else{
-                for item in result.items {
-                    let localURL = URL(string: "${item.name}.saves")!
-                    
-                    let downloadTask = storageRef.write(toFile: localURL) {url, error in
-                        if let error = error{
-                            print("Download Failed")
-                            print(error)
+        let currentUser = Auth.auth().currentUser
+        let currentUID = currentUser?.uid
+        if(currentUID != nil){
+            let storageRef = storage.reference(withPath: "userData/" + currentUID!)
+            storageRef.listAll { (result, error) in
+                if let error = error {
+                    print("Retrived Failed")
+                    print(error)
+                }
+                else{
+                    for item in result.items {
+                        print("Here")
+                        print(item.name)
+                        //let localURL = URL(string: item.name)!
+                        
+                        /*let downloadTask = storageRef.write(toFile: localURL) {url, error in
+                            if let error = error{
+                                print("Download Failed")
+                                print(error)
+                            }
+                            
+                        }*/
+                        
+                        let fName = item.name
+                        let fileManager = FileManager.default
+                        let localURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fName)
+                        
+                        let downloadTask = item.write(toFile: localURL) {url, error in
+                            if let error = error{
+                                print("Download Failed")
+                                print(error)
+                            }
+                            else{
+                                print(url)
+                            }
+                            
                         }
                         
                     }
                 }
-            }
+        }
 
         }
         

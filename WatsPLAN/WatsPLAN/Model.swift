@@ -8,6 +8,8 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
+import Firebase
 
 class Model: ObservableObject {
     @Published var fileName = ""
@@ -23,7 +25,9 @@ class Model: ObservableObject {
     @Published var mContent: [String] = []
     @Published var oContent: [String] = []
     @Published var fileContent: [String] = []
-
+    
+    
+    let storage = Storage.storage()
     
     private var db = Firestore.firestore()
     
@@ -157,6 +161,7 @@ class Model: ObservableObject {
         }
         
         let fName = name + ".save"
+        
         let fileManager = FileManager.default
         let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fName)
         
@@ -164,6 +169,21 @@ class Model: ObservableObject {
             try data.write(to: url, atomically: true, encoding: .utf8)
         } catch {
             print(error.localizedDescription)
+        }
+        
+        let currentUser = Auth.auth().currentUser
+        let currentUID = currentUser?.uid
+        
+        if(currentUID != nil){
+            let storageRef = storage.reference(withPath: "userData/" + currentUID!)
+            let fileRef = storageRef.child(fName)
+            
+            let uploadTask = fileRef.putFile(from: url, metadata: nil) { metadata, error in
+                guard let metadata = metadata else {
+                    print(error)
+                    return
+                }
+            }
         }
 
         self.changed = false
@@ -179,6 +199,24 @@ class Model: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
+        
+        let currentUser = Auth.auth().currentUser
+        let currentUID = currentUser?.uid
+        
+        if(currentUID != nil){
+            let storageRef = storage.reference(withPath: "userData/" + currentUID!)
+            let fileRef = storageRef.child(fName)
+            
+            let deleteTask = fileRef.delete { error in
+                if let error = error {
+                    print(error)
+                }
+                else{
+                    
+                }
+            }
+        }
+        
         self.fetchContent(s: "", type: 3)
     }
     
