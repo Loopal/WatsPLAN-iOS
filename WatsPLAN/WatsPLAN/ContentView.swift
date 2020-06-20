@@ -206,10 +206,11 @@ struct LoadCard: View {
                           .background(Color.black)
                           .cornerRadius(10)
                    }
-                   .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(PlainButtonStyle())
                    //.navigationBarTitle("")
                    //.navigationBarHidden(true)
-                   .offset(y:-30)
+                    .disabled(model.fileName == "")
+                    .offset(y:-30)
 
             }
             .shadow(radius: 5)
@@ -259,6 +260,7 @@ struct CreateCard: View {
                 .buttonStyle(PlainButtonStyle())
                 //.navigationBarTitle("")
                 //.navigationBarHidden(true)
+                .disabled(model.facultyName == "" || model.majorName == "")
                 .offset(y:-30)
             }
             .shadow(radius: 5)

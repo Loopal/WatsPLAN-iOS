@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FloatingButton
 
 let SELECT_ALL = 0
 let SELECT_CHECK = 1
@@ -16,7 +17,7 @@ struct CheckListView: View {
 
     @EnvironmentObject var model : Model
     @State var selected = SELECT_ALL
-    @State var showDialog = true
+    @State var showDialog = false
     @State var tempName = ""
     
     var sourceType: Int
@@ -26,7 +27,23 @@ struct CheckListView: View {
     }
         
     var body: some View {
-        return ZStack {
+        
+        let menuButton = AnyView(MainButton(imageName: "line.horizontal.3",  color: Color.white))
+        
+        let saveButton = AnyView(IconButton(imageName: "square.and.arrow.down.fill", color: Color.white, showDialog: self.$showDialog, type: 1))
+
+        let menu1 = FloatingButton(mainButtonView: menuButton, buttons: [saveButton])
+            .straight()
+            .direction(.top)
+            .alignment(.left)
+            .spacing(10)
+            .initialOffset(x: 0)
+            .animation(.spring())
+        
+        return
+        GeometryReader { geometry in
+            ZStack {
+            
             VStack(alignment: .center, spacing : 0) {
                 Image("math_logo")
                     .resizable()
@@ -34,13 +51,13 @@ struct CheckListView: View {
                     .padding(.horizontal, 40.0)
                     .padding(.top, 20)
                     
-                Text(model.majorName + (model.optionName == "" ? "" : " | " + model.optionName))
+                Text(self.model.majorName + (self.model.optionName == "" ? "" : " | " + self.model.optionName))
                     .font(.custom("Avenir Next Medium", size:15))
                     .background(Color.black)
                     .foregroundColor(Color.white)
                     .offset(y:-5)
                 
-                Picker(selection: $selected, label: Text("adasdas"), content: {
+                Picker(selection: self.$selected, label: Text("adasdas"), content: {
                     Text("ALL").tag(SELECT_ALL)
                     Text("CHECKED").tag(SELECT_CHECK)
                     Text("UNCHECKED").tag(SELECT_UNCHECK)
@@ -56,7 +73,7 @@ struct CheckListView: View {
                             .setTitleTextAttributes([.foregroundColor: UIColor(named: "uwyellow")!], for: .normal)
                     }
                 
-                List([Int](0..<model.cards.count)) { curId in
+                List([Int](0..<self.model.cards.count)) { curId in
                     if self.selected == SELECT_ALL ||
                         (self.selected == SELECT_CHECK && self.model.cards[curId].progress == 100) ||
                     (self.selected == SELECT_UNCHECK && self.model.cards[curId].progress != 100)
@@ -74,7 +91,8 @@ struct CheckListView: View {
             .onAppear {
                 self.model.getCollection(type: self.sourceType)
             }
-            
+            menu1
+                .offset(x: geometry.size.width/2 - 50, y: geometry.size.height/2 - 40)
             if self.showDialog {
                 VStack(spacing: 0) {
                     ZStack {
@@ -87,15 +105,15 @@ struct CheckListView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text(model.fileName == "" ? "Create a new save: " : "Overwrite save file " + model.fileName + "?")
+                        Text(self.model.fileName == "" ? "Create a new save: " : "Overwrite save file " + self.model.fileName + "?")
                             .font(.custom("Avenir Next Medium", size:20))
                             .foregroundColor(Color.black)
                             .padding([.top, .leading], 20.0)
 
 
                         
-                        if model.fileName == "" {
-                            TextField("Please enter a file name", text: $tempName)
+                        if self.model.fileName == "" {
+                            TextField("Please enter a file name", text: self.$tempName)
                                 .padding(.horizontal, 20.0)
                             
                             
@@ -160,7 +178,7 @@ struct CheckListView: View {
                 
             }
             
-            
+            }
         }
     }
 }
@@ -170,5 +188,66 @@ struct CheckListView_Previews: PreviewProvider {
         CheckListView(sourceType: 1)
         .environmentObject(Model())
     }
+}
+
+struct IconButton: View {
+
+    var imageName: String
+    var color: Color
+
+    let imageWidth: CGFloat = 40
+    let buttonWidth: CGFloat = 60
+    @Binding var showDialog: Bool
+    var type: Int = 0
+
+    var body: some View {
+        ZStack {
+            self.color
+            
+            Circle()
+                .fill(Color("uwyellow"))
+                .frame(width: 58, height: 55)
+
+            Image(systemName: imageName)
+                .frame(width: self.imageWidth, height: self.imageWidth)
+                .imageScale(.large)
+                .foregroundColor(.black)
+        }
+        .onTapGesture {
+            if (self.type != 0) {
+                self.showDialog = true
+            }
+        }
+        .frame(width: self.buttonWidth, height: self.buttonWidth)
+        .cornerRadius(self.buttonWidth / 2)
+    }
+
+}
+
+struct MainButton: View {
+
+    var imageName: String
+    var color: Color
+
+    let imageWidth: CGFloat = 40
+    let buttonWidth: CGFloat = 60
+
+    var body: some View {
+        ZStack {
+            self.color
+            
+            Circle()
+                .fill(Color("uwyellow"))
+                .frame(width: 58, height: 55)
+
+            Image(systemName: imageName)
+                .frame(width: self.imageWidth, height: self.imageWidth)
+                .imageScale(.large)
+                .foregroundColor(.black)
+        }
+        .frame(width: self.buttonWidth, height: self.buttonWidth)
+        .cornerRadius(self.buttonWidth / 2)
+    }
+
 }
 
