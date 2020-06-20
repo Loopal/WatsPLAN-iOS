@@ -80,7 +80,7 @@ struct ContentView: View {
                                     Text("CONFIRM")
                                         .font(.custom("Avenir Next Demi Bold", size:15))
                                         .foregroundColor(Color("uwyellow"))
-                                        .frame(width: 700, height: 40)
+                                        .frame(width: UIScreen.main.bounds.width, height: 40)
                                         .background(Color.black)
                                 }
                                 
@@ -195,13 +195,13 @@ struct LoadCard: View {
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: 350, height: 120)
+                    .frame(width: UIScreen.main.bounds.width - 20, height: 120)
                 
                 NavigationLink(destination: CheckListView(sourceType: 1)) {
                       Text("LOAD")
                           .foregroundColor(Color("uwyellow"))
                           .font(.custom("Avenir Next Demi Bold", size:20))
-                          .frame(width: 200.0, height:40.0)
+                          .frame(width: UIScreen.main.bounds.width - 150, height:40.0)
                           .background(Color.black)
                           .cornerRadius(10)
                    }
@@ -223,7 +223,7 @@ struct LoadCard: View {
                 Text(model.fileName == "" ? "Select your save file" : "Selected: " +  model.fileName)
                     .font(.custom("Avenir Next Demi Bold", size:15))
                     .foregroundColor(Color.black)
-                    .frame(width: 330, height: 40)
+                    .frame(width: UIScreen.main.bounds.width - 40, height: 40)
                     .border(Color.black, width: 3)
             }
             .offset(y:-25)
@@ -231,7 +231,7 @@ struct LoadCard: View {
             
             Text("CONTINUE")
                 .font(.custom("Avenir Next Demi Bold", size:30))
-                .offset(x:-75,y:-82)
+                .offset(x:-(UIScreen.main.bounds.width/2 - 110),y:-85)
         }
 
     }
@@ -246,13 +246,13 @@ struct CreateCard: View {
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: 350, height: 250)
+                    .frame(width: UIScreen.main.bounds.width - 20, height: 250)
                 
                 NavigationLink(destination: CheckListView(sourceType : 0)) {
                    Text("CREATE")
                        .foregroundColor(Color("uwyellow"))
                        .font(.custom("Avenir Next Demi Bold", size:20))
-                       .frame(width: 200.0, height:40.0)
+                       .frame(width: UIScreen.main.bounds.width - 150, height:40.0)
                        .background(Color.black)
                        .cornerRadius(10)
                 }
@@ -275,7 +275,7 @@ struct CreateCard: View {
                     Text(model.facultyName == "" ? "Select your faculty" : "Selected: " + model.facultyName)
                         .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color.black)
-                        .frame(width: 330, height: 40)
+                        .frame(width: UIScreen.main.bounds.width - 40, height: 40)
                         .border(Color.black, width: 3)
                 }
                 Button(action: {
@@ -289,7 +289,7 @@ struct CreateCard: View {
                     Text(model.majorName == "" ? "Select your program" : "Selected: " + model.majorName)
                         .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color.black)
-                        .frame(width: 330, height: 40)
+                        .frame(width: UIScreen.main.bounds.width - 40, height: 40)
                         .border(Color.black, width: 3)
                 }
                 Button(action: {
@@ -303,7 +303,7 @@ struct CreateCard: View {
                     Text(model.optionName == "" ? "Select your option (if applicable)" : "Selected: " +  model.optionName)
                         .font(.custom("Avenir Next Demi Bold", size:15))
                         .foregroundColor(Color.black)
-                        .frame(width: 330, height: 40)
+                        .frame(width: UIScreen.main.bounds.width - 40, height: 40)
                         .border(Color.black, width: 3)
                 }
 
@@ -313,7 +313,7 @@ struct CreateCard: View {
             
             Text("CREATE NEW")
                 .font(.custom("Avenir Next Demi Bold", size:30))
-                .offset(x:-60,y:-150)
+                .offset(x:-(UIScreen.main.bounds.width / 2 - 130), y:-150)
         }
     }
 }

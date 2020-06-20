@@ -18,18 +18,15 @@ struct LoginView: View {
     @Binding var isMenuActive: Bool
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .center, spacing: 0) {
             Image("logo")
                 .resizable()
                 .frame(width: 200.0, height: 200)
             
-            /*Spacer()
-                .frame(height: 20)*/
+            Spacer()
             
             LoginCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
             
-            Spacer()
-                .frame(height: 50)
             
             NavigationLink(destination: RegisterView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
                 Text("New Here? Create an Account")
@@ -38,7 +35,7 @@ struct LoginView: View {
             .navigationBarHidden(true)
             
             Spacer()
-                .frame(height: 200)
+                .frame(height: 40)
             
         }
         //.navigationBarTitle("")
@@ -82,7 +79,9 @@ struct LoginCard: View {
                 
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: 350, height: 250)
+                    .frame(width: UIScreen.main.bounds.width - 20, height: 250)
+                    .shadow(radius: 5)
+
                 //.offset(y: -40)
                 
                 VStack {
@@ -164,7 +163,7 @@ struct LoginCard: View {
                     }) {
                         Text("SIGN IN")
                             .foregroundColor(Color("uwyellow"))
-                            .frame(width: 200.0, height: 30.0)
+                            .frame(width: UIScreen.main.bounds.width - 150, height: 40.0)
                             .background(Color.black)
                             .cornerRadius(10)
                     }
@@ -172,13 +171,11 @@ struct LoginCard: View {
                     .offset(y: 55)
                     
                     
-                    
                     Text("LOGIN")
                         .font(.custom("Avenir Next Demi Bold", size:30))
-                        .offset(x:-110,y:-225)
+                        .offset(x:-(UIScreen.main.bounds.width/2 - 75),y:-235)
                 }
                     
-                .shadow(radius: 5)
                 
                 VStack(alignment: .leading){
                     Spacer()
