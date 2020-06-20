@@ -235,7 +235,7 @@ struct RegisterCard: View {
                             return
                     }
                     
-                    self.keyboardHeight = keyboardFrame.height - geo.size.height / 2
+                    self.keyboardHeight = keyboardFrame.height - geo.size.height / 3
                 }
                 
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
