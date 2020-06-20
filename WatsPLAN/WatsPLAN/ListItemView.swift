@@ -21,13 +21,13 @@ struct ListItemView: View {
             ZStack() {
                 Rectangle()
                     .fill(Color.black)
-                    .frame(width: 350, height: 32)
+                    .frame(width: UIScreen.main.bounds.width - 20, height: 32)
                 Text(model.cards[id].text)
                     .font(.custom("Avenir Next Medium", size:25))
                     .foregroundColor(Color("uwyellow"))
                 
                 ProgressCircle(id: self.id)
-                    .offset(x :160)
+                    .offset(x :UIScreen.main.bounds.width/2 - 30)
             }
             
             if model.cards[id].items.max(by: {$1.count > $0.count})!.count >= 30 {
@@ -44,11 +44,12 @@ struct ListItemView: View {
                 TextField("My selection is ...", text: $comment)
                     .padding(.bottom, 10)
                     .padding(.horizontal, 10)
-                    .frame(width: 350)
+                    .frame(width: UIScreen.main.bounds.width - 20)
                     .font(.custom("Avenir Next Medium", size:12))
                     .background(Color("uwyellow"))
             }
         }
+        //.offset(x: -10)
     }
     
 }
@@ -72,7 +73,7 @@ struct GridView: View {
             CheckBoxView(cardid: self.id, id: pos,pad : self.colNum < 3 || self.model.cards[self.id].items[pos].count < 7)
             //Text(String(self.colNum))
         }
-        .frame(width: 350, height: getHeight(columns: self.colNum, items: model.cards[id].items))
+        .frame(width: UIScreen.main.bounds.width-20, height: getHeight(columns: self.colNum, items: model.cards[id].items))
         .background(Color("uwyellow"))
     }
 }

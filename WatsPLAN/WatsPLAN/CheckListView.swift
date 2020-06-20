@@ -21,6 +21,20 @@ struct CheckListView: View {
     @State var dialogType = 0
     
     var sourceType: Int
+    var filteredCards: [Card] {
+        switch self.selected {
+        case SELECT_ALL:
+            return model.cards
+        case SELECT_CHECK:
+            return model.cards.filter {
+                $0.progress == 100
+            }
+        default:
+            return model.cards.filter {
+                $0.progress != 100
+            }
+        }
+    }
     
     init(sourceType: Int) {
         self.sourceType = sourceType
@@ -48,49 +62,52 @@ struct CheckListView: View {
             ZStack {
             
             VStack(alignment: .center, spacing : 0) {
-                Image("math_logo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(.horizontal, 40.0)
-                    .padding(.top, 20)
+                Group{
+                    Image("math_logo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.horizontal, 40.0)
+                        .padding(.top, 20)
+                        .padding(.bottom, 5)
+
+                        
+                    Text(self.model.majorName + (self.model.optionName == "" ? "" : " | " + self.model.optionName))
+                        .font(.custom("Avenir Next Medium", size:15))
+                        .background(Color.black)
+                        .foregroundColor(Color.white)
+                        .offset(y:-5)
+                        .frame(width: UIScreen.main.bounds.width)
                     
-                Text(self.model.majorName + (self.model.optionName == "" ? "" : " | " + self.model.optionName))
-                    .font(.custom("Avenir Next Medium", size:15))
-                    .background(Color.black)
-                    .foregroundColor(Color.white)
-                    .offset(y:-5)
-                
-                Picker(selection: self.$selected, label: Text("adasdas"), content: {
-                    Text("ALL").tag(SELECT_ALL)
-                    Text("CHECKED").tag(SELECT_CHECK)
-                    Text("UNCHECKED").tag(SELECT_UNCHECK)
-                })
-                    .cornerRadius(0)
-                    .pickerStyle(SegmentedPickerStyle())
-                    .onAppear{
-                        UISegmentedControl.appearance()
-                            .selectedSegmentTintColor = UIColor(named: "uwyellow")
-                        UISegmentedControl.appearance()
-                            .setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.black], for: .selected)
-                        UISegmentedControl.appearance()
-                            .setTitleTextAttributes([.foregroundColor: UIColor(named: "uwyellow")!], for: .normal)
-                    }
-                
-                List([Int](0..<self.model.cards.count)) { curId in
-                    if self.selected == SELECT_ALL ||
-                        (self.selected == SELECT_CHECK && self.model.cards[curId].progress == 100) ||
-                    (self.selected == SELECT_UNCHECK && self.model.cards[curId].progress != 100)
-                    {
-                        ListItemView(id: curId)
-                    }
+                    Picker(selection: self.$selected, label: Text("adasdas"), content: {
+                        Text("ALL").tag(SELECT_ALL)
+                        Text("CHECKED").tag(SELECT_CHECK)
+                        Text("UNCHECKED").tag(SELECT_UNCHECK)
+                    })
+                        .cornerRadius(0)
+                        .pickerStyle(SegmentedPickerStyle())
+                        .onAppear{
+                            UISegmentedControl.appearance()
+                                .selectedSegmentTintColor = UIColor(named: "uwyellow")
+                            UISegmentedControl.appearance()
+                                .setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.black], for: .selected)
+                            UISegmentedControl.appearance()
+                                .setTitleTextAttributes([.foregroundColor: UIColor(named: "uwyellow")!], for: .normal)
+                        }
+                }
+                .background(Color.black)
+
+                List(self.filteredCards) { curcard in
+                    ListItemView(id: self.model.cards.firstIndex(where: {(c) -> Bool in
+                        return c.id == curcard.id})!)
                 }
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
                     UITableView.appearance().backgroundColor = .clear
                 }
+                 
             }
             .disabled(self.showDialog)
-            .background(Color.black)
+            .background(Color.white)
             .onAppear {
                 self.model.getCollection(type: self.sourceType)
             }
