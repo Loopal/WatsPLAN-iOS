@@ -18,7 +18,7 @@ struct CheckListView: View {
     @EnvironmentObject var model : Model
     @State var selected = SELECT_ALL
     @State var showDialog = false
-    @State var tempName = ""
+    @State var dialogType = 0
     
     var sourceType: Int
     
@@ -30,9 +30,12 @@ struct CheckListView: View {
         
         let menuButton = AnyView(MainButton(imageName: "line.horizontal.3",  color: Color.white))
         
-        let saveButton = AnyView(IconButton(imageName: "square.and.arrow.down.fill", color: Color.white, showDialog: self.$showDialog, type: 1))
+        let saveButton = AnyView(IconButton(imageName: "square.and.arrow.down.fill", color: Color.white, showDialog: self.$showDialog, dialogType: self.$dialogType, type: 0))
+        
+        let deleteButton = AnyView(IconButton(imageName: "trash.fill", color: Color.white, showDialog: self.$showDialog, dialogType: self.$dialogType, type: 1))
 
-        let menu1 = FloatingButton(mainButtonView: menuButton, buttons: [saveButton])
+
+        let menu1 = FloatingButton(mainButtonView: menuButton, buttons: [saveButton, deleteButton])
             .straight()
             .direction(.top)
             .alignment(.left)
@@ -94,88 +97,7 @@ struct CheckListView: View {
             menu1
                 .offset(x: geometry.size.width/2 - 50, y: geometry.size.height/2 - 40)
             if self.showDialog {
-                VStack(spacing: 0) {
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.black)
-                            .frame(height: 50)
-                        Text("SAVE")
-                            .font(.custom("Avenir Next Medium", size:30))
-                            .foregroundColor(Color("uwyellow"))
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        Text(self.model.fileName == "" ? "Create a new save: " : "Overwrite save file " + self.model.fileName + "?")
-                            .font(.custom("Avenir Next Medium", size:20))
-                            .foregroundColor(Color.black)
-                            .padding([.top, .leading], 20.0)
-
-
-                        
-                        if self.model.fileName == "" {
-                            TextField("Please enter a file name", text: self.$tempName)
-                                .padding(.horizontal, 20.0)
-                            
-                            
-                            HStack {
-                                Rectangle()
-                                    .frame(height: 2)
-                                    .background(Color.black)
-                            }
-                            .padding(.leading, 20)
-
-                        }
-                        
-                        HStack(spacing: 30) {
-                            Button(action: {
-                                self.tempName = ""
-                                withAnimation {
-                                    self.showDialog = false;
-                                }
-                            }) {
-                                Text("NO")
-                                    .padding(.horizontal, 30)
-                                    .padding(.vertical, 10)
-                                    .background(Color.black)
-                                    .foregroundColor(Color("uwyellow"))
-                                    .font(.custom("Avenir Next Medium", size:18))
-
-                            }
-                            .cornerRadius(10)
-
-                            Button(action: {
-                                if self.model.fileName == "" && self.tempName != "" {
-                                    self.model.saveModel(name: self.tempName)
-                                } else if self.model.fileName != "" {
-                                    self.model.saveModel(name: self.model.fileName)
-                                } else {
-                                    //alert user incorrect input
-                                }
-                                withAnimation {
-                                    self.showDialog = false;
-                                }
-                                
-                            }) {
-                                Text("YES")
-                                    .padding(.horizontal, 30)
-                                    .padding(.vertical, 10)
-                                    .background(Color.black)
-                                    .foregroundColor(Color("uwyellow"))
-                                    .font(.custom("Avenir Next Medium", size:18))
-
-                            }
-                            .cornerRadius(10)
-                        }
-                        .padding(.leading, 120)
-                        .padding(.top, 20)
-                        .padding(.bottom, 10)
-
-                    }
-                    .background(Color("uwyellow"))
-                }
-                .frame(width: 350)
-
-                
+                DialogView(showDialog: self.$showDialog, dialogType: self.$dialogType)
             }
             
             }
@@ -198,6 +120,7 @@ struct IconButton: View {
     let imageWidth: CGFloat = 40
     let buttonWidth: CGFloat = 60
     @Binding var showDialog: Bool
+    @Binding var dialogType: Int
     var type: Int = 0
 
     var body: some View {
@@ -214,9 +137,8 @@ struct IconButton: View {
                 .foregroundColor(.black)
         }
         .onTapGesture {
-            if (self.type != 0) {
-                self.showDialog = true
-            }
+            self.dialogType = self.type
+            self.showDialog = true
         }
         .frame(width: self.buttonWidth, height: self.buttonWidth)
         .cornerRadius(self.buttonWidth / 2)

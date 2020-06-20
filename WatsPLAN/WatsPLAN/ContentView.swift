@@ -56,7 +56,7 @@ struct ContentView: View {
                         MainView(showMenu: self.$showMenu, showPicker: self.$showPicker, pickerType: self.$pickerType)
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .offset(x: self.showMenu ? geometry.size.width/1.3 : 0,
-                                    y: self.showPicker ? -300 : 0)
+                                    y: self.showPicker ? -200 : 0)
                             .disabled(self.showMenu || self.showPicker ? true : false)
                         if self.showMenu {
                             MenuView(isMenuActive: self.$showMenu)
@@ -69,7 +69,7 @@ struct ContentView: View {
                             (self.pickerType == 2 && self.model.facultyName != "" && self.model.majorName != ""))
                             {
 
-                            VStack(alignment: .center){
+                                VStack(alignment: .center, spacing: 0){
                                 Button(action: {
                                     self.refresh()
                                     withAnimation{
@@ -107,7 +107,7 @@ struct ContentView: View {
                                 .background(Color("uwyellow"))
                                 .labelsHidden()
                                 .pickerStyle(WheelPickerStyle())
-                                .padding(.top, geometry.size.height-200)
+                                .padding(.top, UIScreen.main.bounds.size.height-200)
                                 .transition(.move(edge: .bottom))
                             }
 
@@ -154,7 +154,6 @@ struct MainView: View {
                     .foregroundColor(Color.black)
                     .imageScale(.large)
             }
-            .padding(.leading, -10)
             .padding(.top, 10)
             
             Spacer()

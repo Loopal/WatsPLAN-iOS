@@ -170,6 +170,28 @@ class Model: ObservableObject {
         self.fileName = name
     }
     
+    func deleteFile() {
+        let fName = self.fileName + ".save"
+        let fileManager = FileManager.default
+        let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fName)
+        do {
+            try fileManager.removeItem(at: url)
+        } catch {
+            print(error.localizedDescription)
+        }
+        self.fetchContent(s: "", type: 3)
+    }
+    
+    func resetModel() {
+        self.cards.removeAll()
+        self.storedCards.removeAll()
+        self.fileName = ""
+        self.facultyName = ""
+        self.majorName = ""
+        self.optionName = ""
+        self.mContent = []
+        self.oContent = []
+    }
 
 }
 
