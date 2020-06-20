@@ -32,6 +32,10 @@ class Model: ObservableObject {
     private var db = Firestore.firestore()
     
     func getCollection(type: Int) {
+        
+        // Clear the cards
+        resetCard()
+        
         if type == 0 {
             //load from db
             if self.optionName == "!Just click CREATE button if no option" {
@@ -223,6 +227,20 @@ class Model: ObservableObject {
     func resetModel() {
         self.cards.removeAll()
         self.storedCards.removeAll()
+        self.fileName = ""
+        self.facultyName = ""
+        self.majorName = ""
+        self.optionName = ""
+        self.mContent = []
+        self.oContent = []
+    }
+    
+    func resetCard() {
+        self.cards.removeAll()
+        self.storedCards.removeAll()
+    }
+    
+    func resetName() {
         self.fileName = ""
         self.facultyName = ""
         self.majorName = ""

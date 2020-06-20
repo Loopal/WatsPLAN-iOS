@@ -20,10 +20,10 @@ struct ContentView: View {
     @State var oldO = ""
     
     func refresh() {
-        if self.model.facultyName != self.oldF {
+        if self.model.facultyName != self.oldF && self.model.facultyName != "" {
             self.model.fetchContent(s: "/\(self.model.facultyName)/", type : 1)
         }
-        if self.model.majorName != self.oldM {
+        if self.model.majorName != self.oldM && self.model.facultyName != ""{
             self.model.fetchContent(s: "/\(self.model.majorName)/", type : 2)
         }
     }

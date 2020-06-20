@@ -119,6 +119,11 @@ struct CheckListView: View {
             
             }
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .onDisappear {
+            self.model.resetName()
+        }
     }
 }
 

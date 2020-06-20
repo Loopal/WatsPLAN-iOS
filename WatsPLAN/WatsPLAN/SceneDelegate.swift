@@ -8,6 +8,9 @@
 
 import UIKit
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -34,6 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
