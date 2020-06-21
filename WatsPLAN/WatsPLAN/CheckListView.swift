@@ -124,11 +124,11 @@ struct CheckListView: View {
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            StatusBarColorManager.statusBarBackgroundColor = .black
             StatusBarColorManager.statusBarStyle = .lightContent
         }
         .onDisappear {
             self.model.resetName()
+            StatusBarColorManager.statusBarStyle = .default
         }
     }
 }

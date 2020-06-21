@@ -39,10 +39,6 @@ struct LoginView: View {
                 .frame(height: 40)
             
         }
-        .onAppear {
-            StatusBarColorManager.statusBarBackgroundColor = .white
-            StatusBarColorManager.statusBarStyle = .darkContent
-        }
         //.navigationBarTitle("")
         //.navigationBarHidden(true)
     }

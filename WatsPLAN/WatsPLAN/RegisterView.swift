@@ -38,10 +38,6 @@ struct RegisterView: View {
 
 
         }
-        .onAppear {
-            StatusBarColorManager.statusBarBackgroundColor = .white
-            StatusBarColorManager.statusBarStyle = .darkContent
-        }
         .navigationBarTitle("")
         .navigationBarHidden(true)
     }

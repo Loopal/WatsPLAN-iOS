@@ -111,15 +111,7 @@ struct MenuView: View {
             .padding(.top, 10)
             Spacer()
         }
-        .onAppear {
-            self.getUser()
-            StatusBarColorManager.statusBarBackgroundColor = .black
-            StatusBarColorManager.statusBarStyle = .lightContent
-        }
-        .onDisappear {
-            StatusBarColorManager.statusBarBackgroundColor = .white
-            StatusBarColorManager.statusBarStyle = .darkContent
-        }
+        .onAppear(perform: getUser)
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.black)
