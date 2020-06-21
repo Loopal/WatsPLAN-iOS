@@ -40,10 +40,7 @@ struct ListItemView: View {
                     .offset(x :UIScreen.main.bounds.width/2 - 30)
             }
             
-            if model.cards[id].items.max(by: {$1.count > $0.count})!.count >= 22 {
-                GridView(id: self.id, colNum: 1)
-            }
-            else if model.cards[id].items.count >= 3 {
+            if model.cards[id].items.count >= 3 {
                 GridView(id: self.id, colNum: 3)
             } else {
                 GridView(id: self.id, colNum: model.cards[id].items.count)
@@ -80,18 +77,41 @@ struct GridView: View {
 
     var body: some View {
         
+        /*
         QGrid([Int](0..<self.model.cards[id].items.count), columns: colNum) { pos in
             CheckBoxView(cardid: self.id, id: pos,pad : self.colNum < 3 || self.model.cards[self.id].items[pos].count < 7)
             //Text(String(self.colNum))
         }
         .frame(width: UIScreen.main.bounds.width-20, height: getHeight(columns: self.colNum, items: model.cards[id].items))
         .background(Color("uwyellow"))
-         
+         */
+        
+        VStack(alignment: .leading) {
+            ForEach(([Int](0..<self.model.cards[id].items.count)).chunked(into: self.colNum), id: \.self) { chunk in
+                HStack {
+                    ForEach(chunk) { pos in
+                        CheckBoxView(cardid: self.id, id: pos)
+                    }
+                }
+            }
+        }
+        .padding(.leading, 10)
+        .frame(width: UIScreen.main.bounds.width-20, height: getHeight(columns: self.colNum, items: model.cards[id].items))
+        .background(Color("uwyellow"))
+
     }
 }
 
 extension Int: Identifiable {
     public var id: Int { self }
+}
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
 }
 
 func getHeight(columns: Int, items : [String]) ->CGFloat {

@@ -16,14 +16,11 @@ struct CheckBoxView: View {
     let id: Int
     let size: CGFloat = 20
     let textSize: CGFloat = 15
-    var pad:Bool
     
     @EnvironmentObject var model : Model
 
     var body: some View {
-        Button(action:{
-            self.checkboxSelected()
-        }) {
+        Button(action:{}) {
             HStack(alignment: .center, spacing: 10) {
                 Image(systemName: self.model.cards[self.cardid].checkedBoxes.contains(self.id) ? "checkmark.square.fill" : "square")
                     .renderingMode(.original)
@@ -34,13 +31,16 @@ struct CheckBoxView: View {
                     .font(Font.system(size: self.textSize))
                     .foregroundColor(Color.black)
                     .minimumScaleFactor(0.01)
-                    .lineLimit(2)
+                    .lineLimit(3)
                     .multilineTextAlignment(.leading)
-                if pad {
-                    Spacer()
-                }
+                Spacer()
+            
             }
         }
+        .highPriorityGesture(
+            TapGesture().onEnded{
+                self.checkboxSelected()
+        })
     }
     
     func checkboxSelected() {
@@ -60,7 +60,7 @@ struct CheckBoxView: View {
 struct CheckBoxView_Previews: PreviewProvider {
     
     static var previews: some View {
-        CheckBoxView(cardid: 0, id: 0, pad : true)
+        CheckBoxView(cardid: 0, id: 0)
         .environmentObject(Model())
     }
 }
