@@ -188,6 +188,9 @@ struct ContentView_Previews: PreviewProvider {
 
 
 struct LoadCard: View {
+    
+    @State var isActive: Bool = false
+    
     @Binding var showPicker: Bool
     @Binding var pickerType: Int
     @EnvironmentObject var model: Model
@@ -198,7 +201,7 @@ struct LoadCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: UIScreen.main.bounds.width - 20, height: 120)
                 
-                NavigationLink(destination: CheckListView(sourceType: 1)) {
+                NavigationLink(destination: CheckListView(shouldPopToRootView: self.$isActive, sourceType: 1), isActive: self.$isActive) {
                       Text("LOAD")
                           .foregroundColor(Color("uwyellow"))
                           .font(.custom("Avenir Next Demi Bold", size:20))
@@ -239,6 +242,9 @@ struct LoadCard: View {
 }
 
 struct CreateCard: View {
+    
+    @State var isActive: Bool = false
+    
     @Binding var showPicker: Bool
     @Binding var pickerType: Int
     @EnvironmentObject var model: Model
@@ -249,7 +255,8 @@ struct CreateCard: View {
                     .fill(Color("uwyellow"))
                     .frame(width: UIScreen.main.bounds.width - 20, height: 250)
                 
-                NavigationLink(destination: CheckListView(sourceType : 0)) {
+                
+                NavigationLink(destination: CheckListView(shouldPopToRootView: self.$isActive, sourceType: 0), isActive: self.$isActive) {
                    Text("CREATE")
                        .foregroundColor(Color("uwyellow"))
                        .font(.custom("Avenir Next Demi Bold", size:20))

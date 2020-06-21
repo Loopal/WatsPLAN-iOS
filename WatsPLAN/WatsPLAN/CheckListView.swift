@@ -15,6 +15,8 @@ let SELECT_CHECK = 1
 let SELECT_UNCHECK = 2
 
 struct CheckListView: View {
+    
+    @Binding var shouldPopToRootView: Bool
 
     @EnvironmentObject var model : Model
     @State var selected = SELECT_ALL
@@ -37,9 +39,9 @@ struct CheckListView: View {
         }
     }
     
-    init(sourceType: Int) {
+    /*init(sourceType: Int) {
         self.sourceType = sourceType
-    }
+    }*/
         
     var body: some View {
         
@@ -115,7 +117,7 @@ struct CheckListView: View {
                 .offset(x: geometry.size.width/2 - 50, y: geometry.size.height/2 - 40)
 
             if self.showDialog {
-                DialogView(showDialog: self.$showDialog, dialogType: self.$dialogType)
+                DialogView(showDialog: self.$showDialog, dialogType: self.$dialogType, shouldPopToRootView: self.$shouldPopToRootView)
             }
             
             }
@@ -133,12 +135,12 @@ struct CheckListView: View {
     }
 }
 
-struct CheckListView_Previews: PreviewProvider {
+/*struct CheckListView_Previews: PreviewProvider {
     static var previews: some View {
         CheckListView(sourceType: 1)
         .environmentObject(Model())
     }
-}
+}*/
 
 struct IconButton: View {
 

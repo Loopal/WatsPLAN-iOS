@@ -13,6 +13,8 @@ struct DialogView: View {
     @Binding var showDialog: Bool
     @State var tempName = ""
     @Binding var dialogType: Int
+    
+    @Binding var shouldPopToRootView: Bool
 
     var body: some View {
         VStack(spacing: 0) {
@@ -89,6 +91,7 @@ struct DialogView: View {
                             withAnimation {
                                 self.showDialog = false;
                             }
+                            self.shouldPopToRootView = false
                         }
                         
                     }) {
