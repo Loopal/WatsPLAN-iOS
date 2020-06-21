@@ -11,6 +11,7 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import StatusBarColorKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -33,7 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            //window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = StatusBarColorManager(rootView: AnyView(contentView))
             self.window = window
             window.makeKeyAndVisible()
         }

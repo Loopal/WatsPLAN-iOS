@@ -9,6 +9,7 @@
 import SwiftUI
 import MaterialComponents.MaterialSnackbar
 import FirebaseAuth
+import StatusBarColorKit
 
 struct MenuView: View {
     
@@ -111,10 +112,10 @@ struct MenuView: View {
             Spacer()
         }
         .onAppear(perform: getUser)
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.black)
-            .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

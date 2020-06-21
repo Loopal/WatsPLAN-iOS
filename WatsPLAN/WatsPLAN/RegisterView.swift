@@ -10,6 +10,7 @@ import SwiftUI
 import FloatingLabelTextFieldSwiftUI
 import FirebaseAuth
 import MaterialComponents.MaterialSnackbar
+import StatusBarColorKit
 
 struct RegisterView: View {
     

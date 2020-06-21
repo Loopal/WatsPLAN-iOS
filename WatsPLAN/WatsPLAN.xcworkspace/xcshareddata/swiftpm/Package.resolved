@@ -9,6 +9,15 @@
           "revision": "804e59f8cb9f66b226685e9369fb82029742b83a",
           "version": "0.1.4"
         }
+      },
+      {
+        "package": "StatusBarColorKit",
+        "repositoryURL": "https://github.com/fire-at-will/StatusBarColorKit",
+        "state": {
+          "branch": "master",
+          "revision": "531c7de492dafd3b0b094d0ba69973ea69043b9d",
+          "version": null
+        }
       }
     ]
   },

@@ -18,6 +18,7 @@
 		67BE2916249ACFC6009CFC69 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE2915249ACFC6009CFC69 /* PickerView.swift */; };
 		9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */; };
 		F51577B42497228900110CB1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51577B32497228900110CB1 /* RegisterView.swift */; };
+		F58C88D2249FC35600E56FD9 /* StatusBarColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = F58C88D1249FC35600E56FD9 /* StatusBarColorKit */; };
 		F596AE362495414500B2D068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596AE352495414500B2D068 /* AppDelegate.swift */; };
 		F596AE382495414500B2D068 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596AE372495414500B2D068 /* SceneDelegate.swift */; };
 		F596AE3B2495414500B2D068 /* WatsPLAN.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F596AE392495414500B2D068 /* WatsPLAN.xcdatamodeld */; };
@@ -90,6 +91,7 @@
 			files = (
 				6745083F249715AD005B2FF0 /* QGrid in Frameworks */,
 				9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */,
+				F58C88D2249FC35600E56FD9 /* StatusBarColorKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +196,7 @@
 			name = WatsPLAN;
 			packageProductDependencies = (
 				6745083E249715AD005B2FF0 /* QGrid */,
+				F58C88D1249FC35600E56FD9 /* StatusBarColorKit */,
 			);
 			productName = WatsPLAN;
 			productReference = F596AE322495414500B2D068 /* WatsPLAN.app */;
@@ -225,6 +228,7 @@
 			mainGroup = F596AE292495414500B2D068;
 			packageReferences = (
 				6745083D249715AD005B2FF0 /* XCRemoteSwiftPackageReference "QGrid" */,
+				F58C88D0249FC35600E56FD9 /* XCRemoteSwiftPackageReference "StatusBarColorKit" */,
 			);
 			productRefGroup = F596AE332495414500B2D068 /* Products */;
 			projectDirPath = "";
@@ -524,6 +528,14 @@
 				minimumVersion = 0.1.4;
 			};
 		};
+		F58C88D0249FC35600E56FD9 /* XCRemoteSwiftPackageReference "StatusBarColorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fire-at-will/StatusBarColorKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -531,6 +543,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6745083D249715AD005B2FF0 /* XCRemoteSwiftPackageReference "QGrid" */;
 			productName = QGrid;
+		};
+		F58C88D1249FC35600E56FD9 /* StatusBarColorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F58C88D0249FC35600E56FD9 /* XCRemoteSwiftPackageReference "StatusBarColorKit" */;
+			productName = StatusBarColorKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 
