@@ -108,13 +108,17 @@ struct CheckListView: View {
                 }
                  
             }
+            .saturation(self.showDialog ? 0.5 : 1)
+            .blur(radius: (self.showDialog ? 5 : 0))
             .disabled(self.showDialog)
             .background(Color.white)
             .onAppear {
                 self.model.getCollection(type: self.sourceType)
             }
             menu1
-                .offset(x: geometry.size.width/2 - 50, y: geometry.size.height/2 - 40)
+                .offset(x: geometry.size.width/2 - 30, y: geometry.size.height/2 - 40)
+                .saturation(self.showDialog ? 0.5 : 1)
+                .blur(radius: (self.showDialog ? 5 : 0))
 
             if self.showDialog {
                 DialogView(showDialog: self.$showDialog, dialogType: self.$dialogType, shouldPopToRootView: self.$shouldPopToRootView)
@@ -148,7 +152,7 @@ struct IconButton: View {
     var color: Color
 
     let imageWidth: CGFloat = 40
-    let buttonWidth: CGFloat = 60
+    let buttonWidth: CGFloat = 50
     @Binding var showDialog: Bool
     @Binding var dialogType: Int
     var type: Int = 0
@@ -159,7 +163,7 @@ struct IconButton: View {
             
             Circle()
                 .fill(Color("uwyellow"))
-                .frame(width: 58, height: 55)
+                .frame(width: 48, height: 45)
 
             Image(systemName: imageName)
                 .frame(width: self.imageWidth, height: self.imageWidth)
@@ -182,7 +186,7 @@ struct MainButton: View {
     var color: Color
 
     let imageWidth: CGFloat = 40
-    let buttonWidth: CGFloat = 60
+    let buttonWidth: CGFloat = 50
 
     var body: some View {
         ZStack {
@@ -190,7 +194,7 @@ struct MainButton: View {
             
             Circle()
                 .fill(Color("uwyellow"))
-                .frame(width: 58, height: 55)
+                .frame(width: 48, height: 45)
 
             Image(systemName: imageName)
                 .frame(width: self.imageWidth, height: self.imageWidth)

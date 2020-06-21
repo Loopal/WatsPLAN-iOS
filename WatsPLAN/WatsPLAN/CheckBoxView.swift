@@ -52,6 +52,7 @@ struct CheckBoxView: View {
                 model.cards[cardid].checkedBoxes.remove(at: 0)
             }
         }
+        model.changed = true
         model.cards[cardid].progress = model.cards[cardid].checkedBoxes.count * 100 / model.cards[cardid].num
     }
 }

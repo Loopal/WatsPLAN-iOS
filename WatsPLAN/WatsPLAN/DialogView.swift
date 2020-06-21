@@ -34,10 +34,10 @@ struct DialogView: View {
                         .foregroundColor(Color.black)
                         .padding([.top, .leading], 20.0)
                 } else {
-                    Text("Delete save file " + self.model.fileName + "?")
-                            .font(.custom("Avenir Next Medium", size:20))
-                            .foregroundColor(Color.black)
-                            .padding([.top, .leading], 20.0)
+                    Text(self.model.fileName == "" ? "Discard current checklist and go back?" : "Delete save file " + self.model.fileName + "and go back?")
+                        .font(.custom("Avenir Next Medium", size:20))
+                        .foregroundColor(Color.black)
+                        .padding([.top, .leading], 20.0)
                 }
 
                 
@@ -110,9 +110,10 @@ struct DialogView: View {
                 .padding(.bottom, 10)
 
             }
+            .frame(width: UIScreen.main.bounds.size.width - 20)
             .background(Color("uwyellow"))
         }
-        .frame(width: 350)
+        .frame(width: UIScreen.main.bounds.size.width - 20)
     }
 }
 
