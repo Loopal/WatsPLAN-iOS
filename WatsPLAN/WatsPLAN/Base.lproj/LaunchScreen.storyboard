@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,9 +13,39 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q30-bW-QMT" userLabel="BlackView">
+                                <rect key="frame" x="207" y="0.0" width="207" height="736"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WTZ-DK-JT4" userLabel="YellowView">
+                                <rect key="frame" x="0.0" y="0.0" width="207" height="736"/>
+                                <color key="backgroundColor" name="uwyellow"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="wMb-ay-hsB">
+                                <rect key="frame" x="132" y="293" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="dRc-S0-LEk"/>
+                                    <constraint firstAttribute="height" constant="150" id="dp5-ZP-x2U"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WTZ-DK-JT4" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="firstBaseline" id="0ZZ-mq-V8x"/>
+                            <constraint firstItem="WTZ-DK-JT4" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="3zb-ia-mYp"/>
+                            <constraint firstItem="WTZ-DK-JT4" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="baseline" id="4e7-Pd-EF8"/>
+                            <constraint firstItem="q30-bW-QMT" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="5IX-Oq-rmt"/>
+                            <constraint firstItem="wMb-ay-hsB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="APE-mb-uCp"/>
+                            <constraint firstItem="WTZ-DK-JT4" firstAttribute="trailing" secondItem="q30-bW-QMT" secondAttribute="leading" id="AvP-DY-Lks"/>
+                            <constraint firstItem="wMb-ay-hsB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="DRd-dp-bKf"/>
+                            <constraint firstItem="q30-bW-QMT" firstAttribute="leading" secondItem="WTZ-DK-JT4" secondAttribute="trailing" id="SQH-kp-wlq"/>
+                            <constraint firstItem="WTZ-DK-JT4" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="a2j-9w-YLs"/>
+                            <constraint firstItem="q30-bW-QMT" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="hIk-Cv-3J1"/>
+                            <constraint firstItem="q30-bW-QMT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jOT-1R-RPa"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -22,4 +54,10 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="1200" height="1200"/>
+        <namedColor name="uwyellow">
+            <color red="1" green="0.83499997854232788" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
