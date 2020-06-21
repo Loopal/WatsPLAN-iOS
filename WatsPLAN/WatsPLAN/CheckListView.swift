@@ -8,6 +8,7 @@
 
 import SwiftUI
 import FloatingButton
+import StatusBarColorKit
 
 let SELECT_ALL = 0
 let SELECT_CHECK = 1
@@ -122,6 +123,10 @@ struct CheckListView: View {
         .navigationBarTitle("")
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            StatusBarColorManager.statusBarBackgroundColor = .black
+            StatusBarColorManager.statusBarStyle = .lightContent
+        }
         .onDisappear {
             self.model.resetName()
         }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import StatusBarColorKit
 
 struct ContentView: View {
     
@@ -132,6 +133,8 @@ struct ContentView: View {
             .onAppear{
                 self.model.fetchContent(s: "/Faculties/", type: 0)
                 self.model.fetchContent(s: "", type: 3)
+                //StatusBarColorManager.statusBarBackgroundColor = .white
+                //StatusBarColorManager.statusBarStyle = .darkContent
             }
         }
     }

@@ -59,7 +59,7 @@ struct ListItemView: View {
                     .background(Color("uwyellow"))
             }
         }
-        //.offset(x: -10)
+        .offset(x: -5)
     }
     
 }

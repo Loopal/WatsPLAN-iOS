@@ -10,6 +10,7 @@ import SwiftUI
 import FloatingLabelTextFieldSwiftUI
 import FirebaseAuth
 import MaterialComponents.MaterialSnackbar
+import StatusBarColorKit
 
 struct RegisterView: View {
     
@@ -36,6 +37,10 @@ struct RegisterView: View {
                 .frame(height: 40)
 
 
+        }
+        .onAppear {
+            StatusBarColorManager.statusBarBackgroundColor = .white
+            StatusBarColorManager.statusBarStyle = .darkContent
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
