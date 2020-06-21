@@ -61,22 +61,21 @@ struct CheckListView: View {
         GeometryReader { geometry in
             ZStack {
             
-            VStack(alignment: .center, spacing : 0) {
-                Group{
+                VStack(alignment: .center,spacing : 0) {
+                    VStack(alignment: .center,spacing : 0){
+
                     Image("math_logo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .padding(.horizontal, 40.0)
-                        .padding(.top, 20)
+                        .padding(.top, geometry.safeAreaInsets.top)
                         .padding(.bottom, 5)
-
-                        
+                                            
                     Text(self.model.majorName + (self.model.optionName == "" ? "" : " | " + self.model.optionName))
                         .font(.custom("Avenir Next Medium", size:15))
-                        .background(Color.black)
                         .foregroundColor(Color.white)
                         .offset(y:-5)
-                        .frame(width: UIScreen.main.bounds.width)
+                        .frame(width: UIScreen.main.bounds.width-40)
                     
                     Picker(selection: self.$selected, label: Text("adasdas"), content: {
                         Text("ALL").tag(SELECT_ALL)
@@ -113,6 +112,7 @@ struct CheckListView: View {
             }
             menu1
                 .offset(x: geometry.size.width/2 - 50, y: geometry.size.height/2 - 40)
+
             if self.showDialog {
                 DialogView(showDialog: self.$showDialog, dialogType: self.$dialogType)
             }
@@ -121,6 +121,7 @@ struct CheckListView: View {
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
+        .edgesIgnoringSafeArea(.all)
         .onDisappear {
             self.model.resetName()
         }

@@ -36,6 +36,19 @@
 		F5FFDF61249954F5006FC669 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FFDF60249954F5006FC669 /* User.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		677C38F0249ECCAF00EA5A83 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsPLAN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281A4DABE026C93B5C881327 /* Pods-WatsPLAN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.release.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +185,7 @@
 				F596AE2F2495414500B2D068 /* Frameworks */,
 				F596AE302495414500B2D068 /* Resources */,
 				759D6B4841185F66B8F07AFA /* [CP] Embed Pods Frameworks */,
+				677C38F0249ECCAF00EA5A83 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

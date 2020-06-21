@@ -15,22 +15,32 @@ struct ListItemView: View {
     @EnvironmentObject var model : Model
     @State private var comment: String = ""
     var id : Int
+    var cardText: String {
+        if model.cards[id].items.count >= 3 {
+            if (model.cards[id].num == model.cards[id].items.count) {
+                return "Select All From " + model.cards[id].text
+            } else {
+                return "Select " + String(model.cards[id].num) + " From " + model.cards[id].text
+            }
+        } else {
+            return "Select " + model.cards[id].text
+        }
+    }
     var body: some View {
         return VStack(spacing: 0) {
-            
             ZStack() {
                 Rectangle()
                     .fill(Color.black)
                     .frame(width: UIScreen.main.bounds.width - 20, height: 32)
-                Text(model.cards[id].text)
-                    .font(.custom("Avenir Next Medium", size:25))
+                Text(cardText)
+                    .font(.custom("Avenir Next Medium", size:20))
                     .foregroundColor(Color("uwyellow"))
                 
                 ProgressCircle(id: self.id)
                     .offset(x :UIScreen.main.bounds.width/2 - 30)
             }
             
-            if model.cards[id].items.max(by: {$1.count > $0.count})!.count >= 30 {
+            if model.cards[id].items.max(by: {$1.count > $0.count})!.count >= 22 {
                 GridView(id: self.id, colNum: 1)
             }
             else if model.cards[id].items.count >= 3 {
@@ -40,7 +50,7 @@ struct ListItemView: View {
             }
             
                         
-            if(self.model.cards[id].num == 1) {
+            if(self.model.cards[id].num != 1) {
                 TextField("My selection is ...", text: $comment)
                     .padding(.bottom, 10)
                     .padding(.horizontal, 10)
@@ -69,12 +79,14 @@ struct GridView: View {
     @EnvironmentObject var model : Model
 
     var body: some View {
+        
         QGrid([Int](0..<self.model.cards[id].items.count), columns: colNum) { pos in
             CheckBoxView(cardid: self.id, id: pos,pad : self.colNum < 3 || self.model.cards[self.id].items[pos].count < 7)
             //Text(String(self.colNum))
         }
         .frame(width: UIScreen.main.bounds.width-20, height: getHeight(columns: self.colNum, items: model.cards[id].items))
         .background(Color("uwyellow"))
+         
     }
 }
 
