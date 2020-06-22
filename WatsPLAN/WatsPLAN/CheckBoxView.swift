@@ -18,9 +18,14 @@ struct CheckBoxView: View {
     let textSize: CGFloat = 15
     
     @EnvironmentObject var model : Model
+    
+    let generator = UIImpactFeedbackGenerator(style: .light)
 
     var body: some View {
-        Button(action:{}) {
+        
+        Button(action:{
+            
+        }) {
             HStack(alignment: .center, spacing: 10) {
                 Image(systemName: self.model.cards[self.cardid].checkedBoxes.contains(self.id) ? "checkmark.square.fill" : "square")
                     .renderingMode(.original)
@@ -54,6 +59,7 @@ struct CheckBoxView: View {
         }
         model.changed = true
         model.cards[cardid].progress = model.cards[cardid].checkedBoxes.count * 100 / model.cards[cardid].num
+        self.generator.impactOccurred()
     }
 }
 
