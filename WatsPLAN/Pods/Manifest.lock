@@ -423,7 +423,6 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
-  - ValidatedPropertyKit (0.0.4)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -436,7 +435,6 @@ DEPENDENCIES:
   - FloatingLabelTextFieldSwiftUI
   - MaterialComponents/Snackbar
   - "MaterialComponents/Snackbar+TypographyThemer"
-  - ValidatedPropertyKit
 
 SPEC REPOS:
   trunk:
@@ -468,7 +466,6 @@ SPEC REPOS:
     - MDFTextAccessibility
     - nanopb
     - PromisesObjC
-    - ValidatedPropertyKit
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -499,8 +496,7 @@ SPEC CHECKSUMS:
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: bc22aed0df15ef6216d9fda54edc39b3da64d513
+PODFILE CHECKSUM: d9f441f96ad6d218b062695e3cbe2a4ab1d048b9
 
 COCOAPODS: 1.9.3
