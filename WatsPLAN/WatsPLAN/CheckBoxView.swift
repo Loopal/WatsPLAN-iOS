@@ -31,7 +31,7 @@ struct CheckBoxView: View {
                     .font(Font.system(size: self.textSize))
                     .foregroundColor(Color.black)
                     .minimumScaleFactor(0.01)
-                    .lineLimit(3)
+                    .lineLimit(2)
                     .multilineTextAlignment(.leading)
                 Spacer()
             
