@@ -11,6 +11,7 @@ import FirebaseAuth
 import Combine
 import FirebaseFirestore
 import Firebase
+import MaterialComponents.MaterialSnackbar
 
 class SessionStore : ObservableObject {
     
@@ -79,9 +80,26 @@ class SessionStore : ObservableObject {
                                 for save in (directoryContents.filter{ $0.pathExtension == "save" }) {
                                     let fileRef = storageRef.child(save.lastPathComponent)
                                     let uploadTask = fileRef.putFile(from: save, metadata: nil) { metadata, error in
-                                        guard let metadata = metadata else {
+                                        /*guard let metadata = metadata else {
                                             print(error)
+                                            let message = MDCSnackbarMessage()
+                                            message.text = "Cloud Sync Fail"
+                                            message.duration = 2
+                                            MDCSnackbarManager.show(message)
                                             return
+                                        }*/
+                                        if let error = error {
+                                            let message = MDCSnackbarMessage()
+                                            message.text = "Cloud Sync Fail"
+                                            message.duration = 2
+                                            MDCSnackbarManager.show(message)
+                                            print(error)
+                                        }
+                                        else{
+                                            let message = MDCSnackbarMessage()
+                                            message.text = "Cloud Sync Succeed"
+                                            message.duration = 2
+                                            MDCSnackbarManager.show(message)
                                         }
                                     }
                                 }
@@ -96,6 +114,12 @@ class SessionStore : ObservableObject {
                         print("Error" + message)
                     }
                 }
+            }
+            else if error != nil {
+                let message = MDCSnackbarMessage()
+                message.text = error?.localizedDescription
+                message.duration = 2
+                MDCSnackbarManager.show(message)
             }
             
         }

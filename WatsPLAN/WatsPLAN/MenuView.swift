@@ -15,6 +15,8 @@ struct MenuView: View {
     
     @State var isActive: Bool = false
     
+    @State var isTermActive: Bool = false
+    
     @EnvironmentObject var session: SessionStore
     
     @Binding var isMenuActive: Bool
@@ -100,7 +102,22 @@ struct MenuView: View {
             }
             
             
-            HStack {
+            NavigationLink(destination: TermAndConditionView(shouldPopToRootView: self.$isTermActive, isMenuActive: self.$isMenuActive), isActive: self.$isTermActive) {
+                HStack {
+                    Image("term")
+                        .imageScale(.large)
+                        .foregroundColor(Color("uwyellow"))
+                    Text("Terms and Conditions")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding(.leading, 30)
+                }
+            }
+            .isDetailLink(false)
+            .padding(.top, 10)
+            
+            
+            /*HStack {
                 Image("term")
                     .imageScale(.large)
                 Text("Terms and Conditions")
@@ -108,7 +125,7 @@ struct MenuView: View {
                     .font(.headline)
                     .padding(.leading, 30)
             }
-            .padding(.top, 10)
+            .padding(.top, 10)*/
             Spacer()
         }
         .onAppear(perform: getUser)

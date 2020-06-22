@@ -10,6 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 import Firebase
+import MaterialComponents.MaterialSnackbar
 
 class Model: ObservableObject {
     @Published var fileName = ""
@@ -183,10 +184,28 @@ class Model: ObservableObject {
             let fileRef = storageRef.child(fName)
             
             let uploadTask = fileRef.putFile(from: url, metadata: nil) { metadata, error in
-                guard let metadata = metadata else {
+                if let error = error {
+                    let message = MDCSnackbarMessage()
+                    message.text = "Cloud Sync Fail"
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
+                    print(error)
+                }
+                else{
+                    let message = MDCSnackbarMessage()
+                    message.text = "Cloud Sync Succeed"
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
+                }
+                
+                /*guard let metadata = metadata else {
+                    let message = MDCSnackbarMessage()
+                    message.text = "Cloud Sync Fail"
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
                     print(error)
                     return
-                }
+                }*/
             }
         }
 
@@ -213,10 +232,17 @@ class Model: ObservableObject {
             
             let deleteTask = fileRef.delete { error in
                 if let error = error {
+                    let message = MDCSnackbarMessage()
+                    message.text = "Cloud Sync Fail"
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
                     print(error)
                 }
                 else{
-                    
+                    let message = MDCSnackbarMessage()
+                    message.text = "Cloud Sync Succeed"
+                    message.duration = 2
+                    MDCSnackbarManager.show(message)
                 }
             }
         }

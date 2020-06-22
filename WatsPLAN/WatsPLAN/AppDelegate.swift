@@ -12,6 +12,7 @@ import Firebase
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 import FirebaseAuth
+import MaterialComponents.MaterialSnackbar
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,15 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     for item in result.items {
                         print("Here")
                         print(item.name)
-                        //let localURL = URL(string: item.name)!
-                        
-                        /*let downloadTask = storageRef.write(toFile: localURL) {url, error in
-                            if let error = error{
-                                print("Download Failed")
-                                print(error)
-                            }
-                            
-                        }*/
                         
                         let fName = item.name
                         let fileManager = FileManager.default
@@ -57,10 +49,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         let downloadTask = item.write(toFile: localURL) {url, error in
                             if let error = error{
-                                print("Download Failed")
-                                print(error)
+                                let message = MDCSnackbarMessage()
+                                message.text = "Cloud Sync Fail"
+                                message.duration = 2
+                                MDCSnackbarManager.show(message)
                             }
                             else{
+                                let message = MDCSnackbarMessage()
+                                message.text = "Cloud Sync Succeed"
+                                message.duration = 2
+                                MDCSnackbarManager.show(message)
                                 print(url)
                             }
                             

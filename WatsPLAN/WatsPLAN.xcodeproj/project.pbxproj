@@ -18,6 +18,8 @@
 		67BE2916249ACFC6009CFC69 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE2915249ACFC6009CFC69 /* PickerView.swift */; };
 		9F85EC63792A256300AE8DB5 /* Pods_WatsPLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC3E75464004745E2C3AC29 /* Pods_WatsPLAN.framework */; };
 		F51577B42497228900110CB1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51577B32497228900110CB1 /* RegisterView.swift */; };
+		F58510CB24A0495500FC3CB1 /* TermAndConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58510CA24A0495500FC3CB1 /* TermAndConditionView.swift */; };
+		F58510CD24A0513700FC3CB1 /* HTMLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58510CC24A0513700FC3CB1 /* HTMLView.swift */; };
 		F58C88D2249FC35600E56FD9 /* StatusBarColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = F58C88D1249FC35600E56FD9 /* StatusBarColorKit */; };
 		F596AE362495414500B2D068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596AE352495414500B2D068 /* AppDelegate.swift */; };
 		F596AE382495414500B2D068 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596AE372495414500B2D068 /* SceneDelegate.swift */; };
@@ -64,6 +66,8 @@
 		67BE2915249ACFC6009CFC69 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		EF40EDB1B115BF7DB34CB1A8 /* Pods-WatsPLAN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsPLAN.debug.xcconfig"; path = "Target Support Files/Pods-WatsPLAN/Pods-WatsPLAN.debug.xcconfig"; sourceTree = "<group>"; };
 		F51577B32497228900110CB1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F58510CA24A0495500FC3CB1 /* TermAndConditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndConditionView.swift; sourceTree = "<group>"; };
+		F58510CC24A0513700FC3CB1 /* HTMLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLView.swift; sourceTree = "<group>"; };
 		F596AE322495414500B2D068 /* WatsPLAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsPLAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F596AE352495414500B2D068 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F596AE372495414500B2D068 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 				67BE2915249ACFC6009CFC69 /* PickerView.swift */,
 				F5AD5DC0249C1047008E36AE /* MyBackSwipeGesture.swift */,
 				677C38E8249DAB1900EA5A83 /* DialogView.swift */,
+				F58510CA24A0495500FC3CB1 /* TermAndConditionView.swift */,
+				F58510CC24A0513700FC3CB1 /* HTMLView.swift */,
 			);
 			path = WatsPLAN;
 			sourceTree = "<group>";
@@ -304,8 +310,10 @@
 				F59A646524986B1B0047FD3C /* LoginUserViewModel.swift in Sources */,
 				F596AE362495414500B2D068 /* AppDelegate.swift in Sources */,
 				674CC3A72496A76300A75723 /* MenuView.swift in Sources */,
+				F58510CB24A0495500FC3CB1 /* TermAndConditionView.swift in Sources */,
 				F596AE3B2495414500B2D068 /* WatsPLAN.xcdatamodeld in Sources */,
 				F5FFDF5D249942E9006FC669 /* MyNavigationLink.swift in Sources */,
+				F58510CD24A0513700FC3CB1 /* HTMLView.swift in Sources */,
 				67490C40249702110051BCA1 /* ListItemView.swift in Sources */,
 				67490C3E249701ED0051BCA1 /* CheckListView.swift in Sources */,
 				F596AE3D2495414500B2D068 /* ContentView.swift in Sources */,

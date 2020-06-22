@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MaterialComponents.MaterialSnackbar
 
 struct DialogView: View {
     @EnvironmentObject var model: Model
@@ -76,10 +77,22 @@ struct DialogView: View {
                         if self.dialogType == 0{
                             if self.model.fileName == "" && self.tempName != "" {
                                 self.model.saveModel(name: self.tempName)
+                                let message = MDCSnackbarMessage()
+                                message.text = "Save file created successfully"
+                                message.duration = 2
+                                MDCSnackbarManager.show(message)
                             } else if self.model.fileName != "" {
                                 self.model.saveModel(name: self.model.fileName)
+                                let message = MDCSnackbarMessage()
+                                message.text = "Save file updated successfully"
+                                message.duration = 2
+                                MDCSnackbarManager.show(message)
                             } else {
                                 //alert user incorrect input
+                                let message = MDCSnackbarMessage()
+                                message.text = "Unable to create/update save file"
+                                message.duration = 2
+                                MDCSnackbarManager.show(message)
                             }
                             withAnimation {
                                 self.showDialog = false;
