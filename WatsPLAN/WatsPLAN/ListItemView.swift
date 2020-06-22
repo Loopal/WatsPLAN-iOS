@@ -77,7 +77,6 @@ struct GridView: View {
     @EnvironmentObject var model : Model
 
     var body: some View {
-        
         VStack(alignment: .leading) {
             ForEach(([Int](0..<self.model.cards[id].items.count)).chunked(into: self.colNum), id: \.self) { chunk in
                 HStack {
@@ -88,7 +87,8 @@ struct GridView: View {
             }
         }
         .padding(.leading, 10)
-        .frame(width: UIScreen.main.bounds.width-20, height: getHeight(columns: self.colNum, items: model.cards[id].items))
+        .padding(.vertical, 10)
+        .frame(width: UIScreen.main.bounds.width-20)
         .background(Color("uwyellow"))
 
     }
@@ -105,29 +105,6 @@ extension Array {
         }
     }
 }
-
-func getHeight(columns: Int, items : [String]) ->CGFloat {
-    var h = 0
-    var c = 0
-    while c < items.count {
-        var temp = items[c].count
-        var col = 1
-        while col < columns && c+col < items.count {
-            temp = items[c+col].count > temp ? items[c+col].count : temp
-            col += 1
-        }
-        if columns == 3 {
-            h += 40 + temp / 7 * 10
-        } else if columns == 2 {
-            h += 35 + temp
-        } else {
-            h += 35 + temp / 20 * 10
-        }
-        c += columns
-    }
-    return CGFloat(h)
-}
-
 
 struct ProgressCircle: View {
     var id: Int
