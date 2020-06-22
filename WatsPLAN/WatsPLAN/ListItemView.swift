@@ -7,13 +7,11 @@
 //
 
 import SwiftUI
-import QGrid
 
 let minHeight = 50
 
 struct ListItemView: View {
     @EnvironmentObject var model : Model
-    @State private var comment: String = ""
     var id : Int
     var cardText: String {
         if model.cards[id].items.count >= 3 {
@@ -40,7 +38,10 @@ struct ListItemView: View {
                     .offset(x :UIScreen.main.bounds.width/2 - 30)
             }
             
-            if model.cards[id].items.count >= 3 {
+            if model.cards[id].items.max(by: {$1.count > $0.count})!.count >= 23 {
+                GridView(id: self.id, colNum: 1)
+            }
+            else if model.cards[id].items.count >= 3 {
                 GridView(id: self.id, colNum: 3)
             } else {
                 GridView(id: self.id, colNum: model.cards[id].items.count)
@@ -48,7 +49,7 @@ struct ListItemView: View {
             
                         
             if(self.model.cards[id].num != 1) {
-                TextField("My selection is ...", text: $comment)
+                TextField("My selection is ...", text: $model.cards[id].comment)
                     .padding(.bottom, 10)
                     .padding(.horizontal, 10)
                     .frame(width: UIScreen.main.bounds.width - 20)
@@ -76,15 +77,6 @@ struct GridView: View {
     @EnvironmentObject var model : Model
 
     var body: some View {
-        
-        /*
-        QGrid([Int](0..<self.model.cards[id].items.count), columns: colNum) { pos in
-            CheckBoxView(cardid: self.id, id: pos,pad : self.colNum < 3 || self.model.cards[self.id].items[pos].count < 7)
-            //Text(String(self.colNum))
-        }
-        .frame(width: UIScreen.main.bounds.width-20, height: getHeight(columns: self.colNum, items: model.cards[id].items))
-        .background(Color("uwyellow"))
-         */
         
         VStack(alignment: .leading) {
             ForEach(([Int](0..<self.model.cards[id].items.count)).chunked(into: self.colNum), id: \.self) { chunk in

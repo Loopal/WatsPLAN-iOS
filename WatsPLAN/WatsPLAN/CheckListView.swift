@@ -116,7 +116,7 @@ struct CheckListView: View {
                 self.model.getCollection(type: self.sourceType)
             }
             menu1
-                .offset(x: geometry.size.width/2 - 30, y: geometry.size.height/2 - 40)
+                .offset(x: geometry.size.width/2 - 30, y: geometry.size.height/2 - 100)
                 .saturation(self.showDialog ? 0.5 : 1)
                 .blur(radius: (self.showDialog ? 5 : 0))
 
