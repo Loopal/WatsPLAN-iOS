@@ -36,7 +36,7 @@ struct CheckBoxView: View {
                     .font(Font.system(size: self.textSize))
                     .foregroundColor(Color.black)
                     .minimumScaleFactor(0.01)
-                    .lineLimit(2)
+                    .lineLimit((model.cards[self.cardid].items[self.id].count <= 9) ? 1 : 2)
                     .multilineTextAlignment(.leading)
                 Spacer()
             

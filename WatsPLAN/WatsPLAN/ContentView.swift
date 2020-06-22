@@ -154,7 +154,7 @@ struct MainView: View {
                 Image(systemName: "line.horizontal.3")
                     .resizable()
                     .foregroundColor(Color.black)
-                    .frame(width: 40, height: 30)
+                    .frame(width: 30, height: 20)
                 //.imageScale(.large)
             }
             .padding(.top, 10)
