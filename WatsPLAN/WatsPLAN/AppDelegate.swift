@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [END default_firestore]
         print(db) // silence warning
         
+        
         // Retrive the data from cloud
         // Reference to the storage service
         let storage = Storage.storage()
@@ -131,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
 
 }
 
