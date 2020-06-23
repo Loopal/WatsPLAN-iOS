@@ -135,6 +135,7 @@ struct ContentView: View {
                 self.model.fetchContent(s: "", type: 3)
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -327,3 +328,5 @@ struct CreateCard: View {
         }
     }
 }
+
+
