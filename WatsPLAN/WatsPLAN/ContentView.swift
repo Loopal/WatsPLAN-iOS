@@ -151,6 +151,12 @@ struct ContentView: View {
                                         self.oldF = self.model.facultyName
                                         self.oldM = self.model.majorName
                                         self.oldO = self.model.optionName
+                                        
+                                        if self.pickerType == 1 && self.model.mContent.count == 1 {
+                                            self.model.majorName = self.model.mContent[0]
+                                        } else if self.pickerType == 2 && self.model.oContent.count == 1 {
+                                            self.model.optionName = self.model.oContent[0]
+                                        }
                                     }
 
                             }
