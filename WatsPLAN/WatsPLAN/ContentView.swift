@@ -82,11 +82,11 @@ struct ContentView: View {
         
         let dragMenu = DragGesture()
             .onEnded {
-                if $0.translation.width > 100 {
+                if $0.translation.width > 50 {
                     withAnimation {
                         self.showMenu = true
                     }
-                } else if $0.translation.width < -100 {
+                } else if $0.translation.width < -50 {
                     /*withAnimation {
                         self.showMenu = false
                     }*/
@@ -99,6 +99,16 @@ struct ContentView: View {
                     }
                 }
             }
+        
+        let dragPicker = DragGesture()
+        .onEnded {
+            if $0.translation.height > 50 {
+                self.refresh()
+                withAnimation {
+                    self.showPicker = false
+                }
+            }
+        }
         
         return NavigationView {
             GeometryReader { geometry in
