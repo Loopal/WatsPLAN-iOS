@@ -14,12 +14,26 @@ import SwiftUI
 struct CheckBoxView: View {
     let cardid : Int
     let id: Int
-    let size: CGFloat = 20
-    let textSize: CGFloat = 15
-    
     @EnvironmentObject var model : Model
     
     let generator = UIImpactFeedbackGenerator(style: .light)
+    
+    var fontSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(25)
+        } else {
+            return CGFloat(15)
+        }
+    }
+    
+    var boxSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(30)
+        } else {
+            return CGFloat(20)
+        }
+    }
+    
 
     var body: some View {
         
@@ -31,9 +45,9 @@ struct CheckBoxView: View {
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: self.size, height: self.size)
+                    .frame(width: self.boxSize, height: self.boxSize)
                 Text(model.cards[self.cardid].items[self.id])
-                    .font(Font.system(size: self.textSize))
+                    .font(.custom("Avenir Next Medium", size:self.fontSize))
                     .foregroundColor(Color.black)
                     .minimumScaleFactor(0.01)
                     .lineLimit((model.cards[self.cardid].items[self.id].count <= 9) ? 1 : 2)
