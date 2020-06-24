@@ -29,6 +29,39 @@ struct ContentView: View {
         }
     }
     
+    var fontSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(50)
+        } else {
+            return CGFloat(30)
+        }
+    }
+    
+    var pickerHeight: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(300)
+        } else {
+            return CGFloat(200)
+        }
+    }
+    
+    var menuwidth: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(UIScreen.main.bounds.width * 0.3)
+        } else {
+            return CGFloat(UIScreen.main.bounds.width * 0.7)
+        }
+    }
+    
+    var menuPad: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(-(UIScreen.main.bounds.width - self.menuwidth)/1.4)
+        } else {
+            return CGFloat(-(UIScreen.main.bounds.width - self.menuwidth))
+        }
+    }
+    
+    
     var body: some View {
         
         let dragMenu = DragGesture()
@@ -56,13 +89,13 @@ struct ContentView: View {
                     ZStack(alignment: .center) {
                         MainView(showMenu: self.$showMenu, showPicker: self.$showPicker, pickerType: self.$pickerType)
                             .frame(width: geometry.size.width, height: geometry.size.height)
-                            .offset(x: self.showMenu ? geometry.size.width/1.3 : 0,
-                                    y: self.showPicker ? -200 : 0)
+                            .offset(x: self.showMenu ? self.menuwidth : 0,
+                                    y: self.showPicker ? -self.pickerHeight : 0)
                             .disabled(self.showMenu || self.showPicker ? true : false)
                         if self.showMenu {
                             MenuView(isMenuActive: self.$showMenu)
-                                .frame(width: geometry.size.width/1.3)
-                                .padding(.leading, -(geometry.size.width - geometry.size.width/1.3))
+                                .frame(width: self.menuwidth)
+                                .padding(.leading, self.menuPad)
                                 .transition(.move(edge: .leading))
                         }
                         
@@ -79,9 +112,9 @@ struct ContentView: View {
                                     
                                 }) {
                                     Text("CONFIRM")
-                                        .font(.custom("Avenir Next Demi Bold", size:15))
+                                        .font(.custom("Avenir Next Demi Bold", size:self.fontSize - 15))
                                         .foregroundColor(Color("uwyellow"))
-                                        .frame(width: UIScreen.main.bounds.width, height: 40)
+                                        .frame(width: UIScreen.main.bounds.width, height: self.fontSize + 10)
                                         .background(Color.black)
                                 }
                                 
@@ -93,10 +126,11 @@ struct ContentView: View {
                                         (self.pickerType == 1 ? self.model.mContent :
                                             (self.pickerType == 2 ? self.model.oContent : self.model.fileContent))) { f in
                                             Text(f)
-                                            .font(.custom("Avenir Next Demi Bold", size:20))
+                                                .font(.custom("Avenir Next Demi Bold", size:self.fontSize - 10))
                                         }
                                     }
-                                    .frame(width: 700, height: 200)
+                                    .frame(width: UIScreen.main.bounds.width, height: self.pickerHeight)
+                                    .fixedSize()
                                     .pickerStyle(WheelPickerStyle())
                                     .onAppear{
                                         self.oldF = self.model.facultyName
@@ -145,6 +179,14 @@ struct MainView: View {
     @Binding var showPicker: Bool
     @Binding var pickerType: Int
     
+    var fontSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(50)
+        } else {
+            return CGFloat(30)
+        }
+    }
+    
     var body: some View {
         VStack(alignment:.leading, spacing: 0) {
             Button(action: {
@@ -163,9 +205,9 @@ struct MainView: View {
             Spacer()
 
             Text("Welcome back, Warrior!")
-                .font(.custom("Avenir Next Demi Bold", size:30))
+                .font(.custom("Avenir Next Demi Bold", size: fontSize))
             Text("Let's begin your degree check")
-                .font(.custom("Avenir Next Demi Bold", size:20))
+                .font(.custom("Avenir Next Demi Bold", size: fontSize - 10))
                 .foregroundColor(Color.gray)
             Spacer()
             Spacer()
@@ -184,8 +226,11 @@ struct MainView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-        .environmentObject(Model())
+        ForEach(["iPhone 11 Pro", "iPad Pro (11-inch) (2nd generation)"], id: \.self) { device in
+            ContentView()
+            .environmentObject(Model())
+            .previewDevice(PreviewDevice(rawValue: device))
+        }
     }
 }
 
@@ -197,26 +242,81 @@ struct LoadCard: View {
     @Binding var showPicker: Bool
     @Binding var pickerType: Int
     @EnvironmentObject var model: Model
+    
+    var baseWidth: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return UIScreen.main.bounds.width - 40
+        } else {
+            return UIScreen.main.bounds.width
+        }
+    }
+    
+    var fontSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(50)
+        } else {
+            return CGFloat(30)
+        }
+    }
+    
+    var rectHeight: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(170)
+        } else {
+            return CGFloat(120)
+        }
+    }
+    
+    var titleOffsetX: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(-(UIScreen.main.bounds.width/2 - 180))
+        } else {
+            return CGFloat(-(UIScreen.main.bounds.width/2 - 110))
+        }
+    }
+    
+    var titleOffsetY: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(-125)
+        } else {
+            return CGFloat(-85)
+        }
+    }
+    
+    var buttonOffsetY: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(-40)
+        } else {
+            return CGFloat(-25)
+        }
+    }
+    
+    var cardPad: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(10)
+        } else {
+            return CGFloat(0)
+        }
+    }
+    
     var body: some View {
         ZStack {
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: UIScreen.main.bounds.width - 20, height: 120)
+                    .frame(width: baseWidth - 20, height: rectHeight)
                 
                 NavigationLink(destination: CheckListView(shouldPopToRootView: self.$isActive, sourceType: 1), isActive: self.$isActive) {
                       Text("LOAD")
                           .foregroundColor(Color("uwyellow"))
-                          .font(.custom("Avenir Next Demi Bold", size:20))
-                          .frame(width: UIScreen.main.bounds.width - 150, height:40.0)
+                          .font(.custom("Avenir Next Demi Bold", size:fontSize - 10))
+                          .frame(width: baseWidth - 150, height: fontSize + 10)
                           .background(Color.black)
                           .cornerRadius(10)
                    }
                     .buttonStyle(PlainButtonStyle())
-                   //.navigationBarTitle("")
-                   //.navigationBarHidden(true)
                     .disabled(model.fileName == "")
-                    .offset(y:-30)
+                    .offset(y:-fontSize)
 
             }
             .shadow(radius: 5)
@@ -228,18 +328,19 @@ struct LoadCard: View {
                 }
             }) {
                 Text(model.fileName == "" ? "Select your save file" : "Selected: " +  model.fileName)
-                    .font(.custom("Avenir Next Demi Bold", size:15))
+                    .font(.custom("Avenir Next Demi Bold", size: fontSize - 15))
                     .foregroundColor(Color.black)
-                    .frame(width: UIScreen.main.bounds.width - 40, height: 40)
+                    .frame(width: baseWidth - 40, height: fontSize + 10)
                     .border(Color.black, width: 3)
             }
-            .offset(y:-25)
+            .offset(y: buttonOffsetY)
 
             
             Text("CONTINUE")
-                .font(.custom("Avenir Next Demi Bold", size:30))
-                .offset(x:-(UIScreen.main.bounds.width/2 - 110),y:-85)
+                .font(.custom("Avenir Next Demi Bold", size: fontSize))
+                .offset(x: titleOffsetX,y:titleOffsetY)
         }
+        .padding(.leading, cardPad)
 
     }
 }
@@ -251,19 +352,83 @@ struct CreateCard: View {
     @Binding var showPicker: Bool
     @Binding var pickerType: Int
     @EnvironmentObject var model: Model
+    
+    var baseWidth: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return UIScreen.main.bounds.width - 40
+        } else {
+            return UIScreen.main.bounds.width
+        }
+    }
+    
+        var fontSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(50)
+        } else {
+            return CGFloat(30)
+        }
+    }
+    
+    var rectHeight: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(400)
+        } else {
+            return CGFloat(250)
+        }
+    }
+    
+    var titleOffsetX: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(-(UIScreen.main.bounds.width/2 - 220))
+        } else {
+            return CGFloat(-(UIScreen.main.bounds.width/2 - 130))
+        }
+    }
+    
+    var titleOffsetY: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(-240)
+        } else {
+            return CGFloat(-155)
+        }
+    }
+    var buttonOffsetY: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(-50)
+        } else {
+            return CGFloat(-35)
+        }
+    }
+    
+    var spacing: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(50)
+        } else {
+            return CGFloat(25)
+        }
+    }
+    
+    var cardPad: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            return CGFloat(10)
+        } else {
+            return CGFloat(0)
+        }
+    }
+    
     var body: some View {
         ZStack {
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: UIScreen.main.bounds.width - 20, height: 250)
+                    .frame(width: baseWidth - 20, height: rectHeight)
                 
                 
                 NavigationLink(destination: CheckListView(shouldPopToRootView: self.$isActive, sourceType: 0), isActive: self.$isActive) {
                    Text("CREATE")
                        .foregroundColor(Color("uwyellow"))
-                       .font(.custom("Avenir Next Demi Bold", size:20))
-                       .frame(width: UIScreen.main.bounds.width - 150, height:40.0)
+                       .font(.custom("Avenir Next Demi Bold", size:fontSize - 10))
+                       .frame(width: baseWidth - 150, height:fontSize + 10)
                        .background(Color.black)
                        .cornerRadius(10)
                 }
@@ -271,11 +436,11 @@ struct CreateCard: View {
                 //.navigationBarTitle("")
                 //.navigationBarHidden(true)
                 .disabled(model.facultyName == "" || model.majorName == "")
-                .offset(y:-30)
+                .offset(y:-fontSize)
             }
             .shadow(radius: 5)
             
-            VStack(spacing: 25) {
+            VStack(spacing: spacing) {
                 Button(action: {
                     self.pickerType = 0
                     withAnimation{
@@ -284,9 +449,9 @@ struct CreateCard: View {
                     
                 }) {
                     Text(model.facultyName == "" ? "Select your faculty" : "Selected: " + model.facultyName)
-                        .font(.custom("Avenir Next Demi Bold", size:15))
+                        .font(.custom("Avenir Next Demi Bold", size:fontSize - 15))
                         .foregroundColor(Color.black)
-                        .frame(width: UIScreen.main.bounds.width - 40, height: 40)
+                        .frame(width: baseWidth - 40, height: fontSize + 10)
                         .border(Color.black, width: 3)
                 }
                 Button(action: {
@@ -298,9 +463,9 @@ struct CreateCard: View {
                     }
                 }) {
                     Text(model.majorName == "" ? "Select your program" : "Selected: " + model.majorName)
-                        .font(.custom("Avenir Next Demi Bold", size:15))
+                        .font(.custom("Avenir Next Demi Bold", size:fontSize - 15))
                         .foregroundColor(Color.black)
-                        .frame(width: UIScreen.main.bounds.width - 40, height: 40)
+                        .frame(width: baseWidth - 40, height: fontSize + 10)
                         .border(Color.black, width: 3)
                 }
                 Button(action: {
@@ -312,20 +477,21 @@ struct CreateCard: View {
                     }
                 }) {
                     Text(model.optionName == "" ? "Select your option (if applicable)" : "Selected: " +  model.optionName)
-                        .font(.custom("Avenir Next Demi Bold", size:15))
+                        .font(.custom("Avenir Next Demi Bold", size:fontSize - 15))
                         .foregroundColor(Color.black)
-                        .frame(width: UIScreen.main.bounds.width - 40, height: 40)
+                        .frame(width: baseWidth - 40, height: fontSize + 10)
                         .border(Color.black, width: 3)
                 }
 
             }
-            .offset(y:-35)
+            .offset(y:buttonOffsetY)
 
             
             Text("CREATE NEW")
-                .font(.custom("Avenir Next Demi Bold", size:30))
-                .offset(x:-(UIScreen.main.bounds.width / 2 - 130), y:-150)
+                .font(.custom("Avenir Next Demi Bold", size:fontSize))
+                .offset(x:titleOffsetX, y:titleOffsetY)
         }
+        .padding(.leading, cardPad)
     }
 }
 
