@@ -61,6 +61,22 @@ struct ContentView: View {
         }
     }
     
+    var pickerButtonHeight: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(60)
+        } else {
+            return CGFloat(40)
+        }
+    }
+    
+    var pickerOffsetHeight: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(375)
+        } else {
+            return CGFloat(200)
+        }
+    }
+    
     
     var body: some View {
         
@@ -90,7 +106,7 @@ struct ContentView: View {
                         MainView(showMenu: self.$showMenu, showPicker: self.$showPicker, pickerType: self.$pickerType)
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .offset(x: self.showMenu ? self.menuwidth : 0,
-                                    y: self.showPicker ? -self.pickerHeight : 0)
+                                    y: self.showPicker ? -self.pickerOffsetHeight : 0)
                             .disabled(self.showMenu || self.showPicker ? true : false)
                         if self.showMenu {
                             MenuView(isMenuActive: self.$showMenu)
@@ -114,7 +130,7 @@ struct ContentView: View {
                                     Text("CONFIRM")
                                         .font(.custom("Avenir Next Demi Bold", size:self.fontSize - 15))
                                         .foregroundColor(Color("uwyellow"))
-                                        .frame(width: UIScreen.main.bounds.width, height: self.fontSize + 10)
+                                        .frame(width: UIScreen.main.bounds.width, height: self.pickerButtonHeight)
                                         .background(Color.black)
                                 }
                                 
@@ -126,7 +142,7 @@ struct ContentView: View {
                                         (self.pickerType == 1 ? self.model.mContent :
                                             (self.pickerType == 2 ? self.model.oContent : self.model.fileContent))) { f in
                                             Text(f)
-                                                .font(.custom("Avenir Next Demi Bold", size:self.fontSize - 10))
+                                                .font(.custom("Avenir Next Demi Bold", size:20))
                                         }
                                     }
                                     .frame(width: UIScreen.main.bounds.width, height: self.pickerHeight)
@@ -138,9 +154,10 @@ struct ContentView: View {
                                     }
 
                             }
+                                .scaleEffect(CGSize(width: 1.5, height: 1.5))
                                 .background(Color("uwyellow"))
                                 .labelsHidden()
-                                .padding(.top, UIScreen.main.bounds.size.height-200)
+                                    .padding(.top, UIScreen.main.bounds.size.height-self.pickerHeight)
                                 .transition(.move(edge: .bottom))
                             }
 
