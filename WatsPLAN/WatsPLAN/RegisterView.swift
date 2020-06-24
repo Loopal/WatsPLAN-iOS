@@ -19,27 +19,36 @@ struct RegisterView: View {
     @Binding var isMenuActive: Bool
     
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            Image("logo")
-                .resizable()
-                .frame(width: 150, height: 150)
-            
-            RegisterCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
-            
-            Spacer()
-                .frame(height: 40)
-            
-            NavigationLink(destination: LoginView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
-                Text("Already Registered? Login Here")
+        GeometryReader { bounds in
+            VStack(alignment: .center, spacing: 0) {
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.1 : bounds.size.height * 0.1)
+                
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: bounds.size.height * 0.2)
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.1 : 0)
+                
+                RegisterCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.2 : 0)
+                
+                NavigationLink(destination: LoginView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
+                    Text("Already Registered? Login Here")
+                }
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.25 : bounds.size.height * 0.2)
+                
             }
-            
-            Spacer()
-                .frame(height: 40)
-
-
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
     }
 }
 
@@ -83,12 +92,13 @@ struct RegisterCard: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
+        GeometryReader { bounds in
             ZStack(alignment: .top) {
                 
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: UIScreen.main.bounds.width - 20, height: 400)
+                    .frame(maxWidth: 375)
+                    .frame(height: 400)
                     .shadow(radius: 5)
 
                 //.offset(y: -40)
@@ -174,7 +184,7 @@ struct RegisterCard: View {
                 }) {
                     Text("SIGN UP")
                         .foregroundColor(Color("uwyellow"))
-                        .frame(width: UIScreen.main.bounds.width - 150, height: 40.0)
+                        .frame(width: (bounds.size.width < 375) ? bounds.size.width - 150 : 225, height: 40.0)
                         .background(Color.black)
                         .cornerRadius(10)
                 }
@@ -184,7 +194,8 @@ struct RegisterCard: View {
                 
                 Text("Register")
                     .font(.custom("Avenir Next Demi Bold", size:30))
-                    .offset(x: -100,y: -20)
+                    //.offset(x: -100,y: -20)
+                .offset(x: (bounds.size.width < 375) ? -(bounds.size.width/2 - 75) : -112.5, y:-20)
                 
                 VStack(alignment: .leading){
                     
@@ -226,7 +237,7 @@ struct RegisterCard: View {
                     
                 }
             }
-            .offset(y: -self.keyboardHeight)
+            .offset(y: (bounds.size.height / bounds.size.width < 1.7) ? 0 : -self.keyboardHeight)
             .animation(.spring())
             .onAppear {
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
@@ -236,7 +247,7 @@ struct RegisterCard: View {
                             return
                     }
                     
-                    self.keyboardHeight = keyboardFrame.height - geo.size.height / 3
+                    self.keyboardHeight = keyboardFrame.height - bounds.size.height / 3
                 }
                 
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {

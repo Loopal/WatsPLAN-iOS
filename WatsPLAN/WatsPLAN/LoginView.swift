@@ -19,28 +19,68 @@ struct LoginView: View {
     @Binding var isMenuActive: Bool
     
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            Image("logo")
-                .resizable()
-                .frame(width: 200.0, height: 200)
-            
-            Spacer()
-            
-            LoginCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
-            
-            
-            NavigationLink(destination: RegisterView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
-                Text("New Here? Create an Account")
+        
+        GeometryReader { bounds in
+            VStack() {
+                
+                /*if(bounds.size.height / bounds.size.width < 1.7){
+                    Spacer()
+                        .frame(height: bounds.size.height * 0.1)
+                }*/
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.1 : bounds.size.height * 0.1)
+                
+                
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: bounds.size.height * 0.2)
+                
+                /*if(bounds.size.height / bounds.size.width < 1.7){
+                    Spacer()
+                        .frame(height: bounds.size.height * 0.1)
+                }*/
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.1 : 0)
+                
+                LoginCard(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)
+                    //.frame(height: bounds.size.height * 0.5)
+                
+                /*if(bounds.size.height / bounds.size.width < 1.7){
+                    Spacer()
+                        .frame(height: bounds.size.height * 0.1)
+                }
+                else{
+                    Spacer()
+                    .frame(height: bounds.size.height * 0.5)
+                }*/
+                
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.1 : 0)
+                
+                
+                NavigationLink(destination: RegisterView(shouldPopToRootView: self.$shouldPopToRootView, isMenuActive: self.$isMenuActive)) {
+                    Text("New Here? Create an Account")
+                }
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+                //.frame(height: bounds.size.height * 0.3)
+                
+                /*if(bounds.size.height / bounds.size.width < 1.7){
+                    Spacer()
+                        .frame(height: bounds.size.height * 0.35)
+                }*/
+                
+                Spacer()
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.35 : bounds.size.height * 0.2)
+                
             }
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
-            
-            Spacer()
-                .frame(height: 40)
-            
+            //.navigationBarTitle("")
+            //.navigationBarHidden(true)
         }
-        //.navigationBarTitle("")
-        //.navigationBarHidden(true)
     }
 }
 
@@ -75,12 +115,15 @@ struct LoginCard: View {
     @State private var isPasswordShow: Bool = false
     
     var body: some View {
-        GeometryReader { geo in
-            ZStack(alignment: .top) {
+        GeometryReader { bounds in
+
+            ZStack() {
                 
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(width: UIScreen.main.bounds.width - 20, height: 250)
+                    //.frame(width: bounds.size.width - 20, height: bounds.size.height)
+                    .frame(maxWidth: 375)
+                    .frame(height: 250)
                     .shadow(radius: 5)
 
                 //.offset(y: -40)
@@ -164,7 +207,7 @@ struct LoginCard: View {
                     }) {
                         Text("SIGN IN")
                             .foregroundColor(Color("uwyellow"))
-                            .frame(width: UIScreen.main.bounds.width - 150, height: 40.0)
+                            .frame(width: (bounds.size.width < 375) ? bounds.size.width - 150 : 225, height: 40.0)
                             .background(Color.black)
                             .cornerRadius(10)
                     }
@@ -174,7 +217,14 @@ struct LoginCard: View {
                     
                     Text("LOGIN")
                         .font(.custom("Avenir Next Demi Bold", size:30))
-                        .offset(x:-(UIScreen.main.bounds.width/2 - 75),y:-235)
+                        //.font(.system(size: 500))
+                        //.minimumScaleFactor(0.01)
+                        //.frame(width: bounds.size.width * 0.25)
+                        //.lineLimit(1)
+                        //.offset(x: -bounds.size.width * 0.3, y: -bounds.size.height * 0.25)
+                        //.font(.custom("Avenir Next Demi Bold", size:30))
+                        .offset(x: (bounds.size.width < 375) ? -(bounds.size.width/2 - 75) : -112.5, y:-235)
+                        //.font(.system(size: bounds.size.width * 0.3))
                 }
                     
                 
@@ -196,7 +246,7 @@ struct LoginCard: View {
                     .font(.caption)
                 }
             }
-            .offset(y: -self.keyboardHeight)
+            .offset(y: (bounds.size.height / bounds.size.width < 1.7) ? 0 : -self.keyboardHeight)
             .animation(.spring())
             .onAppear {
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
@@ -206,7 +256,7 @@ struct LoginCard: View {
                             return
                     }
                     
-                    self.keyboardHeight = keyboardFrame.height - geo.size.height / 3
+                    self.keyboardHeight = keyboardFrame.height - bounds.size.height / 3
                 }
                 
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
