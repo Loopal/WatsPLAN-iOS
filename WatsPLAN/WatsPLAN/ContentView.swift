@@ -100,16 +100,6 @@ struct ContentView: View {
                 }
             }
         
-        let dragPicker = DragGesture()
-        .onEnded {
-            if $0.translation.height > 50 {
-                self.refresh()
-                withAnimation {
-                    self.showPicker = false
-                }
-            }
-        }
-        
         return NavigationView {
             GeometryReader { geometry in
                     ZStack(alignment: .center) {
@@ -155,6 +145,7 @@ struct ContentView: View {
                                                 .font(.custom("Avenir Next Demi Bold", size:20))
                                         }
                                     }
+                                    .scaleEffect((UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 ) ? CGSize(width: 1.5, height: 1.5) : CGSize(width: 1, height: 1))
                                     .frame(width: UIScreen.main.bounds.width, height: self.pickerHeight)
                                     .pickerStyle(WheelPickerStyle())
                                     .onAppear{
