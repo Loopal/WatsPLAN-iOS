@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-let minHeight = 50
-
 struct ListItemView: View {
     @EnvironmentObject var model : Model
     var id : Int
@@ -24,14 +22,23 @@ struct ListItemView: View {
             return "Select " + model.cards[id].text
         }
     }
+    
+    var fontSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(30)
+        } else {
+            return CGFloat(20)
+        }
+    }
+    
     var body: some View {
         return VStack(spacing: 0) {
             ZStack() {
                 Rectangle()
                     .fill(Color.black)
-                    .frame(width: UIScreen.main.bounds.width - 20, height: 32)
+                    .frame(width: UIScreen.main.bounds.width - 20, height: fontSize + 12)
                 Text(cardText)
-                    .font(.custom("Avenir Next Medium", size:20))
+                    .font(.custom("Avenir Next Medium", size:fontSize))
                     .foregroundColor(Color("uwyellow"))
                 
                 ProgressCircle(id: self.id)
@@ -53,7 +60,7 @@ struct ListItemView: View {
                     .padding(.bottom, 10)
                     .padding(.horizontal, 10)
                     .frame(width: UIScreen.main.bounds.width - 20)
-                    .font(.custom("Avenir Next Medium", size:12))
+                    .font(.custom("Avenir Next Medium", size:fontSize - 8))
                     .background(Color("uwyellow"))
             }
         }

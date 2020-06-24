@@ -24,6 +24,15 @@ struct CheckListView: View {
     @State var dialogType = 0
     
     var sourceType: Int
+    
+    var fontSize: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(30)
+        } else {
+            return CGFloat(15)
+        }
+    }
+    
     var filteredCards: [Card] {
         switch self.selected {
         case SELECT_ALL:
@@ -36,6 +45,14 @@ struct CheckListView: View {
             return model.cards.filter {
                 $0.progress != 100
             }
+        }
+    }
+    
+    var buttonOffsetX: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(UIScreen.main.bounds.width/2 - 80)
+        } else {
+            return CGFloat(UIScreen.main.bounds.width/2 - 30)
         }
     }
     
@@ -72,10 +89,10 @@ struct CheckListView: View {
                         .aspectRatio(contentMode: .fit)
                         .padding(.horizontal, 40.0)
                         .padding(.top, geometry.safeAreaInsets.top)
-                        .padding(.bottom, 5)
+                        .frame(maxHeight: 125)
                                             
                     Text(self.model.majorName + (self.model.optionName == "" ? "" : " | " + self.model.optionName))
-                        .font(.custom("Avenir Next Medium", size:15))
+                        .font(.custom("Avenir Next Medium", size:self.fontSize))
                         .foregroundColor(Color.white)
                         .offset(y:-5)
                         .frame(width: UIScreen.main.bounds.width-40)
@@ -116,7 +133,7 @@ struct CheckListView: View {
                 self.model.getCollection(type: self.sourceType)
             }
             menu1
-                .offset(x: geometry.size.width/2 - 30, y: geometry.size.height/2 - 100)
+                .offset(x: self.buttonOffsetX, y: geometry.size.height/2 - 100)
                 .saturation(self.showDialog ? 0.5 : 1)
                 .blur(radius: (self.showDialog ? 5 : 0))
 
@@ -151,8 +168,22 @@ struct IconButton: View {
     var imageName: String
     var color: Color
 
-    let imageWidth: CGFloat = 40
-    let buttonWidth: CGFloat = 50
+    var buttonWidth: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(90)
+        } else {
+            return CGFloat(70)
+        }
+    }
+    
+    var imageWidth: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(40)
+        } else {
+            return CGFloat(30)
+        }
+    }
+    
     @Binding var showDialog: Bool
     @Binding var dialogType: Int
     var type: Int = 0
@@ -163,11 +194,11 @@ struct IconButton: View {
             
             Circle()
                 .fill(Color("uwyellow"))
-                .frame(width: 48, height: 45)
+                .frame(width: buttonWidth - 5, height: buttonWidth - 5)
 
             Image(systemName: imageName)
+                .resizable()
                 .frame(width: self.imageWidth, height: self.imageWidth)
-                .imageScale(.large)
                 .foregroundColor(.black)
         }
         .onTapGesture {
@@ -185,8 +216,23 @@ struct MainButton: View {
     var imageName: String
     var color: Color
 
-    let imageWidth: CGFloat = 40
-    let buttonWidth: CGFloat = 50
+    
+    var buttonWidth: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(90)
+        } else {
+            return CGFloat(70)
+        }
+    }
+    
+    var imageWidth: CGFloat {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
+            return CGFloat(40)
+        } else {
+            return CGFloat(30)
+        }
+    }
+    
 
     var body: some View {
         ZStack {
@@ -194,12 +240,13 @@ struct MainButton: View {
             
             Circle()
                 .fill(Color("uwyellow"))
-                .frame(width: 48, height: 45)
+                .frame(width: buttonWidth - 5, height: buttonWidth - 5)
 
             Image(systemName: imageName)
+                .resizable()
                 .frame(width: self.imageWidth, height: self.imageWidth)
-                .imageScale(.large)
                 .foregroundColor(.black)
+
         }
         .frame(width: self.buttonWidth, height: self.buttonWidth)
         .cornerRadius(self.buttonWidth / 2)
