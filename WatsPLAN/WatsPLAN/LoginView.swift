@@ -122,7 +122,7 @@ struct LoginCard: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
                     //.frame(width: bounds.size.width - 20, height: bounds.size.height)
-                    .frame(maxWidth: 375)
+                    .frame(maxWidth: 355)
                     .frame(height: 250)
                     .shadow(radius: 5)
 
@@ -207,7 +207,7 @@ struct LoginCard: View {
                     }) {
                         Text("SIGN IN")
                             .foregroundColor(Color("uwyellow"))
-                            .frame(width: (bounds.size.width < 375) ? bounds.size.width - 150 : 225, height: 40.0)
+                            .frame(width: (bounds.size.width < 355) ? bounds.size.width - 150 : 225, height: 40.0)
                             .background(Color.black)
                             .cornerRadius(10)
                     }
@@ -223,14 +223,14 @@ struct LoginCard: View {
                         //.lineLimit(1)
                         //.offset(x: -bounds.size.width * 0.3, y: -bounds.size.height * 0.25)
                         //.font(.custom("Avenir Next Demi Bold", size:30))
-                        .offset(x: (bounds.size.width < 375) ? -(bounds.size.width/2 - 75) : -112.5, y:-235)
+                        .offset(x: (bounds.size.width < 355) ? -(bounds.size.width/2 - 75) : -112.5, y:-235)
                         //.font(.system(size: bounds.size.width * 0.3))
                 }
                     
                 
                 VStack(alignment: .leading){
                     Spacer()
-                        .frame(height: 80)
+                        .frame(height: 10)
                     
                     Text(self.viewModel.emailError ?? "")
                         .frame(height: 20)
@@ -246,7 +246,7 @@ struct LoginCard: View {
                     .font(.caption)
                 }
             }
-            .offset(y: (bounds.size.height / bounds.size.width < 1.7) ? 0 : -self.keyboardHeight)
+            .offset(y: (UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7) ? 0 : -self.keyboardHeight)
             .animation(.spring())
             .onAppear {
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
@@ -256,7 +256,7 @@ struct LoginCard: View {
                             return
                     }
                     
-                    self.keyboardHeight = keyboardFrame.height - bounds.size.height / 3
+                    self.keyboardHeight = keyboardFrame.height - bounds.size.height / 4
                 }
                 
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {

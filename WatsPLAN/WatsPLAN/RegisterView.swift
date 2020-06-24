@@ -23,7 +23,7 @@ struct RegisterView: View {
             VStack(alignment: .center, spacing: 0) {
                 
                 Spacer()
-                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.1 : bounds.size.height * 0.1)
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.1 : 0)
                 
                 Image("logo")
                     .resizable()
@@ -43,7 +43,7 @@ struct RegisterView: View {
                 }
                 
                 Spacer()
-                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.25 : bounds.size.height * 0.2)
+                    .frame(height: (bounds.size.height / bounds.size.width < 1.7) ? bounds.size.height * 0.25 : bounds.size.height * 0.05)
                 
             }
             .navigationBarTitle("")
@@ -97,7 +97,7 @@ struct RegisterCard: View {
                 
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("uwyellow"))
-                    .frame(maxWidth: 375)
+                    .frame(maxWidth: 355)
                     .frame(height: 400)
                     .shadow(radius: 5)
 
@@ -184,7 +184,7 @@ struct RegisterCard: View {
                 }) {
                     Text("SIGN UP")
                         .foregroundColor(Color("uwyellow"))
-                        .frame(width: (bounds.size.width < 375) ? bounds.size.width - 150 : 225, height: 40.0)
+                        .frame(width: (bounds.size.width < 355) ? bounds.size.width - 150 : 225, height: 40.0)
                         .background(Color.black)
                         .cornerRadius(10)
                 }
@@ -195,7 +195,7 @@ struct RegisterCard: View {
                 Text("Register")
                     .font(.custom("Avenir Next Demi Bold", size:30))
                     //.offset(x: -100,y: -20)
-                .offset(x: (bounds.size.width < 375) ? -(bounds.size.width/2 - 75) : -112.5, y:-20)
+                .offset(x: (bounds.size.width < 355) ? -(bounds.size.width/2 - 75) : -112.5, y:-20)
                 
                 VStack(alignment: .leading){
                     
@@ -237,7 +237,7 @@ struct RegisterCard: View {
                     
                 }
             }
-            .offset(y: (bounds.size.height / bounds.size.width < 1.7) ? 0 : -self.keyboardHeight)
+            .offset(y: (UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7) ? 0 : -self.keyboardHeight)
             .animation(.spring())
             .onAppear {
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
@@ -247,7 +247,7 @@ struct RegisterCard: View {
                             return
                     }
                     
-                    self.keyboardHeight = keyboardFrame.height - bounds.size.height / 3
+                    self.keyboardHeight = keyboardFrame.height - bounds.size.height / 4
                 }
                 
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {

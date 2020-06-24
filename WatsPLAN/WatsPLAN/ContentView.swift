@@ -30,7 +30,7 @@ struct ContentView: View {
     }
     
     var fontSize: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(50)
         } else {
             return CGFloat(30)
@@ -38,7 +38,7 @@ struct ContentView: View {
     }
     
     var pickerHeight: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(300)
         } else {
             return CGFloat(200)
@@ -46,7 +46,7 @@ struct ContentView: View {
     }
     
     var menuwidth: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(UIScreen.main.bounds.width * 0.3)
         } else {
             return CGFloat(UIScreen.main.bounds.width * 0.7)
@@ -54,7 +54,7 @@ struct ContentView: View {
     }
     
     var menuPad: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(-(UIScreen.main.bounds.width - self.menuwidth)/1.4)
         } else {
             return CGFloat(-(UIScreen.main.bounds.width - self.menuwidth))
@@ -130,7 +130,6 @@ struct ContentView: View {
                                         }
                                     }
                                     .frame(width: UIScreen.main.bounds.width, height: self.pickerHeight)
-                                    .fixedSize()
                                     .pickerStyle(WheelPickerStyle())
                                     .onAppear{
                                         self.oldF = self.model.facultyName
@@ -141,7 +140,6 @@ struct ContentView: View {
                             }
                                 .background(Color("uwyellow"))
                                 .labelsHidden()
-                                .pickerStyle(WheelPickerStyle())
                                 .padding(.top, UIScreen.main.bounds.size.height-200)
                                 .transition(.move(edge: .bottom))
                             }
@@ -180,7 +178,7 @@ struct MainView: View {
     @Binding var pickerType: Int
     
     var fontSize: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(50)
         } else {
             return CGFloat(30)
@@ -244,7 +242,7 @@ struct LoadCard: View {
     @EnvironmentObject var model: Model
     
     var baseWidth: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return UIScreen.main.bounds.width - 40
         } else {
             return UIScreen.main.bounds.width
@@ -252,7 +250,7 @@ struct LoadCard: View {
     }
     
     var fontSize: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(50)
         } else {
             return CGFloat(30)
@@ -260,7 +258,7 @@ struct LoadCard: View {
     }
     
     var rectHeight: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(170)
         } else {
             return CGFloat(120)
@@ -268,7 +266,7 @@ struct LoadCard: View {
     }
     
     var titleOffsetX: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(-(UIScreen.main.bounds.width/2 - 180))
         } else {
             return CGFloat(-(UIScreen.main.bounds.width/2 - 110))
@@ -276,7 +274,7 @@ struct LoadCard: View {
     }
     
     var titleOffsetY: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(-125)
         } else {
             return CGFloat(-85)
@@ -284,7 +282,7 @@ struct LoadCard: View {
     }
     
     var buttonOffsetY: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(-40)
         } else {
             return CGFloat(-25)
@@ -292,7 +290,7 @@ struct LoadCard: View {
     }
     
     var cardPad: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(10)
         } else {
             return CGFloat(0)
@@ -354,7 +352,7 @@ struct CreateCard: View {
     @EnvironmentObject var model: Model
     
     var baseWidth: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return UIScreen.main.bounds.width - 40
         } else {
             return UIScreen.main.bounds.width
@@ -362,7 +360,7 @@ struct CreateCard: View {
     }
     
         var fontSize: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+            if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(50)
         } else {
             return CGFloat(30)
@@ -370,7 +368,7 @@ struct CreateCard: View {
     }
     
     var rectHeight: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(400)
         } else {
             return CGFloat(250)
@@ -378,7 +376,7 @@ struct CreateCard: View {
     }
     
     var titleOffsetX: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(-(UIScreen.main.bounds.width/2 - 220))
         } else {
             return CGFloat(-(UIScreen.main.bounds.width/2 - 130))
@@ -386,14 +384,14 @@ struct CreateCard: View {
     }
     
     var titleOffsetY: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(-240)
         } else {
             return CGFloat(-155)
         }
     }
     var buttonOffsetY: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(-50)
         } else {
             return CGFloat(-35)
@@ -401,7 +399,7 @@ struct CreateCard: View {
     }
     
     var spacing: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(50)
         } else {
             return CGFloat(25)
@@ -409,7 +407,7 @@ struct CreateCard: View {
     }
     
     var cardPad: CGFloat {
-        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 2 {
+        if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(10)
         } else {
             return CGFloat(0)
