@@ -60,7 +60,7 @@ struct MenuView: View {
                 }
             })
             
-            HStack {
+            /*HStack {
                 Image("home")
                     .imageScale(.large)
                 Text("Home")
@@ -79,7 +79,7 @@ struct MenuView: View {
                     .padding(.leading, 30)
 
             }
-            .padding(.top, 10)
+            .padding(.top, 10)*/
             
             Button(action: {
                 let result = self.session.signOut()

@@ -145,7 +145,6 @@ struct ContentView: View {
                                                 .font(.custom("Avenir Next Demi Bold", size:20))
                                         }
                                     }
-                                    .scaleEffect((UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 ) ? CGSize(width: 1.5, height: 1.5) : CGSize(width: 1, height: 1))
                                     .frame(width: UIScreen.main.bounds.width, height: self.pickerHeight)
                                     .pickerStyle(WheelPickerStyle())
                                     .onAppear{
@@ -157,16 +156,18 @@ struct ContentView: View {
                                             self.model.majorName = self.model.mContent[0]
                                         } else if self.pickerType == 2 && self.model.oContent.count == 1 {
                                             self.model.optionName = self.model.oContent[0]
+                                        } else if self.pickerType == 3 && self.model.fileContent.count == 1 {
+                                            self.model.fileName = self.model.fileContent[0]
                                         }
                                     }
 
                             }
-                                .scaleEffect(CGSize(width: 1.5, height: 1.5))
+                                .scaleEffect((UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 ) ? CGSize(width: 1.5, height: 1.5) : CGSize(width: 1, height: 1))
                                 .background(Color("uwyellow"))
                                 .labelsHidden()
-                                    .padding(.top, UIScreen.main.bounds.size.height-self.pickerHeight)
+                                .padding(.top, UIScreen.main.bounds.size.height-self.pickerHeight)
                                 .transition(.move(edge: .bottom))
-                            }
+                        }
 
                         
                         

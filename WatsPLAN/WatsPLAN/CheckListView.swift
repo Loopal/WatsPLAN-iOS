@@ -89,7 +89,7 @@ struct CheckListView: View {
                         .aspectRatio(contentMode: .fit)
                         .padding(.horizontal, 40.0)
                         .padding(.top, geometry.safeAreaInsets.top)
-                        .frame(maxHeight: 125)
+                        .frame(maxHeight: (UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7) ?  125 : 100)
                                             
                     Text(self.model.majorName + (self.model.optionName == "" ? "" : " | " + self.model.optionName))
                         .font(.custom("Avenir Next Medium", size:self.fontSize))
@@ -172,7 +172,7 @@ struct IconButton: View {
         if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(90)
         } else {
-            return CGFloat(70)
+            return CGFloat(50)
         }
     }
     
@@ -180,7 +180,7 @@ struct IconButton: View {
         if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(40)
         } else {
-            return CGFloat(30)
+            return CGFloat(20)
         }
     }
     
@@ -221,7 +221,7 @@ struct MainButton: View {
         if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(90)
         } else {
-            return CGFloat(70)
+            return CGFloat(50)
         }
     }
     
@@ -229,7 +229,7 @@ struct MainButton: View {
         if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.7 {
             return CGFloat(40)
         } else {
-            return CGFloat(30)
+            return CGFloat(20)
         }
     }
     

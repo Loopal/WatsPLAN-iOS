@@ -28,14 +28,14 @@ struct DialogView: View {
                     .foregroundColor(Color("uwyellow"))
             }
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 if dialogType == 0 {
                     Text(self.model.fileName == "" ? "Create a new save: " : "Overwrite save file " + self.model.fileName + "?")
                         .font(.custom("Avenir Next Medium", size:20))
                         .foregroundColor(Color.black)
                         .padding([.top, .leading], 20.0)
                 } else {
-                    Text(self.model.fileName == "" ? "Discard current checklist and go back?" : "Delete save file " + self.model.fileName + "and go back?")
+                    Text(self.model.fileName == "" ? "Discard current checklist and go back?" : ("Delete save file \"" + self.model.fileName + "\" and go back?"))
                         .font(.custom("Avenir Next Medium", size:20))
                         .foregroundColor(Color.black)
                         .padding([.top, .leading], 20.0)
@@ -118,7 +118,6 @@ struct DialogView: View {
                     }
                     .cornerRadius(10)
                 }
-                .padding(.leading, 120)
                 .padding(.top, 20)
                 .padding(.bottom, 10)
 
